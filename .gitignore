@@ -6,6 +6,9 @@ node_modules/
 dist/
 build/
 
+# Turborepo cache
+.turbo/
+
 # Environment variables / secrets
 .env
 .env.*
