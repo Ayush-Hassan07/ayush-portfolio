@@ -1,0 +1,138 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model admin {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email         String   @unique @db.VarChar(255)
+  password_hash String
+  name          String?  @db.VarChar(100)
+  created_at    DateTime @default(now()) @db.Timestamp(6)
+  updated_at    DateTime @default(now()) @db.Timestamp(6)
+}
+
+model certification {
+  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name           String    @db.VarChar(250)
+  issuer         String    @db.VarChar(200)
+  issue_date     DateTime? @db.Date
+  expiry_date    DateTime? @db.Date
+  credential_id  String?   @db.VarChar(200)
+  credential_url String?
+  description    String?
+  created_at     DateTime  @default(now()) @db.Timestamp(6)
+  updated_at     DateTime  @default(now()) @db.Timestamp(6)
+}
+
+model education {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  institution     String    @db.VarChar(250)
+  degree          String    @db.VarChar(200)
+  field           String?   @db.VarChar(200)
+  start_date      DateTime  @db.Date
+  end_date        DateTime? @db.Date
+  description     String?
+  institution_url String?
+  created_at      DateTime  @default(now()) @db.Timestamp(6)
+  updated_at      DateTime  @default(now()) @db.Timestamp(6)
+}
+
+model experience {
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  company     String    @db.VarChar(200)
+  position    String    @db.VarChar(200)
+  location    String?   @db.VarChar(150)
+  start_date  DateTime  @db.Date
+  end_date    DateTime? @db.Date
+  description String
+  company_url String?
+  created_at  DateTime  @default(now()) @db.Timestamp(6)
+  updated_at  DateTime  @default(now()) @db.Timestamp(6)
+}
+
+model message {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name       String   @db.VarChar(150)
+  email      String   @db.VarChar(255)
+  subject    String?  @db.VarChar(250)
+  content    String
+  is_read    Boolean  @default(false)
+  created_at DateTime @default(now()) @db.Timestamp(6)
+}
+
+model profile {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String   @db.VarChar(150)
+  title         String   @db.VarChar(200)
+  bio           String
+  email         String   @db.VarChar(255)
+  phone         String?  @db.VarChar(30)
+  location      String?  @db.VarChar(150)
+  profile_image String?
+  resume_url    String?
+  github_url    String?
+  linkedin_url  String?
+  created_at    DateTime @default(now()) @db.Timestamp(6)
+  updated_at    DateTime @default(now()) @db.Timestamp(6)
+}
+
+model project {
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title              String               @db.VarChar(200)
+  slug               String               @unique @db.VarChar(220)
+  description        String
+  image_url          String?
+  github_url         String?
+  live_url           String?
+  featured           Boolean              @default(false)
+  sort_order         Int                  @default(0)
+  created_at         DateTime             @default(now()) @db.Timestamp(6)
+  updated_at         DateTime             @default(now()) @db.Timestamp(6)
+  project_technology project_technology[]
+}
+
+model project_technology {
+  project_id    String     @db.Uuid
+  technology_id String     @db.Uuid
+  project       project    @relation(fields: [project_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_project")
+  technology    technology @relation(fields: [technology_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_technology")
+
+  @@id([project_id, technology_id])
+}
+
+model publication {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String
+  venue            String?   @db.VarChar(250)
+  publication_date DateTime? @db.Date
+  doi_url          String?
+  paper_url        String?
+  description      String?
+  featured         Boolean   @default(false)
+  created_at       DateTime  @default(now()) @db.Timestamp(6)
+  updated_at       DateTime  @default(now()) @db.Timestamp(6)
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+model skill {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String   @unique @db.VarChar(100)
+  category    String   @db.VarChar(100)
+  proficiency Int?
+  sort_order  Int      @default(0)
+  created_at  DateTime @default(now()) @db.Timestamp(6)
+}
+
+model technology {
+  id                 String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name               String               @unique @db.VarChar(100)
+  category           String?              @db.VarChar(100)
+  icon_url           String?
+  created_at         DateTime             @default(now()) @db.Timestamp(6)
+  project_technology project_technology[]
+}
