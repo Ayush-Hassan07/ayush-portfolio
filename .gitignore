@@ -36,3 +36,7 @@ venv/
 # Temporary files
 *.tmp
 *.temp
+
+# OpenSpec installation
+.agents/
+openspec/
