@@ -40,3 +40,9 @@ venv/
 # OpenSpec installation
 .agents/
 openspec/
+
+# Tool-generated Prisma AI skill files
+apps/api/.agents/
+apps/api/.claude/
+apps/api/.windsurf/
+apps/api/skills-lock.json
