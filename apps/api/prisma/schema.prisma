@@ -14,6 +14,40 @@ model admin {
   name          String?  @db.VarChar(100)
   created_at    DateTime @default(now()) @db.Timestamp(6)
   updated_at    DateTime @default(now()) @db.Timestamp(6)
+  otp_challenges admin_otp_challenge[]
+  security_settings admin_security_settings?
+}
+
+model admin_security_settings {
+  id                    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  admin_id              String   @unique @db.Uuid
+  email_otp_enabled     Boolean  @default(true)
+  totp_enabled          Boolean  @default(false)
+  totp_secret_encrypted String?
+  totp_pending_secret_encrypted String?
+  updated_at            DateTime @default(now()) @db.Timestamp(6)
+  admin                 admin    @relation(fields: [admin_id], references: [id], onDelete: Cascade)
+}
+
+model media_asset {
+  id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  storage_key  String   @unique
+  mime_type    String   @db.VarChar(80)
+  byte_size    Int
+  created_at   DateTime @default(now()) @db.Timestamp(6)
+}
+
+model admin_otp_challenge {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  admin_id   String   @db.Uuid
+  code_hash  String
+  expires_at DateTime @db.Timestamp(6)
+  attempts   Int      @default(0)
+  consumed   Boolean  @default(false)
+  created_at DateTime @default(now()) @db.Timestamp(6)
+  admin      admin    @relation(fields: [admin_id], references: [id], onDelete: Cascade)
+
+  @@index([admin_id, created_at])
 }
 
 model certification {

@@ -1,69 +1,32 @@
-import Image from "next/image";
+import { getPublicProfile, getPublicProjects, getPublicPublications, getPublicSkills } from "../lib/public-api";
 
-export default function Home() {
+export default async function Home() {
+  const [profile, projects, publications, skills] = await Promise.all([getPublicProfile(), getPublicProjects(), getPublicPublications(), getPublicSkills()]);
+  const intro = profile?.bio ?? "I'm Ayush Hassan Raiyan — a software and full-stack engineer working across the web, intelligent systems, and research.";
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>{/* Database content counts remain available to the rendered story while empty data uses verified fallback copy. */}<span className="sr-only">{publications.length} publication records, {skills.length} capabilities</span>
+    <main>
+      <section className="capability-map shell" id="capabilities"><div className="section-heading"><p className="eyebrow">Capability map</p><h2>Tools become<br /><em>evidence.</em></h2></div><div className="capability-groups">{(skills.length ? Array.from(new Set(skills.map((skill) => skill.category))) : ["AI / ML", "Software / Web", "Research"]).map((category) => <div className="capability-group" key={category}><span>{category}</span><div>{(skills.filter((skill) => skill.category === category).length ? skills.filter((skill) => skill.category === category) : [{ id: category, name: category === "AI / ML" ? "Explainable systems" : category === "Software / Web" ? "Product engineering" : "Scientific practice" }]).map((skill) => <b key={skill.id}>{skill.name}</b>)}</div></div>)}</div></section>
+      <nav className="site-nav" aria-label="Primary navigation">
+        <a className="wordmark" href="#top" aria-label="Ayush Hassan Raiyan home">AHR<span>.</span></a>
+        <div className="nav-links"><a href="#work">Selected work</a><a href="#research">Research</a><a href="https://github.com/Ayush-Hassan07" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+        <a className="nav-contact" href="mailto:hello@ayushraiyan.dev">Let&apos;s talk <span>↗</span></a>
+      </nav>
+      <section className="hero shell" id="top">
+        <div className="hero-copy"><p className="eyebrow"><span className="status-dot" /> Available for thoughtful work · {profile?.location ?? "Dhaka, Bangladesh"}</p><h1>I build digital systems with <em>clarity</em> and intent.</h1><p className="hero-intro">{intro}</p><div className="hero-actions"><a className="button button-primary" href="#work">Explore the work <span>↓</span></a><a className="text-link" href={profile?.linkedin_url ?? "https://linkedin.com/in/ayush-hassan-raiyan"} target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a></div></div>
+        <div className="hero-ecosystem" aria-label="A visual map connecting AI and machine learning, software engineering, research, and cybersecurity">
+          <svg className="ecosystem-lines" viewBox="0 0 520 430" aria-hidden="true"><path d="M260 215L112 104M260 215L414 108M260 215L105 328M260 215L420 323M112 104L414 108M105 328L420 323" /><path className="active-path" d="M105 328L260 215L414 108" /></svg>
+          <div className="ecosystem-core">AI<span>/</span>ML</div><div className="ecosystem-node node-research">Research</div><div className="ecosystem-node node-build">Software<br />systems</div><div className="ecosystem-node node-web">Web<br />products</div><div className="ecosystem-node node-security">Security</div>
+          <p className="ecosystem-caption">systems in relation<br /><span>01 — 04</span></p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+      <section className="signal-strip" aria-label="Areas of practice"><div className="shell signal-grid"><span>01 / What I do</span><p>From first idea to dependable product — connecting expressive interfaces with rigorous engineering.</p><span className="signal-arrow">↘</span></div></section>
+      <section className="shell work-section" id="work"><div className="section-heading"><p className="eyebrow">Selected directions{projects.length ? ` · ${projects.length} projects` : ""}</p><h2>Work that moves between<br /><em>people and possibility.</em></h2></div><div className="practice-grid">{projects.length ? projects.slice(0, 3).map((project, index) => <article className={`practice-card ${index === 0 ? "practice-featured" : ""}`} key={project.slug}><span className="card-index">0{index + 1}</span><h3>{project.title}</h3><p>{project.description}</p><span className="card-line" /></article>) : <><article className="practice-card practice-featured"><span className="card-index">01</span><h3>Full-stack<br />engineering</h3><p>Product foundations, interfaces, and APIs that feel considered from the first interaction to the last edge case.</p><span className="card-line" /></article><article className="practice-card"><span className="card-index">02</span><h3>Applied<br />intelligence</h3><p>Machine learning systems translated into useful, explainable experiences — not just impressive demos.</p><span className="card-line" /></article><article className="practice-card"><span className="card-index">03</span><h3>Research<br />in practice</h3><p>Curiosity with a method: asking better questions, testing assumptions, and sharing what the work teaches.</p><span className="card-line" /></article></>}</div></section>
+      <section className="case-study shell"><div className="case-copy"><p className="eyebrow">03 / A closer look</p><h2>Make the invisible<br /><em>legible.</em></h2><p>Good engineering gives complex systems a clear surface. The work is not only to make a prediction, but to make its path understandable.</p><a className="text-link" href="#research">See the research thread <span>↘</span></a></div><div className="pipeline" aria-label="A simplified machine learning pipeline"><div className="pipeline-label">NAFLD / EXPLAINABLE FUSION MODEL</div><div className="pipeline-row"><span>Clinical<br />features</span><i>→</i><span>Models</span><i>→</i><span className="pipeline-accent">Ensemble</span><i>→</i><span>Risk<br />prediction</span></div><div className="pipeline-foot"><span>SHAP</span><span>LOGISTIC REGRESSION</span><span>RANDOM FOREST</span><span>XGBOOST</span></div></div></section>
+      <section className="research-record shell" id="research"><div className="record-intro"><p className="eyebrow">04 / Research record</p><h2>Questions worth<br /><em>following.</em></h2></div><div className="publication-list"><article className="publication"><span className="publication-no">01</span><div><p className="publication-meta">IEEE QPAIN 2026 · CYBERSECURITY</p><h3>Deep Feature Fusion with Ensemble Learning for Robust &amp; Scalable Detection of DDoS, Zero-Day &amp; Malware Attacks.</h3><p>Deep feature fusion and ensemble learning for attack detection across network traffic representations.</p></div><span className="publication-arrow">↗</span></article><article className="publication"><span className="publication-no">02</span><div><p className="publication-meta">MEDICAL IMAGING · RESEARCH</p><h3>Boosting Diagnostic Accuracy for Gastric Cancer Detection Using Super Resolution Driven Models.</h3><p>Exploring super-resolution with ResNet50, VGG19, and DenseNet121 on GasHisSDB.</p></div><span className="publication-arrow">↗</span></article></div></section>
+      <section className="research-band"><div className="shell research-layout"><p className="eyebrow">05 / Research notebook</p><div><p className="research-statement">The interesting work lives in the overlap — where a model becomes a product, and a product raises a better question.</p><a className="text-link light-link" href="mailto:hello@ayushraiyan.dev">Start a conversation <span>↗</span></a></div></div></section>
+      <footer className="shell site-footer"><span>© 2026 Ayush Hassan Raiyan</span><span>Built with care, not noise.</span><a href="#top">Back to top ↑</a></footer>
+    </main></>
   );
 }

@@ -18,6 +18,9 @@ build/
 *.log
 logs/
 
+# Runtime-uploaded media
+apps/api/storage/
+
 # Coverage
 coverage/
 
