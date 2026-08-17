@@ -39,4 +39,6 @@ export class AdminController {
   ) {
     return this.service.replaceProjectTechnologies(slug, body.technologyIds);
   }
+  @Get(':slug/media') media(@Param('slug') slug: string) { return this.service.listProjectMedia(slug); }
+  @Put(':slug/media') replaceMedia(@Param('slug') slug: string, @Body() body: { mediaIds?: unknown }) { return this.service.replaceProjectMedia(slug, body.mediaIds); }
 }

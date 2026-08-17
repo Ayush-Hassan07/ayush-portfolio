@@ -4,6 +4,7 @@ import {
   Param,
   Res,
   Post,
+  Delete,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -14,7 +15,7 @@ import { AdminAuthGuard } from '../auth/admin-auth.guard';
 import { MediaService } from './media.service';
 import { PrismaService } from '../prisma/prisma.service';
 import type { Response } from 'express';
-import { readFile } from 'node:fs/promises';
+import { readFile, unlink } from 'node:fs/promises';
 import { join } from 'node:path';
 
 @Controller('admin/media')
@@ -27,7 +28,9 @@ export class MediaController {
 
   @Get()
   async list() {
-    return this.prisma.media_asset.findMany({ orderBy: { created_at: 'desc' } });
+    return this.prisma.media_asset.findMany({
+      orderBy: { created_at: 'desc' },
+    });
   }
 
   @Get(':key')
@@ -56,5 +59,24 @@ export class MediaController {
         byte_size: result.bytes,
       },
     });
+  }
+
+  @Delete(':key')
+  async remove(@Param('key') key: string) {
+    if (!/^[a-f0-9-]+\.webp$/i.test(key))
+      throw new BadRequestException('Invalid media key');
+    const asset = await this.prisma.media_asset.findUnique({
+      where: { storage_key: key },
+    });
+    if (!asset) throw new BadRequestException('Media asset not found');
+    const used = await this.prisma.project.count({
+      where: { image_url: { endsWith: key } },
+    });
+    if (used) throw new BadRequestException('Media asset is used by a project');
+    await this.prisma.media_asset.delete({ where: { storage_key: key } });
+    await unlink(join(process.cwd(), 'storage', 'media', key)).catch(
+      () => undefined,
+    );
+    return { deleted: true };
   }
 }

@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-base-to-string */
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import type { Prisma } from '../../generated/prisma/client';
 import { randomBytes } from 'node:crypto';
@@ -10,6 +14,7 @@ type ProjectInput = {
   title?: unknown;
   slug?: unknown;
   description?: unknown;
+  status?: unknown;
   image_url?: unknown;
   github_url?: unknown;
   live_url?: unknown;
@@ -24,11 +29,18 @@ export class AdminService {
   listProjects() {
     return this.prisma.project.findMany({
       orderBy: [{ sort_order: 'asc' }, { created_at: 'desc' }],
-    });
+    }).then((projects) => projects.map((project) => ({
+      ...project,
+      image_url: project.image_url?.startsWith('/')
+        ? `${process.env.API_PUBLIC_URL ?? 'http://localhost:4000'}${project.image_url}`
+        : project.image_url,
+    })));
   }
 
   async createProject(input: ProjectInput) {
     const data = this.validateProject(input);
+    if (await this.prisma.project.findUnique({ where: { slug: data.slug } }))
+      throw new ConflictException('A project with this slug already exists');
     return this.prisma.project.create({ data });
   }
 
@@ -73,6 +85,23 @@ export class AdminService {
       });
     return this.listProjectTechnologies(slug);
   }
+  async listProjectMedia(slug: string) {
+    const rows = await this.prisma.project_media.findMany({ where: { project: { slug } }, orderBy: [{ is_primary: 'desc' }, { sort_order: 'asc' }], include: { media: true } });
+    if (rows.length) return rows;
+    const project = await this.prisma.project.findUnique({ where: { slug }, select: { id: true, image_url: true } });
+    const key = project?.image_url?.match(/([a-f0-9-]+\.webp)$/i)?.[1];
+    if (!project || !key) return rows;
+    const media = await this.prisma.media_asset.findUnique({ where: { storage_key: key } });
+    return media ? [{ project_id: project.id, media_id: media.id, sort_order: 0, is_primary: true, media }] : rows;
+  }
+  async replaceProjectMedia(slug: string, mediaIds: unknown) {
+    if (!Array.isArray(mediaIds) || mediaIds.some((id) => typeof id !== 'string')) throw new Error('mediaIds must be an array of ids');
+    const project = await this.prisma.project.findUnique({ where: { slug } });
+    if (!project) throw new Error('Project not found');
+    await this.prisma.project_media.deleteMany({ where: { project_id: project.id } });
+    if (mediaIds.length) await this.prisma.project_media.createMany({ data: mediaIds.map((media_id, index) => ({ project_id: project.id, media_id: media_id as string, sort_order: index, is_primary: index === 0 })) });
+    return this.listProjectMedia(slug);
+  }
 
   listPublications() {
     return this.prisma.publication.findMany({
@@ -91,10 +120,12 @@ export class AdminService {
         publication_date: input.publication_date
           ? new Date(String(input.publication_date))
           : null,
-        doi_url: input.doi_url ? String(input.doi_url).trim() : null,
         paper_url: input.paper_url ? String(input.paper_url).trim() : null,
-        description: input.description
+      description: input.description
           ? String(input.description).trim()
+          : null,
+        repository_url: input.repository_url
+          ? String(input.repository_url).trim()
           : null,
         featured: Boolean(input.featured),
       },
@@ -112,18 +143,18 @@ export class AdminService {
           input.publication_date === undefined
             ? undefined
             : new Date(String(input.publication_date)),
-        doi_url:
-          input.doi_url === undefined
-            ? undefined
-            : String(input.doi_url).trim(),
         paper_url:
           input.paper_url === undefined
             ? undefined
             : String(input.paper_url).trim(),
-        description:
+      description:
           input.description === undefined
             ? undefined
             : String(input.description).trim(),
+        repository_url:
+          input.repository_url === undefined
+            ? undefined
+            : String(input.repository_url).trim(),
         featured:
           input.featured === undefined ? undefined : Boolean(input.featured),
       },
@@ -143,7 +174,11 @@ export class AdminService {
         name: String(input.name ?? '').trim(),
         category: String(input.category ?? '').trim(),
         proficiency:
-          input.proficiency === undefined ? null : Number(input.proficiency),
+          input.proficiency === undefined ||
+          input.proficiency === null ||
+          input.proficiency === ''
+            ? null
+            : Number(input.proficiency),
         sort_order:
           input.sort_order === undefined ? 0 : Number(input.sort_order),
       },
@@ -161,7 +196,9 @@ export class AdminService {
         proficiency:
           input.proficiency === undefined
             ? undefined
-            : Number(input.proficiency),
+            : input.proficiency === null || input.proficiency === ''
+              ? null
+              : Number(input.proficiency),
         sort_order:
           input.sort_order === undefined ? undefined : Number(input.sort_order),
       },
@@ -170,8 +207,209 @@ export class AdminService {
   deleteSkill(id: string) {
     return this.prisma.skill.delete({ where: { id } });
   }
+  listCertifications() {
+    return this.prisma.certification.findMany({
+      orderBy: [{ issue_date: 'desc' }, { name: 'asc' }],
+    });
+  }
+  createCertification(input: Record<string, unknown>) {
+    return this.prisma.certification.create({
+      data: {
+        name: String(input.name ?? '').trim(),
+        issuer: String(input.issuer ?? '').trim(),
+        issue_date: input.issue_date
+          ? new Date(String(input.issue_date))
+          : null,
+        expiry_date: input.expiry_date
+          ? new Date(String(input.expiry_date))
+          : null,
+        credential_id: input.credential_id
+          ? String(input.credential_id).trim()
+          : null,
+        credential_url: input.credential_url
+          ? String(input.credential_url).trim()
+          : null,
+        description: input.description
+          ? String(input.description).trim()
+          : null,
+        image_url: input.image_url ? String(input.image_url).trim() : null,
+      },
+    });
+  }
+  updateCertification(id: string, input: Record<string, unknown>) {
+    return this.prisma.certification.update({
+      where: { id },
+      data: {
+        name: input.name === undefined ? undefined : String(input.name).trim(),
+        issuer:
+          input.issuer === undefined ? undefined : String(input.issuer).trim(),
+        issue_date:
+          input.issue_date === undefined
+            ? undefined
+            : input.issue_date
+              ? new Date(String(input.issue_date))
+              : null,
+      image_url:
+        input.image_url === undefined
+          ? undefined
+          : input.image_url
+            ? String(input.image_url).trim()
+            : null,
+        expiry_date:
+          input.expiry_date === undefined
+            ? undefined
+            : input.expiry_date
+              ? new Date(String(input.expiry_date))
+              : null,
+        credential_id:
+          input.credential_id === undefined
+            ? undefined
+            : input.credential_id
+              ? String(input.credential_id).trim()
+              : null,
+        credential_url:
+          input.credential_url === undefined
+            ? undefined
+            : input.credential_url
+              ? String(input.credential_url).trim()
+              : null,
+        description:
+          input.description === undefined
+            ? undefined
+            : input.description
+              ? String(input.description).trim()
+              : null,
+        updated_at: new Date(),
+      },
+    });
+  }
+  deleteCertification(id: string) {
+    return this.prisma.certification.delete({ where: { id } });
+  }
+  listEducation() {
+    return this.prisma.education.findMany({ orderBy: { start_date: 'desc' } });
+  }
+  createEducation(i: Record<string, unknown>) {
+    return this.prisma.education.create({
+      data: {
+        institution: String(i.institution ?? '').trim(),
+        degree: String(i.degree ?? '').trim(),
+        field: i.field ? String(i.field).trim() : null,
+        start_date: new Date(String(i.start_date)),
+        end_date: i.end_date ? new Date(String(i.end_date)) : null,
+        description: i.description ? String(i.description) : null,
+        institution_url: i.institution_url ? String(i.institution_url) : null,
+      },
+    });
+  }
+  updateEducation(id: string, i: Record<string, unknown>) {
+    return this.prisma.education.update({
+      where: { id },
+      data: {
+        institution:
+          i.institution === undefined
+            ? undefined
+            : String(i.institution).trim(),
+        degree: i.degree === undefined ? undefined : String(i.degree).trim(),
+        field:
+          i.field === undefined
+            ? undefined
+            : i.field
+              ? String(i.field).trim()
+              : null,
+        start_date:
+          i.start_date === undefined
+            ? undefined
+            : new Date(String(i.start_date)),
+        end_date:
+          i.end_date === undefined
+            ? undefined
+            : i.end_date
+              ? new Date(String(i.end_date))
+              : null,
+        description:
+          i.description === undefined
+            ? undefined
+            : i.description
+              ? String(i.description)
+              : null,
+        institution_url:
+          i.institution_url === undefined
+            ? undefined
+            : i.institution_url
+              ? String(i.institution_url)
+              : null,
+        updated_at: new Date(),
+      },
+    });
+  }
+  deleteEducation(id: string) {
+    return this.prisma.education.delete({ where: { id } });
+  }
+  listExperience() {
+    return this.prisma.experience.findMany({ orderBy: { start_date: 'desc' } });
+  }
+  createExperience(i: Record<string, unknown>) {
+    return this.prisma.experience.create({
+      data: {
+        company: String(i.company ?? '').trim(),
+        position: String(i.position ?? '').trim(),
+        location: i.location ? String(i.location).trim() : null,
+        start_date: new Date(String(i.start_date)),
+        end_date: i.end_date ? new Date(String(i.end_date)) : null,
+        description: String(i.description ?? ''),
+        company_url: i.company_url ? String(i.company_url) : null,
+      },
+    });
+  }
+  updateExperience(id: string, i: Record<string, unknown>) {
+    return this.prisma.experience.update({
+      where: { id },
+      data: {
+        company: i.company === undefined ? undefined : String(i.company).trim(),
+        position:
+          i.position === undefined ? undefined : String(i.position).trim(),
+        location:
+          i.location === undefined
+            ? undefined
+            : i.location
+              ? String(i.location).trim()
+              : null,
+        start_date:
+          i.start_date === undefined
+            ? undefined
+            : new Date(String(i.start_date)),
+        end_date:
+          i.end_date === undefined
+            ? undefined
+            : i.end_date
+              ? new Date(String(i.end_date))
+              : null,
+        description:
+          i.description === undefined ? undefined : String(i.description),
+        company_url:
+          i.company_url === undefined
+            ? undefined
+            : i.company_url
+              ? String(i.company_url)
+              : null,
+        updated_at: new Date(),
+      },
+    });
+  }
+  deleteExperience(id: string) {
+    return this.prisma.experience.delete({ where: { id } });
+  }
   getProfile() {
     return this.prisma.profile.findFirst();
+  }
+  async updateProfileImage(storageKey: string) {
+    const profile = await this.prisma.profile.findFirst();
+    if (!profile) throw new Error('Profile record does not exist');
+    return this.prisma.profile.update({
+      where: { id: profile.id },
+      data: { profile_image: storageKey },
+    });
   }
   async updateProfile(input: Record<string, unknown>) {
     const current = await this.prisma.profile.findFirst();
@@ -180,18 +418,26 @@ export class AdminService {
       title: input.title === undefined ? undefined : String(input.title).trim(),
       bio: input.bio === undefined ? undefined : String(input.bio).trim(),
       email: input.email === undefined ? undefined : String(input.email).trim(),
+      profile_image:
+        input.profile_image === undefined
+          ? undefined
+          : String(input.profile_image).trim() || null,
+      phone:
+        input.phone === undefined
+          ? undefined
+          : String(input.phone).trim() || null,
       location:
         input.location === undefined
           ? undefined
-          : String(input.location).trim(),
+          : String(input.location).trim() || null,
       github_url:
         input.github_url === undefined
           ? undefined
-          : String(input.github_url).trim(),
+          : String(input.github_url).trim() || null,
       linkedin_url:
         input.linkedin_url === undefined
           ? undefined
-          : String(input.linkedin_url).trim(),
+          : String(input.linkedin_url).trim() || null,
     };
     if (current)
       return this.prisma.profile.update({ where: { id: current.id }, data });
@@ -207,6 +453,17 @@ export class AdminService {
   listTechnologies() {
     return this.prisma.technology.findMany({
       orderBy: [{ category: 'asc' }, { name: 'asc' }],
+      include: { skill: true },
+    });
+  }
+  createTechnology(input: Record<string, unknown>) {
+    return this.prisma.technology.create({
+      data: {
+        name: String(input.name ?? '').trim(),
+        category: input.category ? String(input.category).trim() : null,
+        icon_url: input.icon_url ? String(input.icon_url).trim() : null,
+        skill_id: input.skill_id ? String(input.skill_id) : null,
+      },
     });
   }
   async getSecurity() {
@@ -390,19 +647,49 @@ export class AdminService {
 
   private validateProject(input: ProjectInput, partial = false) {
     const text = (value: unknown, field: string, required: boolean) => {
-      if (value === undefined && partial) return undefined;
+      if (value === undefined) return undefined;
+      if (value === null && !required) return null;
       if (typeof value !== 'string' || (!value.trim() && required))
         throw new Error(`${field} is required`);
-      return value.trim();
+      return value.trim() || null;
     };
     const title = text(input.title, 'title', true);
     const slug = text(input.slug, 'slug', true);
+    if (typeof slug === 'string' && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug))
+      throw new Error('slug must use lowercase letters, numbers, and hyphens');
+    const status =
+      input.status === undefined && partial
+        ? undefined
+        : text(input.status ?? 'draft', 'status', true);
+    const allowedStatuses = [
+      'draft',
+      'planned',
+      'ongoing',
+      'finished',
+      'paused',
+      'archived',
+    ];
+    if (typeof status === 'string' && !allowedStatuses.includes(status))
+      throw new Error(
+        'status must be draft, planned, ongoing, finished, paused, or archived',
+      );
     const description = text(input.description, 'description', true);
     const data = {
       title,
       slug,
       description,
-      image_url: text(input.image_url, 'image_url', false),
+      status,
+      image_url: (() => {
+        const value = text(input.image_url, 'image_url', false);
+        if (value === '\\1') return null;
+        if (typeof value === 'string') {
+          try {
+            const parsed = new URL(value);
+            if (parsed.pathname.startsWith('/media/')) return parsed.pathname;
+          } catch { /* keep relative or validated external URL */ }
+        }
+        return value;
+      })(),
       github_url: text(input.github_url, 'github_url', false),
       live_url: text(input.live_url, 'live_url', false),
       featured:

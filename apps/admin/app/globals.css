@@ -12,3 +12,144 @@
  .media-uploader { border:1px solid var(--admin-line); margin-top:65px; max-width:680px; padding:35px; } .upload-drop { border:1px dashed #aab8a6; color:var(--admin-muted); cursor:pointer; display:block; padding:45px 25px; text-align:center; } .upload-drop input { display:none; } .upload-drop span { display:block; font-size:.72rem; margin-top:12px; } .media-uploader button { background:var(--admin-deep); border:0; color:white; cursor:pointer; font-size:.7rem; margin-top:20px; padding:14px 18px; } .media-uploader button:disabled { cursor:not-allowed; opacity:.45; }
  .password-form { border-top:1px solid var(--admin-line); margin-top:45px; max-width:550px; padding-top:28px; } .password-form label { color:var(--admin-muted); display:block; font-size:.65rem; letter-spacing:.08em; margin:18px 0; text-transform:uppercase; } .password-form input { background:transparent; border:0; border-bottom:1px solid #b9c5b7; display:block; font:inherit; margin-top:8px; outline:0; padding:10px 0; width:100%; } .password-form button { background:var(--admin-deep); border:0; color:white; cursor:pointer; font-size:.68rem; margin-top:15px; padding:13px 16px; } .password-form button:disabled { cursor:not-allowed; opacity:.45; }
  .totp-setup { background:#e3e9df; border:1px solid var(--admin-line); margin:25px 0; padding:22px; } .totp-setup code { background:#f7f8f3; display:block; font-family:monospace; letter-spacing:.12em; margin:15px 0; padding:12px; word-break:break-all; } .totp-uri { color:var(--admin-muted); font-size:.65rem; line-height:1.5; word-break:break-all; } .totp-setup label { color:var(--admin-muted); display:block; font-size:.65rem; margin-top:18px; } .totp-setup input { background:transparent; border:0; border-bottom:1px solid #aeb9aa; display:block; font:inherit; margin-top:7px; padding:9px 0; width:100%; } .totp-setup button { background:var(--admin-deep); border:0; color:white; cursor:pointer; font-size:.68rem; margin-top:18px; padding:12px 15px; } .totp-setup button:disabled { opacity:.45; }
+
+
+.profile-image-preview { display:block; width:160px; height:120px; margin:14px 0; object-fit:contain; object-position:center; border:1px solid var(--admin-line); background:#dfe6dc; } .media-item img { width:100%; height:180px; object-fit:cover; display:block; } .media-grid { display:grid; gap:24px; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); } .media-item { border:1px solid var(--admin-line); padding:12px; } .media-item div { display:flex; flex-direction:column; gap:6px; padding-top:10px; } .media-item span { color:var(--admin-muted); font-size:.7rem; }
+
+
+
+
+
+/* Readability pass */
+.admin-sidebar nav a { font-size: .95rem; padding: 14px 0; }
+.admin-sidebar nav a span { font-size: .78rem; }
+.admin-sidebar-foot { font-size: .82rem; }
+.editor-back, .admin-user { font-size: .9rem; }
+.editor-intro > p:last-child { font-size: 1rem; max-width: 560px; }
+.project-form label, .password-form label, .totp-setup label { font-size: .82rem; letter-spacing: .06em; }
+.project-form input, .project-form textarea, .project-form select, .password-form input, .totp-setup input { font-size: 1.05rem; line-height: 1.45; min-height: 44px; }
+.project-form textarea { min-height: 130px; }
+.project-form button, .password-form button, .totp-setup button, .media-uploader button { font-size: .9rem; padding: 15px 20px; }
+.project-row strong { font-size: 1.15rem; }
+.project-row p, .empty-editor { font-size: .9rem; }
+.upload-drop { font-size: 1rem; }
+.upload-drop span { font-size: .85rem; }
+.editor-message { font-size: .9rem; }
+.security-row strong { font-size: 1.05rem; }
+.security-row p { font-size: .9rem; line-height: 1.5; }
+.login-timer { align-items: center; background: var(--admin-deep); border: 2px solid var(--admin-acid); border-radius: 6px; color: var(--admin-acid) !important; display: inline-flex; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 1rem !important; font-weight: 800; justify-content: center; letter-spacing: .05em; margin: 16px 0; min-width: 150px; padding: 10px 14px; }
+.login-timer.urgent { background: #6b3028; border-color: #ffb09a; color: #fff !important; }
+.totp-setup { font-size: 1rem; }
+.totp-setup code { font-size: .95rem; }
+.totp-uri { font-size: .8rem; }
+@media (max-width: 700px) {
+  .editor-intro h1 { font-size: clamp(3rem, 14vw, 5.2rem); }
+  .project-form input, .project-form textarea, .project-form select { font-size: 1rem; }
+  .editor-back { font-size: .85rem; }
+}
+
+
+
+.totp-setup .login-timer,
+.totp-setup > button { box-sizing:border-box; display:inline-flex; height:62px; margin:18px 0 0; vertical-align:middle; width:190px; }
+.totp-setup .login-timer { align-items:center; }
+.totp-setup > button { align-items:center; justify-content:center; margin-left:14px; }
+@media (max-width:560px) {
+  .totp-setup .login-timer,
+  .totp-setup > button { width:100%; }
+  .totp-setup > button { margin-left:0; margin-top:12px; }
+}
+
+
+
+/* Consistent admin controls */
+.project-form label { margin-bottom:30px; }
+.project-form select {
+  appearance:auto; background:#f7f8f3; border:1px solid var(--admin-ink); border-radius:4px;
+  color:var(--admin-ink); display:block; font:inherit; font-size:1rem; margin-top:12px;
+  min-height:48px; padding:10px 14px; width:190px;
+}
+.project-form > button,
+.project-form label > button,
+.password-form > button,
+.totp-setup > button,
+.media-uploader > button {
+  border-radius:4px; min-height:48px; min-width:170px;
+}
+.project-form label > button { display:block; margin-top:14px; }
+.project-row button, .admin-logout, .security-toggle { border-radius:4px; min-height:42px; padding:10px 16px; }
+
+
+
+/* High-contrast form text */
+.project-form label,
+.password-form label,
+.totp-setup label,
+.upload-drop,
+.technology-picker legend { color:#17201d; }
+.project-form input,
+.project-form textarea,
+.project-form select,
+.password-form input,
+.totp-setup input { color:#101513; font-weight:500; }
+.project-form input::placeholder,
+.project-form textarea::placeholder,
+.password-form input::placeholder,
+.totp-setup input::placeholder { color:#52615a; opacity:1; }
+.project-form input,
+.project-form textarea,
+.password-form input,
+.totp-setup input { border-color:#809187; }
+.project-form input:focus,
+.project-form textarea:focus,
+.project-form select:focus,
+.password-form input:focus,
+.totp-setup input:focus { border-color:#244d43; box-shadow:0 2px 0 #244d43; }
+.project-form select { color:#101513; font-weight:600; }
+
+
+
+.project-row p { display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:2; overflow:hidden; }
+.project-row { min-height:92px; }
+
+
+
+.checkbox-field { align-items:center; color:#17201d !important; display:flex !important; flex-direction:row; gap:12px; letter-spacing:.04em !important; }
+.checkbox-field input { accent-color:var(--admin-deep); height:20px; min-height:20px; width:20px; }
+
+
+
+.project-image-preview { display:block; width:180px; height:130px; margin:14px 0; object-fit:contain; object-position:center; border:1px solid var(--admin-line); background:#dfe6dc; }
+.checkbox-field { align-items:center !important; display:flex !important; flex-direction:row !important; gap:10px !important; white-space:nowrap; }
+.project-form .checkbox-field input { flex:0 0 18px; height:18px; min-height:18px; margin:0; width:18px; }
+
+/* Make admin actions visibly interactive across every editor page. */
+.project-form button, .form-actions button, .project-row button, .password-form button, .totp-setup button, .media-uploader button, .security-toggle, .admin-logout {
+  align-items:center; background:var(--admin-deep); border:1px solid var(--admin-deep); border-radius:5px; color:#fff; cursor:pointer; display:inline-flex; font:inherit; font-size:.9rem; font-weight:700; justify-content:center; line-height:1.1; min-height:48px; min-width:150px; padding:13px 20px; text-decoration:none; transition:background-color .16s ease, border-color .16s ease, transform .16s ease;
+}
+.project-form button:hover, .form-actions button:hover, .project-row button:hover, .password-form button:hover, .totp-setup button:hover, .media-uploader button:hover, .security-toggle:hover, .admin-logout:hover { background:#315c4c; border-color:#315c4c; transform:translateY(-1px); }
+.form-actions .secondary-action { background:transparent; border-color:#52615a; color:var(--admin-ink); }
+.project-row button { min-height:42px; min-width:86px; padding:10px 14px; }
+.project-row .delete-action { background:transparent; border-color:#a45e49; color:#8b4938; min-width:42px; padding:10px; }
+.security-toggle { min-width:82px; }
+.admin-logout { margin-top:18px; min-height:40px; min-width:110px; padding:10px 14px; }
+.media-upload-preview { background:#dfe6dc; border:1px solid var(--admin-line); display:block; height:180px; margin:18px 0; object-fit:contain; object-position:center; width:240px; }
+.media-item small { color:var(--admin-muted); font-size:.68rem; overflow-wrap:anywhere; }
+.media-actions { display:flex; gap:10px; margin-top:10px; }
+.media-item .media-actions { flex-direction:row; align-items:center; }
+.media-actions button { min-height:38px; min-width:88px; padding:9px 14px; }
+.media-actions .delete-action { background:transparent; border:1px solid #a45e49; color:#8b4938; }
+.media-viewer { align-items:center; background:#17201dcc; display:flex; inset:0; justify-content:center; padding:30px; position:fixed; z-index:50; }
+.media-viewer-panel { background:var(--admin-paper); max-height:90vh; max-width:900px; overflow:auto; padding:20px; position:relative; text-align:center; width:min(90vw,900px); }
+.media-viewer-panel img { display:block; height:auto; margin:20px auto; max-height:75vh; max-width:100%; object-fit:contain; }
+.media-viewer-panel strong { color:var(--admin-ink); display:block; font-size:.8rem; overflow-wrap:anywhere; }
+.media-viewer-close { background:var(--admin-deep); border:0; color:#fff; cursor:pointer; font-weight:700; padding:10px 16px; }
+.certificate-thumb { background:#dfe6dc; display:block; height:90px; margin-bottom:10px; object-fit:contain; width:130px; }
+.media-picker-block { border:1px solid var(--admin-line); margin:8px 0 28px; padding:16px; }
+.media-picker-block > strong { color:var(--admin-ink); display:block; font-size:.82rem; margin-bottom:12px; }
+.media-picker { display:flex; flex-wrap:wrap; gap:10px; }
+.media-picker-option { background:#e3e9df !important; border:1px solid var(--admin-line) !important; color:var(--admin-ink) !important; display:flex !important; flex-direction:column; gap:5px; min-height:100px !important; min-width:92px !important; padding:7px !important; }
+.media-picker-option img { height:64px; object-fit:contain; width:78px; }
+.media-picker-option span { font-size:.65rem; }
+.media-picker-option.selected { border:2px solid var(--admin-deep) !important; box-shadow:inset 0 0 0 2px var(--admin-acid); }
+.media-item img { background:#dfe6dc; height:220px; object-fit:contain; object-position:center; padding:8px; width:100%; box-sizing:border-box; }

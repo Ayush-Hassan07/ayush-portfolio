@@ -1,4 +1,12 @@
-import { Body, Controller, HttpCode, Post, Req, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Req,
+  Res,
+} from '@nestjs/common';
 import type { Request, Response } from 'express';
 import { AuthService } from './auth.service';
 
@@ -15,6 +23,15 @@ type PasswordBody = {
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Get('session')
+  session(@Req() request: Request) {
+    return {
+      authenticated: this.authService.verifySession(
+        request.cookies?.admin_session,
+      ),
+    };
+  }
+
   @Post('login')
   @HttpCode(200)
   async login(
@@ -29,7 +46,29 @@ export class AuthController {
       maxAge: 60 * 1000,
       path: '/auth',
     });
-    return { requiresOtp: true, expiresIn: result.expiresIn };
+    if (result.session)
+      response.cookie('admin_session', result.session, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 30 * 60 * 1000,
+        path: '/',
+      });
+    if ('factorToken' in result && result.factorToken)
+      response.cookie('login_factor', result.factorToken, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 1000,
+        path: '/auth',
+      });
+    return result.authenticated
+      ? { authenticated: true }
+      : {
+          requiresOtp: result.requiresEmailOtp,
+          requiresTotp: result.requiresTotp,
+          expiresIn: result.expiresIn,
+        };
   }
 
   @Post('verify-otp')
@@ -39,11 +78,48 @@ export class AuthController {
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
   ) {
-    const session = await this.authService.verifyOtp(
+    const result = await this.authService.verifyOtp(
       request.cookies?.otp_challenge,
       body.code,
     );
     response.clearCookie('otp_challenge', {
+      httpOnly: true,
+      sameSite: 'lax',
+      path: '/auth',
+    });
+    if (result.session)
+      response.cookie('admin_session', result.session, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 30 * 60 * 1000,
+        path: '/',
+      });
+    if (result.factorToken)
+      response.cookie('login_factor', result.factorToken, {
+        httpOnly: true,
+        sameSite: 'lax',
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 60 * 1000,
+        path: '/auth',
+      });
+    return result.authenticated
+      ? { authenticated: true }
+      : { requiresTotp: true };
+  }
+
+  @Post('verify-totp')
+  @HttpCode(200)
+  async verifyLoginTotp(
+    @Req() request: Request,
+    @Res({ passthrough: true }) response: Response,
+    @Body() body: OtpBody,
+  ) {
+    const session = await this.authService.verifyLoginTotp(
+      request.cookies?.login_factor,
+      body.code,
+    );
+    response.clearCookie('login_factor', {
       httpOnly: true,
       sameSite: 'lax',
       path: '/auth',

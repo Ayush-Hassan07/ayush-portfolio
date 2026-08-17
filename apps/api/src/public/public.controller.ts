@@ -29,4 +29,8 @@ export class PublicController {
   getPublications() {
     return this.publicService.getPublications();
   }
+  @Get('certifications')
+  getCertifications() {
+    return this.publicService.getCertifications();
+  }
 }

@@ -50,14 +50,76 @@ export class AdminLibraryController {
   @Delete('skills/:id') deleteSkill(@Param('id') id: string) {
     return this.service.deleteSkill(id);
   }
+  @Get('certifications') listCertifications() {
+    return this.service.listCertifications();
+  }
+  @Post('certifications') createCertification(
+    @Body() body: Record<string, unknown>,
+  ) {
+    return this.service.createCertification(body);
+  }
+  @Put('certifications/:id') updateCertification(
+    @Param('id') id: string,
+    @Body() body: Record<string, unknown>,
+  ) {
+    return this.service.updateCertification(id, body);
+  }
+  @Delete('certifications/:id') deleteCertification(@Param('id') id: string) {
+    return this.service.deleteCertification(id);
+  }
+  @Get('education') listEducation() {
+    return this.service.listEducation();
+  }
+  @Post('education') createEducation(@Body() body: Record<string, unknown>) {
+    return this.service.createEducation(body);
+  }
+  @Put('education/:id') updateEducation(
+    @Param('id') id: string,
+    @Body() body: Record<string, unknown>,
+  ) {
+    return this.service.updateEducation(id, body);
+  }
+  @Delete('education/:id') deleteEducation(@Param('id') id: string) {
+    return this.service.deleteEducation(id);
+  }
+  @Get('experience') listExperience() {
+    return this.service.listExperience();
+  }
+  @Post('experience') createExperience(@Body() body: Record<string, unknown>) {
+    return this.service.createExperience(body);
+  }
+  @Put('experience/:id') updateExperience(
+    @Param('id') id: string,
+    @Body() body: Record<string, unknown>,
+  ) {
+    return this.service.updateExperience(id, body);
+  }
+  @Delete('experience/:id') deleteExperience(@Param('id') id: string) {
+    return this.service.deleteExperience(id);
+  }
   @Get('profile') getProfile() {
     return this.service.getProfile();
   }
   @Put('profile') updateProfile(@Body() body: Record<string, unknown>) {
     return this.service.updateProfile(body);
   }
+  @Put('profile/image') updateProfileImage(
+    @Body() body: { storage_key?: unknown },
+  ) {
+    if (
+      typeof body.storage_key !== 'string' ||
+      !/^[a-f0-9-]+\.webp$/i.test(body.storage_key)
+    )
+      throw new UnauthorizedException('Invalid profile image path');
+    return this.service.updateProfileImage(body.storage_key);
+  }
   @Get('technologies') technologies() {
     return this.service.listTechnologies();
+  }
+  @Post('technologies') createTechnology(
+    @Body() body: Record<string, unknown>,
+  ) {
+    return this.service.createTechnology(body);
   }
   @Post('security/totp/begin') beginTotp(@Req() request: Request) {
     return this.service.beginTotp(this.adminId(request));

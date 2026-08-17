@@ -67,4 +67,10 @@ export class PublicService {
       ],
     });
   }
+
+  getCertifications() {
+    return this.prisma.certification.findMany({
+      orderBy: [{ issue_date: 'desc' }, { name: 'asc' }],
+    });
+  }
 }

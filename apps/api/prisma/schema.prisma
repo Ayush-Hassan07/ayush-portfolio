@@ -35,6 +35,7 @@ model media_asset {
   mime_type    String   @db.VarChar(80)
   byte_size    Int
   created_at   DateTime @default(now()) @db.Timestamp(6)
+  project_media project_media[]
 }
 
 model admin_otp_challenge {
@@ -59,6 +60,7 @@ model certification {
   credential_id  String?   @db.VarChar(200)
   credential_url String?
   description    String?
+  image_url      String?
   created_at     DateTime  @default(now()) @db.Timestamp(6)
   updated_at     DateTime  @default(now()) @db.Timestamp(6)
 }
@@ -120,6 +122,7 @@ model project {
   title              String               @db.VarChar(200)
   slug               String               @unique @db.VarChar(220)
   description        String
+  status             String               @default("draft") @db.VarChar(30)
   image_url          String?
   github_url         String?
   live_url           String?
@@ -128,6 +131,18 @@ model project {
   created_at         DateTime             @default(now()) @db.Timestamp(6)
   updated_at         DateTime             @default(now()) @db.Timestamp(6)
   project_technology project_technology[]
+  project_media     project_media[]
+}
+
+model project_media {
+  project_id  String      @db.Uuid
+  media_id    String      @db.Uuid
+  sort_order  Int         @default(0)
+  is_primary  Boolean     @default(false)
+  project     project     @relation(fields: [project_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_project_media_project")
+  media       media_asset @relation(fields: [media_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_project_media_asset")
+  @@id([project_id, media_id])
+  @@index([media_id])
 }
 
 model project_technology {
@@ -142,11 +157,11 @@ model project_technology {
 model publication {
   id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   title            String
-  venue            String?   @db.VarChar(250)
-  publication_date DateTime? @db.Date
-  doi_url          String?
+    venue            String?   @db.VarChar(250)
+    publication_date DateTime? @db.Date
   paper_url        String?
-  description      String?
+    description      String?
+    repository_url   String?
   featured         Boolean   @default(false)
   created_at       DateTime  @default(now()) @db.Timestamp(6)
   updated_at       DateTime  @default(now()) @db.Timestamp(6)
@@ -160,6 +175,7 @@ model skill {
   proficiency Int?
   sort_order  Int      @default(0)
   created_at  DateTime @default(now()) @db.Timestamp(6)
+  technologies technology[]
 }
 
 model technology {
@@ -168,5 +184,7 @@ model technology {
   category           String?              @db.VarChar(100)
   icon_url           String?
   created_at         DateTime             @default(now()) @db.Timestamp(6)
+  skill_id           String?              @db.Uuid
+  skill              skill?               @relation(fields: [skill_id], references: [id], onDelete: SetNull, onUpdate: NoAction, map: "fk_technology_skill")
   project_technology project_technology[]
 }

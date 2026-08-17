@@ -34,6 +34,20 @@ export class AuthService {
     if (!admin || !this.verifyPassword(password, admin.password_hash))
       throw new UnauthorizedException('Invalid credentials');
 
+    const settings = await this.prisma.admin_security_settings.findUnique({
+      where: { admin_id: admin.id },
+    });
+    const emailOtpEnabled = settings?.email_otp_enabled ?? true;
+    const totpEnabled = settings?.totp_enabled ?? false;
+    if (!emailOtpEnabled && !totpEnabled)
+      return { authenticated: true, session: this.createSession(admin.id) };
+    if (!emailOtpEnabled && totpEnabled)
+      return {
+        requiresTotp: true,
+        factorToken: this.createFactorToken(admin.id),
+        expiresIn: OTP_TTL_SECONDS,
+      };
+
     await this.prisma.admin_otp_challenge.deleteMany({
       where: {
         admin_id: admin.id,
@@ -57,7 +71,12 @@ export class AuthService {
       },
     });
     await this.sendOtp(admin.email, code);
-    return { challengeId: challenge.id, expiresIn: OTP_TTL_SECONDS };
+    return {
+      challengeId: challenge.id,
+      expiresIn: OTP_TTL_SECONDS,
+      requiresEmailOtp: emailOtpEnabled,
+      requiresTotp: totpEnabled,
+    };
   }
 
   async verifyOtp(challengeId: unknown, code: unknown) {
@@ -88,7 +107,39 @@ export class AuthService {
       where: { id: challenge.id },
       data: { consumed: true },
     });
-    return this.createSession(challenge.admin_id);
+    const settings = await this.prisma.admin_security_settings.findUnique({
+      where: { admin_id: challenge.admin_id },
+    });
+    if (settings?.totp_enabled)
+      return {
+        requiresTotp: true,
+        factorToken: this.createFactorToken(challenge.admin_id),
+      };
+    return {
+      authenticated: true,
+      session: this.createSession(challenge.admin_id),
+    };
+  }
+
+  async verifyLoginTotp(token: unknown, code: unknown) {
+    const adminId = this.verifyFactorToken(token);
+    const settings = await this.prisma.admin_security_settings.findUnique({
+      where: { admin_id: adminId },
+    });
+    if (!settings?.totp_enabled || !settings.totp_secret_encrypted)
+      throw new UnauthorizedException(
+        'Authenticator verification is not enabled',
+      );
+    const { decryptTotpSecret, verifyTotp } = await import('./totp');
+    if (
+      typeof code !== 'string' ||
+      !verifyTotp(
+        decryptTotpSecret(settings.totp_secret_encrypted, this.getSecret()),
+        code,
+      )
+    )
+      throw new UnauthorizedException('Invalid authenticator code');
+    return this.createSession(adminId);
   }
 
   async requestPasswordChange(
@@ -185,6 +236,27 @@ export class AuthService {
       .update(payload)
       .digest('base64url');
     return `${Buffer.from(payload).toString('base64url')}.${signature}`;
+  }
+  private createFactorToken(adminId: string) {
+    const payload = `${adminId}.${Date.now() + OTP_TTL_SECONDS * 1000}`;
+    const signature = createHmac('sha256', this.getSecret())
+      .update(`factor:${payload}`)
+      .digest('base64url');
+    return `${Buffer.from(payload).toString('base64url')}.${signature}`;
+  }
+  private verifyFactorToken(token: unknown) {
+    if (typeof token !== 'string')
+      throw new UnauthorizedException('Authentication step expired');
+    const [encoded, signature] = token.split('.');
+    if (!encoded || !signature)
+      throw new UnauthorizedException('Authentication step expired');
+    const payload = Buffer.from(encoded, 'base64url').toString('utf8');
+    const expected = createHmac('sha256', this.getSecret())
+      .update(`factor:${payload}`)
+      .digest('base64url');
+    if (signature !== expected || Number(payload.split('.')[1]) <= Date.now())
+      throw new UnauthorizedException('Authentication step expired');
+    return payload.split('.')[0];
   }
 
   private async sendOtp(recipient: string, code: string) {
