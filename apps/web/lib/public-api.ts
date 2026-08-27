@@ -5,6 +5,7 @@ export type PublicProfile = {
   email: string;
   resume_url: string | null;
   location: string | null;
+  profile_image: string | null;
   github_url: string | null;
   linkedin_url: string | null;
   google_scholar_url: string | null;

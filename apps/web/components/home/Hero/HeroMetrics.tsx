@@ -1,0 +1,3 @@
+import styles from "./Hero.module.css";
+type Props={projects:number;publications:number;technologies:number;capabilities:number};
+export default function HeroMetrics({projects,publications,technologies,capabilities}:Props){const metrics=[[projects,"SYSTEMS","PROJECT RECORDS"],[publications,"PAPERS","PUBLISHED WORK"],[technologies,"TECH","IMPLEMENTATION STACK"],[capabilities,"CAPABILITIES","TECHNICAL INDEX"]];return <div className={styles.metrics}>{metrics.map(([value,label,sub],i)=><div className={styles.metric} key={label as string}><span>0{i+1}</span><strong>{String(value).padStart(2,"0")}</strong><div><span>{label}</span><small>{sub}</small></div></div>)}</div>}
