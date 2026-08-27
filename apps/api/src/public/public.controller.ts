@@ -33,4 +33,6 @@ export class PublicController {
   getCertifications() {
     return this.publicService.getCertifications();
   }
+  @Get('education') getEducation() { return this.publicService.getEducation(); }
+  @Get('experience') getExperience() { return this.publicService.getExperience(); }
 }

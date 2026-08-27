@@ -16,6 +16,7 @@ export class PublicService {
         resume_url: true,
         github_url: true,
         linkedin_url: true,
+        google_scholar_url: true,
       },
     });
   }
@@ -31,6 +32,7 @@ export class PublicService {
         project_technology: {
           include: { technology: true },
         },
+        project_media: { orderBy: [{ is_primary: 'desc' }, { sort_order: 'asc' }], include: { media: true } },
       },
     });
   }
@@ -42,6 +44,7 @@ export class PublicService {
         project_technology: {
           include: { technology: true },
         },
+        project_media: { orderBy: [{ is_primary: 'desc' }, { sort_order: 'asc' }], include: { media: true } },
       },
     });
 
@@ -73,4 +76,6 @@ export class PublicService {
       orderBy: [{ issue_date: 'desc' }, { name: 'asc' }],
     });
   }
+  getEducation() { return this.prisma.education.findMany({ orderBy: { start_date: 'desc' } }); }
+  getExperience() { return this.prisma.experience.findMany({ orderBy: { start_date: 'desc' } }); }
 }

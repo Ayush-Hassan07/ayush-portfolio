@@ -1,0 +1,13 @@
+.project-detail-reference img,
+.project-detail-reference .project-media img,
+.project-detail-reference .project-hero img,
+.project-detail-reference figure img {
+  object-fit: contain !important;
+  object-position: center !important;
+  background: #071014;
+}
+.project-detail-reference .project-media,
+.project-detail-reference .project-hero,
+.project-detail-reference figure { overflow: hidden; background:#071014; }
+.project-media-stage { background:#071014 !important; }
+.project-media-stage img { object-fit: contain !important; object-position:center !important; background:#071014; }

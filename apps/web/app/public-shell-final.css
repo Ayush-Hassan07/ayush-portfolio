@@ -1,0 +1,34 @@
+/* The shared public frame owns the rail and header on every route. */
+@media (min-width: 901px) {
+  .public-frame-content {
+    margin-left: 180px !important;
+    width: calc(100% - 180px) !important;
+  }
+
+  .public-frame-content > .systems-archive,
+  .public-frame-content > .research-archive,
+  .public-frame-content > .journey-archive,
+  .public-frame-content > .capability-map,
+  .public-frame-content > .project-detail,
+  .public-frame-content > .publication-page {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding-left: 56px !important;
+    padding-right: 56px !important;
+    box-sizing: border-box !important;
+  }
+
+  .public-frame-content > .systems-archive > .archive-rail { display: none !important; }
+  .public-frame-content > .systems-archive > .archive-main {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 26px 0 100px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .public-frame-content { margin-left: 0 !important; width: 100% !important; }
+}

@@ -73,6 +73,7 @@ model education {
   start_date      DateTime  @db.Date
   end_date        DateTime? @db.Date
   description     String?
+  result          String?   @db.VarChar(80)
   institution_url String?
   created_at      DateTime  @default(now()) @db.Timestamp(6)
   updated_at      DateTime  @default(now()) @db.Timestamp(6)
@@ -113,6 +114,7 @@ model profile {
   resume_url    String?
   github_url    String?
   linkedin_url  String?
+  google_scholar_url String?
   created_at    DateTime @default(now()) @db.Timestamp(6)
   updated_at    DateTime @default(now()) @db.Timestamp(6)
 }

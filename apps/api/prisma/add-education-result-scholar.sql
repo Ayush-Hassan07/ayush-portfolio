@@ -1,0 +1,2 @@
+ALTER TABLE education ADD COLUMN IF NOT EXISTS result VARCHAR(80);
+ALTER TABLE profile ADD COLUMN IF NOT EXISTS google_scholar_url TEXT;

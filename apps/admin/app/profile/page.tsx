@@ -15,6 +15,7 @@ type Profile = {
   location: string | null;
   github_url: string | null;
   linkedin_url: string | null;
+  google_scholar_url: string | null;
 };
 type MediaAsset = { id: string; storage_key: string };
 
@@ -28,6 +29,7 @@ const emptyProfile: Profile = {
   location: null,
   github_url: null,
   linkedin_url: null,
+  google_scholar_url: null,
 };
 
 export default function ProfilePage() {
@@ -143,6 +145,7 @@ export default function ProfilePage() {
         <label>Location<input value={form.location ?? ""} onChange={(event) => setForm({ ...form, location: event.target.value })} /></label>
         <label>GitHub URL<input type="url" value={form.github_url ?? ""} onChange={(event) => setForm({ ...form, github_url: event.target.value })} /></label>
         <label>LinkedIn URL<input type="url" value={form.linkedin_url ?? ""} onChange={(event) => setForm({ ...form, linkedin_url: event.target.value })} /></label>
+        <label>Google Scholar URL<input type="url" value={form.google_scholar_url ?? ""} onChange={(event) => setForm({ ...form, google_scholar_url: event.target.value })} /></label>
         <button type="submit" disabled={busy}>{busy ? "Saving…" : "Save profile"}</button>
         {message && <p className="editor-message" role="status">{message}</p>}
       </form>

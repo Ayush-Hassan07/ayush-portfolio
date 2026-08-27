@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import PublicFrame from "./PublicFrame";
 
 export const metadata: Metadata = {
   title: "Ayush Hassan Raiyan — Software Engineer",
@@ -13,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col"><PublicFrame>{children}</PublicFrame></body>
     </html>
   );
 }

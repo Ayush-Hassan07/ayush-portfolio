@@ -1,0 +1,53 @@
+@media (min-width: 901px) {
+  .public-frame-rail { width: 180px !important; top: 0 !important; bottom: 0 !important; position: fixed !important; }
+  .public-frame-rail .public-logo { display: none !important; }
+  .public-frame-rail nav { margin-top: 55px !important; }
+  .public-frame-header { height: 96px !important; margin-left: 180px !important; padding-left: 56px !important; padding-right: 56px !important; }
+  .public-frame-content,
+  .public-frame-footer { margin-left: 180px !important; }
+}
+
+@media (min-width: 901px) {
+  .public-frame-content .journey-archive,
+  .public-frame-content .research-archive,
+  .public-frame-content .systems-archive,
+  .public-frame-content .capability-map,
+  .public-frame-content .project-detail,
+  .public-frame-content .publication-page {
+    margin-left: 0 !important;
+    padding-left: 56px !important;
+    padding-right: 56px !important;
+  }
+}
+
+/* The root frame owns the shell. The homepage keeps its content only. */
+.public-frame-content > .benchmark-nav,
+.public-frame-content > .system-index,
+.public-frame-content > .public-system > .benchmark-nav,
+.public-frame-content > .public-system > .system-index { display: none !important; }
+
+@media (min-width: 901px) {
+  .public-frame-content > main,
+  .public-frame-content > section {
+    padding-left: 56px !important;
+    padding-right: 56px !important;
+  }
+}
+
+@media (min-width: 901px) {
+  .public-frame-content > .public-system .benchmark-hero,
+  .public-frame-content > .public-system .benchmark-workbench,
+  .public-frame-content > .public-system .benchmark-systems,
+  .public-frame-content > .public-system .benchmark-triad,
+  .public-frame-content > .public-system .benchmark-research,
+  .public-frame-content > .public-system .benchmark-footer {
+    padding-left: 56px !important;
+  }
+  .public-frame-content > .public-system .benchmark-hero,
+  .public-frame-content > .public-system .benchmark-workbench,
+  .public-frame-content > .public-system .benchmark-systems,
+  .public-frame-content > .public-system .benchmark-triad,
+  .public-frame-content > .public-system .benchmark-research {
+    padding-left: 56px !important;
+  }
+}

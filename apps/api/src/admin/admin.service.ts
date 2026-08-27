@@ -298,6 +298,7 @@ export class AdminService {
         start_date: new Date(String(i.start_date)),
         end_date: i.end_date ? new Date(String(i.end_date)) : null,
         description: i.description ? String(i.description) : null,
+        result: i.result ? String(i.result).trim() : null,
         institution_url: i.institution_url ? String(i.institution_url) : null,
       },
     });
@@ -327,6 +328,8 @@ export class AdminService {
             : i.end_date
               ? new Date(String(i.end_date))
               : null,
+        result:
+          i.result === undefined ? undefined : i.result ? String(i.result).trim() : null,
         description:
           i.description === undefined
             ? undefined
@@ -438,6 +441,10 @@ export class AdminService {
         input.linkedin_url === undefined
           ? undefined
           : String(input.linkedin_url).trim() || null,
+      google_scholar_url:
+        input.google_scholar_url === undefined
+          ? undefined
+          : String(input.google_scholar_url).trim() || null,
     };
     if (current)
       return this.prisma.profile.update({ where: { id: current.id }, data });
