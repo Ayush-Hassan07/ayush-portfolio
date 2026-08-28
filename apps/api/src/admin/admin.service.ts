@@ -181,6 +181,8 @@ export class AdminService {
             : Number(input.proficiency),
         sort_order:
           input.sort_order === undefined ? 0 : Number(input.sort_order),
+        featured:
+          input.featured === undefined ? false : Boolean(input.featured),
       },
     });
   }
@@ -201,6 +203,10 @@ export class AdminService {
               : Number(input.proficiency),
         sort_order:
           input.sort_order === undefined ? undefined : Number(input.sort_order),
+        featured:
+          input.featured === undefined
+            ? undefined
+            : Boolean(input.featured),
       },
     });
   }
@@ -209,7 +215,12 @@ export class AdminService {
   }
   listCertifications() {
     return this.prisma.certification.findMany({
-      orderBy: [{ issue_date: 'desc' }, { name: 'asc' }],
+      orderBy: [
+        { featured: 'desc' },
+        { sort_order: 'asc' },
+        { issue_date: 'desc' },
+        { name: 'asc' },
+      ],
     });
   }
   createCertification(input: Record<string, unknown>) {
@@ -232,7 +243,17 @@ export class AdminService {
         description: input.description
           ? String(input.description).trim()
           : null,
-        image_url: input.image_url ? String(input.image_url).trim() : null,
+        image_url: input.image_url
+          ? String(input.image_url).trim()
+          : null,
+        category: input.category
+          ? String(input.category).trim()
+          : null,
+        featured: Boolean(input.featured),
+        sort_order:
+          input.sort_order === undefined || input.sort_order === null
+            ? 0
+            : Number(input.sort_order),
       },
     });
   }
@@ -279,6 +300,20 @@ export class AdminService {
             : input.description
               ? String(input.description).trim()
               : null,
+        category:
+          input.category === undefined
+            ? undefined
+            : input.category
+              ? String(input.category).trim()
+              : null,
+        featured:
+          input.featured === undefined
+            ? undefined
+            : Boolean(input.featured),
+        sort_order:
+          input.sort_order === undefined
+            ? undefined
+            : Number(input.sort_order),
         updated_at: new Date(),
       },
     });

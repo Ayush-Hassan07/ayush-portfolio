@@ -73,7 +73,12 @@ export class PublicService {
 
   getCertifications() {
     return this.prisma.certification.findMany({
-      orderBy: [{ issue_date: 'desc' }, { name: 'asc' }],
+      orderBy: [
+        { featured: 'desc' },
+        { sort_order: 'asc' },
+        { issue_date: 'desc' },
+        { name: 'asc' },
+      ],
     });
   }
   getEducation() { return this.prisma.education.findMany({ orderBy: { start_date: 'desc' } }); }

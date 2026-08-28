@@ -153,3 +153,5 @@
 .media-picker-option span { font-size:.65rem; }
 .media-picker-option.selected { border:2px solid var(--admin-deep) !important; box-shadow:inset 0 0 0 2px var(--admin-acid); }
 .media-item img { background:#dfe6dc; height:220px; object-fit:contain; object-position:center; padding:8px; width:100%; box-sizing:border-box; }
+.project-form label.check-row { display:flex; align-items:center; gap:12px; color:var(--admin-ink); cursor:pointer; }
+.project-form label.check-row input[type="checkbox"] { width:20px; height:20px; flex:0 0 auto; margin:0; padding:0; accent-color:var(--admin-deep); }

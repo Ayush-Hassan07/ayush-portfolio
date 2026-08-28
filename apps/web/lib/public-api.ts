@@ -25,9 +25,22 @@ export type PublicProject = {
   project_technology?: { technology: { id: string; name: string; category: string | null } }[];
   project_media?: { media: { storage_key: string } }[];
 };
-export type PublicPublication = { id: string; title: string; venue: string | null; publication_date: string | null; paper_url: string | null; description: string | null; featured: boolean };
-export type PublicSkill = { id: string; name: string; category: string; sort_order: number };
-export type PublicCertification = { id: string; name: string; issuer: string; issue_date: string | null; expiry_date: string | null; credential_id: string | null; credential_url: string | null; description: string | null; image_url: string | null };
+export type PublicPublication = { id: string; title: string; venue: string | null; publication_date: string | null; paper_url: string | null; notebook_url: string | null; repository_url: string | null; description: string | null; featured: boolean };
+export type PublicSkill = { id: string; name: string; category: string; sort_order: number; featured: boolean };
+export type PublicCertification = {
+  id: string;
+  name: string;
+  issuer: string;
+  issue_date: string | null;
+  expiry_date: string | null;
+  credential_id: string | null;
+  credential_url: string | null;
+  description: string | null;
+  image_url: string | null;
+  category: string | null;
+  featured: boolean;
+  sort_order: number;
+};
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
 

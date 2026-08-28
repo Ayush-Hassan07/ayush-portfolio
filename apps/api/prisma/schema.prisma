@@ -61,6 +61,11 @@ model certification {
   credential_url String?
   description    String?
   image_url      String?
+
+  category       String?   @db.VarChar(100)
+  featured       Boolean   @default(false)
+  sort_order     Int       @default(0)
+
   created_at     DateTime  @default(now()) @db.Timestamp(6)
   updated_at     DateTime  @default(now()) @db.Timestamp(6)
 }
@@ -176,6 +181,7 @@ model skill {
   category    String   @db.VarChar(100)
   proficiency Int?
   sort_order  Int      @default(0)
+  featured    Boolean  @default(false)
   created_at  DateTime @default(now()) @db.Timestamp(6)
   technologies technology[]
 }
@@ -190,3 +196,4 @@ model technology {
   skill              skill?               @relation(fields: [skill_id], references: [id], onDelete: SetNull, onUpdate: NoAction, map: "fk_technology_skill")
   project_technology project_technology[]
 }
+
