@@ -22,6 +22,13 @@
   align-items: start;
 }
 
+/* HERO PORTFOLIO TELEMETRY */
+.metrics{position:relative;z-index:4;width:100%;min-width:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(223,255,99,.16);border-bottom:1px solid rgba(243,246,237,.09);background:linear-gradient(180deg,rgba(223,255,99,.012),transparent)}
+.metric{position:relative;min-width:0;min-height:7.3rem;padding:1rem 1.15rem .95rem;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;border-right:1px solid rgba(243,246,237,.09);transition:background 220ms ease,border-color 220ms ease}.metric:last-child{border-right:0}.metric:before{content:"";position:absolute;inset:0;opacity:0;pointer-events:none;background-image:linear-gradient(rgba(223,255,99,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(223,255,99,.025) 1px,transparent 1px);background-size:20px 20px;transition:opacity 220ms ease}.metric:hover{background:rgba(223,255,99,.018)}.metric:hover:before{opacity:1}
+.metricHead{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between}.metricIndex{color:rgba(243,246,237,.3);font:700 .38rem monospace;letter-spacing:.12em}.metricCode{padding:.22rem .32rem;border:1px solid rgba(223,255,99,.11);color:rgba(223,255,99,.5);font:700 .29rem monospace;letter-spacing:.11em}.metricMain{position:relative;z-index:2;display:flex;align-items:flex-end;gap:.85rem}.metricMain>strong{display:block;color:var(--text);font-size:clamp(2rem,2.8vw,3rem);font-weight:430;line-height:.8;letter-spacing:-.065em}.metricCopy{min-width:0;display:flex;flex-direction:column;gap:.28rem}.metricCopy>span{color:rgba(243,246,237,.86);font-size:.46rem;font-weight:750}.metricCopy small{color:rgba(243,246,237,.34);font-size:.29rem;white-space:nowrap}.metricSignal{position:relative;z-index:2;display:flex;align-items:center;gap:.45rem}.metricSignal>span{height:1px;flex:1;background:rgba(243,246,237,.08)}.metricSignal>i{width:4px;height:4px;border-radius:50%;background:var(--accent);box-shadow:0 0 7px rgba(223,255,99,.5)}
+@media(max-width:950px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid rgba(243,246,237,.09)}}
+@media(max-width:650px){.metric{min-height:6.5rem;padding:.85rem}.metricMain>strong{font-size:clamp(1.7rem,8vw,2.25rem)}.metricCopy small{white-space:normal}}
+
 .portraitStage {
   position: relative;
   width: 100%;
@@ -293,3 +300,251 @@
     opacity: 0;
   }
 }
+
+/* TELEMETRY COMPRESSION */
+.metric{min-height:5.9rem;padding:.75rem 1rem .7rem}
+.metricHead{margin-bottom:.3rem}
+.metricMain{align-items:center;gap:.7rem}
+.metricMain>strong{font-size:clamp(1.9rem,2.4vw,2.6rem);line-height:.9}
+.metricCopy{gap:.2rem}
+.metricSignal{margin-top:.55rem}
+.metricSignal>span{background:rgba(243,246,237,.1)}
+.metricSignal>span::after{width:34%;background:rgba(223,255,99,.5)}
+
+/* TELEMETRY VISIBILITY */
+.metric{min-height:6.6rem;padding:.9rem 1.1rem .8rem}
+.metricIndex{font-size:.48rem}
+.metricCode{font-size:.36rem}
+.metricMain>strong{font-size:clamp(2.2rem,3vw,3.2rem)}
+.metricCopy>span{font-size:.55rem}
+.metricCopy small{font-size:.35rem}
+.metricSignal{gap:.55rem}
+.metricSignal>span{height:2px}
+.metricSignal>span::after{height:2px}
+.metricSignal>i{width:5px;height:5px}
+.metricIndex{color:rgba(243,246,237,.62);font-size:.55rem}
+.metricCode{color:var(--accent);border-color:rgba(223,255,99,.3);font-size:.42rem}
+.metricCopy>span{color:var(--text);font-size:.62rem}
+.metricCopy small{color:rgba(243,246,237,.58);font-size:.38rem}
+.metricSignal>span{background:rgba(243,246,237,.2)}
+.metricSignal>span::after{background:rgba(223,255,99,.75)}
+.metric{align-items:center}
+.metricHead,.metricSignal{width:100%}
+.metricMain{justify-content:center}
+.metricCopy{align-items:center;text-align:center}
+/* =========================================================
+   FINAL MOBILE INTELLIGENCE CORE
+   Continuous range: 0px - 479px
+   Keep this at the VERY END of Hero.module.css
+   ========================================================= */
+
+@media (max-width: 479px) {
+  .coreSide {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .visual {
+    position: relative;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .coreStage {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    aspect-ratio: 1 / 1;
+    flex: 0 0 auto;
+    transform: none;
+  }
+
+  .coreField {
+    transform: none;
+  }
+
+  .intelligenceCenter {
+    transform: translate(-50%, -50%);
+  }
+
+  .coreNode {
+    min-width: 0;
+    min-height: 0;
+    padding: .35rem;
+    transform: translate(-50%, -50%);
+  }
+
+  .coreNode span,
+  .stageLabel span:last-child,
+  .telemetry {
+    display: none;
+  }
+
+  .coreNode > i {
+    width: .5rem;
+    height: .5rem;
+  }
+
+  .stageLabel {
+    left: 5%;
+    right: 5%;
+    top: 5%;
+    font-size: .39rem;
+    letter-spacing: .07em;
+    white-space: nowrap;
+  }
+
+  .signalDock {
+    position: absolute;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: .75rem !important;
+    width: calc(100% - 2rem) !important;
+    max-width: 18rem;
+    transform: translate(-50%, .5rem) !important;
+  }
+
+  .signalDockVisible {
+    transform: translate(-50%, 0) !important;
+  }
+
+  .signalConnector {
+    display: none;
+  }
+
+  .signalContent {
+    padding: .85rem;
+    border-left: 0;
+    border-top: 1px solid rgba(223, 255, 99, .25);
+  }
+
+  .signalContent > strong {
+    font-size: .9rem;
+  }
+
+  .signalContent > p {
+    font-size: .67rem;
+  }
+}
+
+/* Laptop Core centering: continuous 1024px-1279px coverage. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .visual {
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    justify-content: center !important;
+  }
+
+  .coreStage {
+    margin: 0 auto !important;
+  }
+}
+
+/* FINAL TABLET INTELLIGENCE CORE: continuous 480px-1023px */
+@media (min-width: 480px) and (max-width: 1023px) {
+  .coreSide { width: 100%; min-width: 0; max-width: 100%; margin: 0 auto; }
+  .visual { width: 100% !important; max-width: 100% !important; margin: 0 auto !important; padding: 0 !important; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .coreStage { width: min(88vw, 42rem) !important; max-width: 42rem !important; margin: 0 auto !important; flex: 0 0 auto; }
+}
+
+
+
+@media (hover: none) and (pointer: coarse) {
+  .coreStage,
+  .coreField {
+    transform: none !important;
+  }
+
+  .intelligenceCenter,
+  .coreNode {
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+/* Mobile/tablet signal panels close visually after five seconds. */
+@media (max-width: 900px) {
+  .signalDockVisible {
+    animation: mobileSignalAutoHide 5s forwards;
+  }
+}
+
+@keyframes mobileSignalAutoHide {
+  0%, 88% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+/* Mobile core breathing room: preserve containment while separating the stage from its edges. */
+@media (max-width: 479px) {
+  .visual {
+    width: 100% !important;
+    padding: 3rem .75rem !important;
+    box-sizing: border-box;
+  }
+
+  .coreStage {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .stageLabel {
+    left: 8% !important;
+    right: 8% !important;
+    top: 1.5% !important;
+    font-size: .52rem !important;
+    font-weight: 750 !important;
+    letter-spacing: .06em !important;
+    color: rgba(243, 246, 237, .82) !important;
+  }
+
+  .stageLabel span:first-child {
+    color: var(--accent) !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .identityCopy h1 {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 479px) {
+  .identityCopy h1 {
+    font-size: clamp(2.8rem, 12vw, 4rem);
+  }
+}
+
+/* Keep the core rings clear of the telemetry readout. */
+.connectionMap{inset:4%;width:92%;height:92%}.ringOne{width:58%;height:58%;margin:-29%}.ringTwo{width:52%;height:52%;margin:-26%}.fragmentRing{width:47%;height:47%;margin:-23.5%}.telemetry{z-index:30}
+.coreNode[style*="--x:91%"],
+.coreNode[style*="--x: 91%"] {
+  --x: 86% !important;
+  --y: 48% !important;
+}
+@media (min-width: 651px) and (max-width: 1100px) {
+  .coreStage {
+    width: min(82vw, 36rem);
+  }
+
+  .header {
+    padding-inline: 1.25rem;
+    overflow: visible;
+  }
+}
+
+/* Core node indexes remain visible above each label at every viewport. */
+.coreNode span { display: flex !important; flex-direction: column; align-items: center; }
+.coreNode small { display: block !important; margin-bottom: .2rem; color: var(--accent) !important; font-size: .42rem !important; font-weight: 800; line-height: 1; letter-spacing: .08em; }
+@media (max-width: 479px) { .coreNode strong { display: none !important; } }

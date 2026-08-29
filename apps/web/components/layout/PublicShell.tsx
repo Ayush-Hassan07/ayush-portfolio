@@ -27,7 +27,7 @@ export default function PublicShell({
         linkedinUrl={linkedinUrl}
         googleScholarUrl={googleScholarUrl}
       />
-      <TopNav name={name} email={email} />
+      <TopNav name={name} email={email} githubUrl={githubUrl} linkedinUrl={linkedinUrl} googleScholarUrl={googleScholarUrl} />
       <div className={styles.content}>{children}</div>
       <footer className={styles.footer}>
         <span>&copy; {new Date().getFullYear()} {name}</span>

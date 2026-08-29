@@ -1,19 +1,5 @@
 "use client";
-
 import { useState } from "react";
 import styles from "./ProjectGallery.module.css";
-
-type GalleryImage = { src: string; storageKey: string };
-
-export default function ProjectGallery({ images, title }: { images: GalleryImage[]; title: string }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  if (!images.length) return <div className={styles.empty}><span>MEDIA / UNAVAILABLE</span><strong>NO PROJECT MEDIA</strong><small>Project screenshots have not been added yet.</small></div>;
-  const active = images[activeIndex];
-  return <div className={styles.gallery}>
-    <div className={styles.stage}>
-      <header><span>MEDIA / {String(activeIndex + 1).padStart(2, "0")}</span><span>{String(activeIndex + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}</span></header>
-      <div className={styles.imageFrame}><img key={active.src} src={active.src} alt={`${title} screenshot ${activeIndex + 1}`} onLoad={(event) => { const image = event.currentTarget; if (image.naturalWidth > image.naturalHeight) { image.classList.add(styles.landscape); image.classList.remove(styles.portrait); } else { image.classList.add(styles.portrait); image.classList.remove(styles.landscape); } }} /><i className={styles.cornerTop} /><i className={styles.cornerBottom} /></div>
-    </div>
-    {images.length > 1 && <div className={styles.thumbnailRail}><div><span>// MEDIA INDEX</span><small>SELECT FRAME</small></div><div className={styles.thumbnails}>{images.map((image, index) => <button type="button" key={`${image.storageKey}-${index}`} className={index === activeIndex ? styles.thumbnailActive : styles.thumbnail} onClick={() => setActiveIndex(index)} aria-label={`View screenshot ${index + 1}`} aria-pressed={index === activeIndex}><img src={image.src} alt="" /><span>{String(index + 1).padStart(2, "0")}</span></button>)}</div></div>}
-  </div>;
-}
+type GalleryImage={src:string;storageKey:string};
+export default function ProjectGallery({images,title}:{images:GalleryImage[];title:string}){const[activeIndex,setActiveIndex]=useState(0);if(!images.length)return <div className={styles.empty}><span>MEDIA / UNAVAILABLE</span><strong>NO PROJECT MEDIA</strong><small>Project screenshots have not been added yet.</small></div>;const active=images[activeIndex];return <div className={styles.gallery}><div className={styles.stage}><header><span>MEDIA / {String(activeIndex+1).padStart(2,"0")}</span><span>{String(activeIndex+1).padStart(2,"0")} / {String(images.length).padStart(2,"0")}</span></header><div className={styles.imageFrame}><img key={active.src} src={active.src} alt={`${title} screenshot ${activeIndex+1}`} onLoad={event=>{const image=event.currentTarget;const ratio=image.naturalWidth/image.naturalHeight;image.classList.remove(styles.wideLandscape,styles.standardMedia,styles.portrait);if(ratio>=1.6)image.classList.add(styles.wideLandscape);else if(ratio>=1)image.classList.add(styles.standardMedia);else image.classList.add(styles.portrait)}}/><i className={styles.cornerTop}/><i className={styles.cornerBottom}/></div></div>{images.length>1&&<div className={styles.thumbnailRail}><div><span>// MEDIA INDEX</span><small>SELECT FRAME</small></div><div className={styles.thumbnails}>{images.map((image,index)=><button type="button" key={`${image.storageKey}-${index}`} className={index===activeIndex?styles.thumbnailActive:styles.thumbnail} onClick={()=>setActiveIndex(index)} aria-label={`View screenshot ${index+1}`} aria-pressed={index===activeIndex}><img src={image.src} alt=""/><span>{String(index+1).padStart(2,"0")}</span></button>)}</div></div>}</div>}

@@ -15,6 +15,7 @@ export type PublicProject = {
   id?: string;
   title: string;
   slug: string;
+  summary?: string | null;
   description: string;
   status?: string;
   image_url: string | null;

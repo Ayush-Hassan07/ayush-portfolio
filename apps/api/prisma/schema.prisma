@@ -129,6 +129,7 @@ model project {
   title              String               @db.VarChar(200)
   slug               String               @unique @db.VarChar(220)
   description        String
+  summary            String?
   status             String               @default("draft") @db.VarChar(30)
   image_url          String?
   github_url         String?

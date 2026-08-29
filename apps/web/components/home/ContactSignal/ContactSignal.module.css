@@ -1,0 +1,29 @@
+.section{position:relative;width:100%;padding:2rem clamp(1.25rem,4vw,4.5rem) 1.25rem;overflow:hidden;border-top:1px solid rgba(255,255,255,.1);background:radial-gradient(circle at 82% 50%,rgba(199,255,61,.055),transparent 26rem)}.signalMeta{display:flex;align-items:center;justify-content:space-between;gap:1rem;color:rgba(255,255,255,.45);font: .55rem monospace;letter-spacing:.11em;text-transform:uppercase}.signalMeta>span{color:var(--accent)}.signalMeta>div{display:flex;align-items:center;gap:.5rem}.signalMeta i,.signalLine i{width:5px;height:5px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px rgba(199,255,61,.55)}.main{min-height:23rem;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(17rem,.6fr);align-items:center;gap:clamp(2rem,6vw,7rem)}.index{display:block;margin-bottom:1.3rem;color:rgba(255,255,255,.35);font: .48rem monospace;letter-spacing:.12em}.copy h2{margin:0;max-width:14ch;color:var(--text);font-size:clamp(2.2rem,4vw,4.7rem);font-weight:480;line-height:.98;letter-spacing:-.055em}.contactAction{position:relative;min-height:11rem;padding:1.4rem;display:flex;align-items:flex-end;justify-content:space-between;overflow:hidden;border:1px solid rgba(199,255,61,.22);color:var(--text);text-decoration:none;background:linear-gradient(135deg,rgba(199,255,61,.035),transparent 62%)}.contactAction>span:first-child{max-width:12ch;font:700 .72rem monospace;line-height:1.45;letter-spacing:.1em}.actionArrow{color:var(--accent);font-size:1.5rem}.footer{min-height:4rem;display:grid;grid-template-columns:auto minmax(5rem,1fr) auto;align-items:center;gap:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.08);font-family:monospace;text-transform:uppercase}.channel{display:flex;flex-direction:column;gap:.35rem}.channel>span,.endpoint{color:rgba(255,255,255,.3);font-size:.42rem;letter-spacing:.11em}.channel a{color:rgba(255,255,255,.75);font-size:.54rem;text-decoration:none}.channel a:hover{color:var(--accent)}.signalLine{display:flex;align-items:center;gap:.45rem}.signalLine span{height:1px;flex:1;background:linear-gradient(90deg,rgba(199,255,61,.15),rgba(199,255,61,.5),rgba(199,255,61,.15))}.endpoint{text-align:right}@media(max-width:800px){.main{grid-template-columns:1fr;padding:3rem 0}.contactAction{min-height:8rem}}@media(max-width:600px){.signalMeta{align-items:flex-start;flex-direction:column}.footer{grid-template-columns:1fr}.signalLine{order:3}.endpoint{text-align:left}}
+ .section{padding:1.6rem clamp(1.25rem,4vw,4.5rem) 1rem}.main{min-height:15rem;grid-template-columns:minmax(0,1.45fr) minmax(15rem,.55fr);gap:clamp(2rem,5vw,6rem)}.copy h2{max-width:15ch;font-size:clamp(2rem,3.4vw,3.9rem);line-height:.98}.contactAction{min-height:7rem;max-height:8rem;padding:1.15rem 1.25rem;align-self:center;border-color:rgba(199,255,61,.25);background:linear-gradient(135deg,rgba(199,255,61,.045),rgba(199,255,61,.012))}.actionLabel{max-width:none;font-size:.66rem;line-height:1.35}.actionArrow{font-size:1.3rem}.footer{min-height:3.5rem}.actionCopy{position:relative;z-index:2;display:flex;flex-direction:column;gap:.45rem}.actionCopy small{color:rgba(255,255,255,.3);font:.4rem monospace;letter-spacing:.12em}
+.main{min-height:12.5rem;grid-template-columns:minmax(0,1.45fr) minmax(15rem,.55fr);gap:clamp(2rem,5vw,5rem)}.copy h2{max-width:18ch;font-size:clamp(2rem,3.1vw,3.55rem);line-height:.98}.signalMeta{color:rgba(255,255,255,.58);font-size:.6rem;font-weight:600}.index{color:rgba(255,255,255,.46);font-size:.5rem;font-weight:600}.actionCopy small{color:rgba(255,255,255,.52);font-family:monospace;font-size:.45rem;font-weight:600;letter-spacing:.12em}.contactAction{min-height:6.5rem;max-height:7rem;padding:1rem 1.2rem}.channel>span,.endpoint{color:rgba(255,255,255,.44);font-size:.45rem;font-weight:600;letter-spacing:.1em}.channel a{color:rgba(255,255,255,.82);font-size:.58rem;font-weight:600;letter-spacing:.03em;text-transform:lowercase}
+.copy h2{max-width:26ch}
+/* =========================================================
+   FINAL CONTACT MOBILE LAYOUT
+   Continuous coverage: 0px - 479px
+   KEEP AT END OF FILE
+   ========================================================= */
+
+@media (max-width: 479px) {
+  .section { width: 100%; min-width: 0; padding: 1.4rem 1.25rem 1rem; overflow: hidden; }
+  .signalMeta { width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 1rem; font-size: .48rem; }
+  .signalMeta > div { align-self: flex-start; }
+  .main { width: 100%; min-width: 0; min-height: 0; padding: 2.2rem 0; display: flex !important; flex-direction: column !important; align-items: stretch; gap: 2rem; }
+  .copy { width: 100%; min-width: 0; }
+  .index { margin-bottom: .9rem; font-size: .43rem; }
+  .copy h2 { width: 100%; max-width: none !important; margin: 0; font-size: clamp(2rem, 10vw, 2.7rem); line-height: 1.02; letter-spacing: -.05em; }
+  .contactAction { width: 100% !important; max-width: none !important; min-height: 6rem; max-height: none; align-self: stretch; padding: 1rem 1.1rem; display: flex; align-items: flex-end; justify-content: space-between; }
+  .actionCopy { min-width: 0; gap: .4rem; }
+  .actionCopy small { font-size: .39rem; }
+  .actionLabel { max-width: none; font-size: .58rem; }
+  .actionArrow { flex: 0 0 auto; font-size: 1.25rem; }
+  .footer { width: 100%; min-height: 0; padding-top: 1rem; display: flex; flex-direction: column; align-items: stretch; gap: 1.15rem; }
+  .channel { min-width: 0; }
+  .channel a { max-width: 100%; overflow-wrap: anywhere; font-size: .5rem; text-transform: lowercase; }
+  .signalLine { width: 100%; }
+  .endpoint { width: 100%; text-align: left; }
+}

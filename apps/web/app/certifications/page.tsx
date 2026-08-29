@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getPublicCertifications } from "../../lib/public-api";
+import CertificatePreview from "./CertificatePreview";
 import styles from "./certifications.module.css";
 
 const api =
@@ -143,10 +144,7 @@ export default async function CertificationsPage() {
                     </div>
 
                     {certificate.image_url ? (
-                      <img
-                        src={`${api}${certificate.image_url}`}
-                        alt={`${certificate.name} certificate`}
-                      />
+                      <CertificatePreview src={`${api}${certificate.image_url}`} alt={`${certificate.name} certificate`} />
                     ) : (
                       <div className={styles.visualPlaceholder}>
                         <span>DOCUMENT RECORD</span>
@@ -303,10 +301,7 @@ export default async function CertificationsPage() {
                     </div>
 
                     {certificate.image_url ? (
-                      <img
-                        src={`${api}${certificate.image_url}`}
-                        alt={`${certificate.name} certificate`}
-                      />
+                      <CertificatePreview src={`${api}${certificate.image_url}`} alt={`${certificate.name} certificate`} />
                     ) : (
                       <div className={styles.visualPlaceholder}>
                         <span>

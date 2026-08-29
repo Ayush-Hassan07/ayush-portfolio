@@ -11,6 +11,7 @@ export class PublicService {
         name: true,
         title: true,
         bio: true,
+        email: true,
         location: true,
         profile_image: true,
         resume_url: true,

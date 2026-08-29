@@ -14,6 +14,7 @@ type ProjectInput = {
   title?: unknown;
   slug?: unknown;
   description?: unknown;
+  summary?: unknown;
   status?: unknown;
   image_url?: unknown;
   github_url?: unknown;
@@ -716,10 +717,12 @@ export class AdminService {
         'status must be draft, planned, ongoing, finished, paused, or archived',
       );
     const description = text(input.description, 'description', true);
+    const summary = text(input.summary, 'summary', false);
     const data = {
       title,
       slug,
       description,
+      summary,
       status,
       image_url: (() => {
         const value = text(input.image_url, 'image_url', false);
