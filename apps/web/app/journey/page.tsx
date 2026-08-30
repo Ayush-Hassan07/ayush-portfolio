@@ -68,17 +68,9 @@ export default async function JourneyPage() {
                 className={styles.trianglePath}
                 d="M 150 390 L 500 105 L 850 390 Z"
               />
-              <circle className={styles.triangleSignal} r="7">
-                <animateMotion
-                  dur="7.5s"
-                  repeatCount="indefinite"
-                  calcMode="linear"
-                  keyTimes="0;0.33333;0.66666;1"
-                  keyPoints="0;0.2817;0.5634;1"
-                  path="M 150 390 L 500 105 L 850 390 L 150 390"
-                />
-              </circle>
             </svg>
+
+            <span className={styles.v2Signal} aria-hidden="true" />
 
             <div className={`${styles.v2Node} ${styles.v2Foundation}`}>
               <span className={styles.v2Number}>01</span>

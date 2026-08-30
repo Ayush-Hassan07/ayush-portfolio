@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { FormEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -21,4 +21,5 @@ export default function LoginPage() {
   const isOtp = step === "otp";
   return <main className="login-shell"><div className="login-mark">AHR<span>.</span><small>private workspace</small></div><section className="login-panel"><p className="admin-kicker">Owner authentication</p><h1>{step === "password" ? <>Enter the<br /><em>control room.</em></> : step === "otp" ? <>Check your<br /><em>inbox.</em></> : <>Verify your<br /><em>authenticator.</em></>}</h1><p className="login-copy">{step === "password" ? "Use the owner credentials to begin a secure session." : isOtp ? "Enter the six-digit email code. It expires in 60 seconds." : "Enter the current six-digit authenticator code."}</p><form onSubmit={submit}>{step === "password" ? <><label>Email<input type="email" autoComplete="username" required value={email} onChange={(e) => setEmail(e.target.value)} /></label><label>Password<div className="password-field"><input type={showPassword ? "text" : "password"} autoComplete="current-password" minLength={8} required value={password} onChange={(e) => setPassword(e.target.value)} /><button className="password-toggle" type="button" onClick={() => setShowPassword((v) => !v)}>{showPassword ? "Hide" : "Show"}</button></div></label></> : <><label>{isOtp ? "Email verification code" : "Authenticator code"}<input className="otp-input" inputMode="numeric" pattern="[0-9]{6}" maxLength={6} required value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))} /></label>{isOtp && <div className="login-timer">{remaining}s remaining</div>}</>}<button type="submit" disabled={busy || (step === "otp" && remaining === 0)}>{busy ? "Verifying…" : step === "password" ? "Continue" : "Verify and enter"}</button></form>{message && <p className="login-message" role="status">{message}</p>}</section></main>;
 }
+
 

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -124,11 +124,6 @@ export default function ProfilePage() {
         <Link className="admin-brand" href="/">AHR<span>.</span><small>studio / profile</small></Link>
         <Link className="editor-back" href="/">← Overview</Link>
       </header>
-      <section className="editor-intro">
-        <p className="admin-kicker">Content / Profile</p>
-        <h1>Define the<br /><em>identity.</em></h1>
-        <p>Everything here can shape the public introduction without requiring a source-code edit.</p>
-      </section>
       <form className="profile-form project-form" onSubmit={save}>
         <label>Name<input required value={form.name} onChange={(event) => setForm({ ...form, name: event.target.value })} /></label>
         <label>Professional title<input required value={form.title} onChange={(event) => setForm({ ...form, title: event.target.value })} /></label>
@@ -152,3 +147,4 @@ export default function ProfilePage() {
     </main>
   );
 }
+

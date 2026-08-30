@@ -1,144 +1,6 @@
-﻿.routeOne,
-.routeTwo,
-.routeThree {
-  position: absolute;
-  z-index: 2;
-  height: 1px;
-  transform-origin: left center;
-  background: rgba(197, 255, 22, 0.48);
-  pointer-events: none;
-}
-
-/* =========================================================
-   HERO TRIANGLE SIGNAL
+﻿/* =========================================================
+   PAGE
 ========================================================= */
-
-.journeyMap .nodeFoundation {
-  left: 10%;
-  top: 68%;
-  bottom: auto;
-}
-
-.journeyMap .nodePractice {
-  left: 47%;
-  top: 20%;
-}
-
-.journeyMap .nodeIntelligence {
-  right: 8%;
-  top: 68%;
-  bottom: auto;
-  transform: translateY(-50%);
-}
-
-.journeyMap .routeOne,
-.journeyMap .routeTwo,
-.journeyMap .routeThree {
-  position: absolute;
-  z-index: 2;
-  height: 1px;
-  transform-origin: left center;
-  background: rgba(197, 255, 22, 0.48);
-  pointer-events: none;
-}
-
-.journeyMap .routeOne {
-  left: 13%;
-  top: 71%;
-  bottom: auto;
-  width: 48%;
-  transform: rotate(-39deg);
-}
-
-.journeyMap .routeTwo {
-  left: 50%;
-  top: 25%;
-  width: 48%;
-  transform: rotate(39deg);
-}
-
-.journeyMap .routeThree {
-  left: 13%;
-  top: 71%;
-  bottom: auto;
-  width: 74%;
-  transform: rotate(0deg);
-}
-
-.journeyMap .signalPulse {
-  position: absolute;
-  z-index: 8;
-  width: 8px;
-  height: 8px;
-  left: auto;
-  top: auto;
-  bottom: auto;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent), 0 0 18px rgba(197, 255, 22, 0.6), 0 0 32px rgba(197, 255, 22, 0.22);
-  pointer-events: none;
-  offset-path: polygon(13% 71%, 50% 25%, 87% 71%);
-  offset-rotate: 0deg;
-  animation: heroTriangleTraverse 7.5s linear infinite;
-}
-
-@keyframes heroTriangleTraverse {
-  0% { offset-distance: 0%; }
-  100% { offset-distance: 100%; }
-}
-
-/* =========================================================
-   TRIANGLE ROUTE
-========================================================= */
-
-.journeyMap .nodeFoundation { left: 10%; bottom: 27%; }
-.journeyMap .nodePractice { left: 47%; top: 18%; }
-.journeyMap .nodeIntelligence { right: 9%; bottom: 27%; }
-
-.journeyMap .routeOne { left: 13%; bottom: 29%; width: 46%; transform: rotate(-34deg); }
-.journeyMap .routeTwo { left: 50%; top: 23%; width: 45%; transform: rotate(34deg); }
-.journeyMap .routeThree { left: 13%; bottom: 29%; width: 77%; transform: rotate(0deg); }
-
-.journeyMap .signalPulse { z-index: 8; left: 13%; bottom: 28.5%; animation: triangleTraverse 7.5s linear infinite; }
-
-/* Explicit triangle traversal */
-.journeyMap .signalPulse {
-  left: 13%;
-  top: 71%;
-  bottom: auto;
-  transform: translate(-50%, -50%);
-  offset-path: none;
-  animation: triangleTraverse 7.5s linear infinite;
-}
-
-@keyframes triangleTraverse {
-  0% { left: 13%; top: 71%; }
-  8% { left: 22%; top: 60%; }
-  16% { left: 31%; top: 49%; }
-  24% { left: 40%; top: 38%; }
-  33.333% { left: 50%; top: 25%; }
-  41% { left: 59%; top: 36%; }
-  49% { left: 68%; top: 47%; }
-  57% { left: 77%; top: 59%; }
-  66.666% { left: 87%; top: 71%; }
-  74% { left: 69%; top: 71%; }
-  82% { left: 51%; top: 71%; }
-  90% { left: 31%; top: 71%; }
-  100% { left: 13%; top: 71%; }
-}
-
-@keyframes triangleTraverse {
-  0% { left: 13%; bottom: 28.5%; }
-  11% { left: 25%; bottom: 42%; }
-  22% { left: 37%; bottom: 55%; }
-  33.333% { left: 50%; bottom: 72%; }
-  44% { left: 62%; bottom: 57%; }
-  55% { left: 74%; bottom: 43%; }
-  66.666% { left: 88%; bottom: 28.5%; }
-  77% { left: 63%; bottom: 28.5%; }
-  88% { left: 38%; bottom: 28.5%; }
-  100% { left: 13%; bottom: 28.5%; }
-}
 
 .page {
   width: min(calc(100% - 7vw), 1440px);
@@ -146,18 +8,21 @@
   padding: clamp(3rem, 5vw, 5.5rem) 0 7rem;
 }
 
+
 /* =========================================================
    HERO
 ========================================================= */
 
 .hero {
-  padding-bottom: clamp(5rem, 8vw, 8rem);
+  padding-bottom: clamp(2rem, 3vw, 3rem);
 }
 
 .eyebrow {
   display: flex;
   gap: 1rem;
+
   color: var(--muted);
+
   font-size: 0.58rem;
   letter-spacing: 0.16em;
 }
@@ -168,6 +33,7 @@
 
 .heroGrid {
   display: grid;
+
   grid-template-columns:
     minmax(0, 1.15fr)
     minmax(460px, 0.78fr);
@@ -177,6 +43,7 @@
 
   margin-top: clamp(3.5rem, 6vw, 5.5rem);
 }
+
 
 /* =========================================================
    JOURNEY MAP
@@ -208,6 +75,8 @@
   content: "";
 
   position: absolute;
+  z-index: 3;
+
   left: -1px;
   top: -1px;
 
@@ -222,6 +91,7 @@
   content: "SIGNAL / DEVELOPMENT";
 
   position: absolute;
+  z-index: 3;
 
   right: 1.4rem;
   top: 1.2rem;
@@ -230,6 +100,8 @@
 
   font-size: 0.4rem;
   letter-spacing: 0.16em;
+
+  pointer-events: none;
 }
 
 .mapGrid {
@@ -259,253 +131,363 @@
   pointer-events: none;
 }
 
-.mapNode {
+
+/* =========================================================
+   JOURNEY MAP V2 — TRIANGLE
+========================================================= */
+
+.triangleSvg {
+  position: absolute;
+  z-index: 2;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+}
+
+.trianglePath {
+  fill: none;
+
+  stroke: rgba(197, 255, 22, 0.55);
+  stroke-width: 1;
+
+  vector-effect: non-scaling-stroke;
+}
+
+
+/* =========================================================
+   JOURNEY MAP V2 — TRAVELLING SIGNAL
+========================================================= */
+
+.v2Signal {
+  position: absolute;
+  z-index: 8;
+
+  left: 15%;
+  top: 75%;
+
+  width: 8px;
+  height: 8px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  box-shadow:
+    0 0 7px var(--accent),
+    0 0 15px rgba(197, 255, 22, 0.65),
+    0 0 26px rgba(197, 255, 22, 0.22);
+
+  pointer-events: none;
+
+  animation: v2SignalTraverse 7.5s linear infinite;
+}
+
+@keyframes v2SignalTraverse {
+  0% {
+    left: 15%;
+    top: 75%;
+  }
+
+  33.333% {
+    left: 50%;
+    top: 20.192%;
+  }
+
+  66.666% {
+    left: 85%;
+    top: 75%;
+  }
+
+  100% {
+    left: 15%;
+    top: 75%;
+  }
+}
+
+
+/* =========================================================
+   JOURNEY MAP V2 — NODES
+========================================================= */
+
+.v2Node {
   position: absolute;
   z-index: 5;
 
-  display: grid;
-  grid-template-columns: auto 32px auto;
-  gap: 0.65rem;
+  width: 150px;
+
+  display: flex;
+  flex-direction: column;
   align-items: center;
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
 }
 
-.nodeFoundation {
-  left: 8%;
-  bottom: 32%;
+.v2Foundation {
+  left: 15%;
+  top: calc(75% - 19px);
 }
 
-.nodePractice {
-  left: 42%;
-  top: 19%;
+.v2Practice {
+  left: 50%;
+  top: calc(20.192% - 19px);
 }
 
-.nodeIntelligence {
-  right: 6%;
-  top: 45%;
+.v2Intelligence {
+  left: 85%;
+  top: calc(75% - 19px);
 }
 
-.nodeNumber {
+.v2Number {
+  position: absolute;
+
+  right: calc(50% + 30px);
+  top: 12px;
+
   color: var(--muted);
 
-  font-size: 0.46rem;
+  font-size: 0.44rem;
   font-variant-numeric: tabular-nums;
 }
 
-.nodeDot {
+.v2Dot {
   position: relative;
 
-  width: 30px;
-  height: 30px;
+  width: 38px;
+  height: 38px;
 
   display: grid;
   place-items: center;
 
-  border: 1px solid rgba(197, 255, 22, 0.35);
+  border: 1px solid rgba(197, 255, 22, 0.38);
   border-radius: 50%;
 
   background: #050807;
+
+  box-shadow:
+    0 0 0 6px rgba(197, 255, 22, 0.025);
 }
 
-.nodeDot::before {
+.v2Dot::before {
   content: "";
 
   position: absolute;
-  inset: -6px;
+  inset: -7px;
 
-  border: 1px solid rgba(197, 255, 22, 0.07);
+  border: 1px solid rgba(197, 255, 22, 0.06);
   border-radius: inherit;
 }
 
-.nodeDot i {
-  width: 6px;
-  height: 6px;
-
-  border-radius: 50%;
-
-  background: var(--accent);
-
-  box-shadow:
-    0 0 8px rgba(197, 255, 22, 0.75);
-}
-
-.nodeText {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.nodeText small {
-  color: var(--muted);
-
-  font-size: 0.42rem;
-  letter-spacing: 0.13em;
-}
-
-
-.nodeText strong {
-  color: var(--text-soft);
-
-  font-size: 0.53rem;
-  font-weight: 500;
-  letter-spacing: 0.07em;
-}
-
-/* connecting signal */
-
-.signalPulse {
-  position: absolute;
-  z-index: 6;
-
+.v2Dot i {
   width: 7px;
   height: 7px;
 
-  left: 14%;
-  top: 67.4%;
-
   border-radius: 50%;
 
   background: var(--accent);
 
   box-shadow:
-    0 0 9px var(--accent),
-    0 0 24px rgba(197, 255, 22, 0.3);
-
+    0 0 8px rgba(197, 255, 22, 0.65);
 }
 
-@keyframes journeySignal {
-  0% {
-    left: 14%;
-    top: 67.4%;
-    opacity: 0;
-  }
-
-  5% {
-    opacity: 1;
-  }
-
-  12% {
-    left: 49%;
-    top: 67.4%;
-  }
-
-  40% {
-    left: 49%;
-    top: 24%;
-  }
-
-  48% {
-    left: 49%;
-    top: 24%;
-  }
-
-  72% {
-    left: 84%;
-    top: 48%;
-  }
-
-  80% {
-    left: 84%;
-    top: 48%;
-  }
-
-  96% {
-    left: 89%;
-    top: 66%;
-    opacity: 1;
-  }
-
-  100% {
-    left: 89%;
-    top: 66%;
-    opacity: 0;
-  }
-}
-
-.mapOutput {
-  position: absolute;
-
-  right: 6%;
-  bottom: 18%;
-
+.v2Text {
   display: flex;
-  gap: 0.65rem;
+  flex-direction: column;
   align-items: center;
 
-  padding: 0.55rem 0.7rem;
+  margin-top: 0.8rem;
 
-  border: 1px solid var(--accent-line);
-
-  background: rgba(197, 255, 22, 0.025);
+  text-align: center;
 }
 
-.mapOutput span {
+.v2Text small {
   color: var(--muted);
 
-  font-size: 0.38rem;
-  letter-spacing: 0.14em;
+  font-size: 0.43rem;
+  letter-spacing: 0.13em;
 }
 
-.mapOutput strong {
-  color: var(--accent);
+.v2Text strong {
+  margin-top: 0.25rem;
 
-  font-size: 0.52rem;
-  letter-spacing: 0.1em;
+  color: var(--text-soft);
+
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
 }
 
-.mapOutput i {
-  color: var(--accent);
-  font-style: normal;
+
+/* =========================================================
+   JOURNEY MAP V2 — NODE ACTIVATION
+========================================================= */
+
+.v2Foundation .v2Dot,
+.v2Foundation .v2Text small,
+.v2Foundation .v2Text strong {
+  animation: v2FoundationActive 7.5s linear infinite;
 }
 
-.mapFooter {
+.v2Practice .v2Dot,
+.v2Practice .v2Text small,
+.v2Practice .v2Text strong {
+  animation: v2PracticeActive 7.5s linear infinite;
+}
+
+.v2Intelligence .v2Dot,
+.v2Intelligence .v2Text small,
+.v2Intelligence .v2Text strong {
+  animation: v2IntelligenceActive 7.5s linear infinite;
+}
+
+@keyframes v2FoundationActive {
+  0%,
+  2.5% {
+    color: var(--accent);
+
+    border-color: var(--accent);
+
+    box-shadow:
+      0 0 0 7px rgba(197, 255, 22, 0.08),
+      0 0 26px rgba(197, 255, 22, 0.24);
+  }
+
+  2.51%,
+  97.49% {
+    color: var(--text-soft);
+
+    border-color: rgba(197, 255, 22, 0.38);
+
+    box-shadow:
+      0 0 0 6px rgba(197, 255, 22, 0.025);
+  }
+
+  97.5%,
+  100% {
+    color: var(--accent);
+
+    border-color: var(--accent);
+
+    box-shadow:
+      0 0 0 7px rgba(197, 255, 22, 0.08),
+      0 0 26px rgba(197, 255, 22, 0.24);
+  }
+}
+
+@keyframes v2PracticeActive {
+  0%,
+  33.332% {
+    color: var(--text-soft);
+
+    border-color: rgba(197, 255, 22, 0.38);
+
+    box-shadow:
+      0 0 0 6px rgba(197, 255, 22, 0.025);
+  }
+
+  33.333%,
+  36% {
+    color: var(--accent);
+
+    border-color: var(--accent);
+
+    box-shadow:
+      0 0 0 7px rgba(197, 255, 22, 0.08),
+      0 0 26px rgba(197, 255, 22, 0.24);
+  }
+
+  36.001%,
+  100% {
+    color: var(--text-soft);
+
+    border-color: rgba(197, 255, 22, 0.38);
+
+    box-shadow:
+      0 0 0 6px rgba(197, 255, 22, 0.025);
+  }
+}
+
+@keyframes v2IntelligenceActive {
+  0%,
+  66.665% {
+    color: var(--text-soft);
+
+    border-color: rgba(197, 255, 22, 0.38);
+
+    box-shadow:
+      0 0 0 6px rgba(197, 255, 22, 0.025);
+  }
+
+  66.666%,
+  69.3% {
+    color: var(--accent);
+
+    border-color: var(--accent);
+
+    box-shadow:
+      0 0 0 7px rgba(197, 255, 22, 0.08),
+      0 0 26px rgba(197, 255, 22, 0.24);
+  }
+
+  69.301%,
+  100% {
+    color: var(--text-soft);
+
+    border-color: rgba(197, 255, 22, 0.38);
+
+    box-shadow:
+      0 0 0 6px rgba(197, 255, 22, 0.025);
+  }
+}
+
+
+/* =========================================================
+   JOURNEY MAP V2 — FOOTER
+========================================================= */
+
+.v2MapFooter {
   position: absolute;
+  z-index: 5;
 
-  left: 1.8rem;
-  right: 1.8rem;
-  bottom: 1.5rem;
+  left: 50%;
+  bottom: 0.8rem;
 
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-
-  gap: 2rem;
-}
-
-.mapFormula {
-  display: flex;
-  gap: 0.65rem;
   align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+
+  width: max-content;
+
+  transform: translateX(-50%);
 
   color: var(--muted);
 
   font-size: 0.43rem;
   letter-spacing: 0.12em;
+
+  white-space: nowrap;
 }
 
-.mapFormula i {
-  width: 20px;
+.v2MapFooter i {
+  width: 22px;
   height: 1px;
 
   background: var(--accent-line);
 }
 
-.mapFormula strong {
+.v2MapFooter strong {
   color: var(--accent);
   font-weight: 500;
 }
 
-.mapFooter p {
-  max-width: 250px;
-
-  margin: 0;
-
-  color: var(--muted);
-
-  font-size: 0.6rem;
-  line-height: 1.6;
-
-  text-align: right;
-}
 
 /* =========================================================
    HERO SUMMARY CARDS
@@ -545,11 +527,8 @@
   position: relative;
 
   appearance: none;
+
   width: 100%;
-  border: 0;
-  font: inherit;
-  text-align: inherit;
-  cursor: pointer;
 
   display: grid;
 
@@ -560,15 +539,24 @@
     18px;
 
   gap: 1.25rem;
-
   align-items: center;
 
   padding: 1.7rem;
 
+  border: 0;
+
   color: inherit;
+
+  font: inherit;
+  text-align: inherit;
   text-decoration: none;
 
-  transition: background 180ms ease;
+  cursor: pointer;
+
+  background: transparent;
+
+  transition:
+    background 180ms ease;
 }
 
 .statRow + .statRow {
@@ -633,7 +621,6 @@
   color: var(--accent);
 
   font-family: Georgia, serif;
-
   font-size: clamp(2.4rem, 3vw, 3.4rem);
   font-weight: 400;
 }
@@ -672,12 +659,14 @@
   font-size: 1.9rem;
   font-weight: 300;
 
-  transition: transform 180ms ease;
+  transition:
+    transform 180ms ease;
 }
 
 .statRow:hover .statArrow {
   transform: translateX(4px);
 }
+
 
 /* =========================================================
    COMMON SECTION HEADER
@@ -698,7 +687,6 @@
     minmax(260px, 0.5fr);
 
   gap: clamp(3rem, 8vw, 8rem);
-
   align-items: end;
 
   padding-bottom: 1.5rem;
@@ -733,6 +721,7 @@
   font-size: 0.76rem;
   line-height: 1.7;
 }
+
 
 /* =========================================================
    EXPERIENCE
@@ -793,11 +782,13 @@
 
 .recordPeriod i {
   color: var(--accent);
+
   font-size: 0.7rem;
   font-style: normal;
 }
 
 .recordBody {
+  min-width: 0;
   max-width: 900px;
 }
 
@@ -847,6 +838,7 @@
 
 .external {
   display: inline-flex;
+  align-items: center;
 
   gap: 0.7rem;
 
@@ -857,11 +849,13 @@
   font-size: 0.5rem;
   font-weight: 700;
   letter-spacing: 0.08em;
+  text-decoration: none;
 }
 
 .external span {
   color: var(--accent);
 }
+
 
 /* =========================================================
    EDUCATION
@@ -881,7 +875,6 @@
     minmax(150px, 0.28fr);
 
   gap: clamp(1.5rem, 3vw, 3.5rem);
-
   align-items: start;
 
   padding: 2.5rem 0;
@@ -913,11 +906,14 @@
   color: var(--accent);
 }
 
+.educationMain {
+  min-width: 0;
+}
+
 .educationTitle {
   display: flex;
 
   gap: 1rem;
-
   align-items: flex-start;
 }
 
@@ -933,6 +929,8 @@
 }
 
 .currentBadge {
+  flex-shrink: 0;
+
   margin-top: 0.25rem;
 
   padding: 0.34rem 0.46rem;
@@ -977,10 +975,9 @@
 .educationResult {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 
   gap: 0.55rem;
-
-  align-items: flex-start;
 }
 
 .educationResult > span {
@@ -1000,6 +997,7 @@
   font-size: 0.6rem;
   font-weight: 500;
 }
+
 
 /* =========================================================
    TRAJECTORY
@@ -1021,7 +1019,6 @@
     minmax(260px, 0.45fr);
 
   gap: 4rem;
-
   align-items: end;
 
   margin-bottom: 4.5rem;
@@ -1050,7 +1047,7 @@
 
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 
   min-height: 270px;
 }
@@ -1077,7 +1074,6 @@
 
 .trajectorySignal {
   position: absolute;
-
   z-index: 5;
 
   left: 0;
@@ -1106,7 +1102,8 @@
     0 0 8px var(--accent),
     0 0 18px rgba(197, 255, 22, 0.35);
 
-  animation: trajectorySignal 7s ease-in-out infinite;
+  animation:
+    trajectorySignal 7s ease-in-out infinite;
 }
 
 @keyframes trajectorySignal {
@@ -1132,6 +1129,8 @@
 .trajectoryItem {
   position: relative;
 
+  min-width: 0;
+
   padding-right: clamp(1.4rem, 3vw, 3rem);
 }
 
@@ -1147,7 +1146,6 @@
 
 .trajectoryNode {
   position: relative;
-
   z-index: 6;
 
   width: 24px;
@@ -1165,7 +1163,6 @@
   content: "";
 
   position: absolute;
-
   inset: -6px;
 
   border: 1px solid rgba(197, 255, 22, 0.05);
@@ -1253,94 +1250,291 @@
   color: var(--accent);
 }
 
+
 /* =========================================================
-   TABLET
+   TABLET / COMPACT LAPTOP
+   701px — 1100px
 ========================================================= */
 
-@media (max-width: 1100px) {
+@media (min-width: 701px) and (max-width: 1100px) {
+  .page {
+    width: calc(100% - 3rem);
+    padding: 2.5rem 0 4rem;
+  }
+
+  .hero {
+    padding-bottom: 2rem;
+  }
+
   .heroGrid {
     grid-template-columns: 1fr;
+
+    gap: 2rem;
+
+    margin-top: 3rem;
   }
 
   .journeyMap {
-    min-height: 420px;
+    min-height: 390px;
   }
 
   .heroStats {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-template-rows: auto;
+  }
+
+  .statRow {
+    grid-template-columns:
+      52px
+      58px
+      minmax(0, 1fr)
+      16px;
+
+    gap: 0.85rem;
+
+    padding: 1.35rem;
   }
 
   .statRow + .statRow {
     border-top: 0;
     border-left: 1px solid var(--accent-line);
   }
-}
 
-@media (max-width: 900px) {
+  .statIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .statIcon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .statNumber {
+    font-size: 2.1rem;
+  }
+
+  .statContent p {
+    max-width: none;
+
+    font-size: 0.62rem;
+  }
+
   .sectionHeader,
   .trajectoryHeader {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(230px, 0.55fr);
+
+    gap: 2rem;
   }
 
   .experienceRecord {
     grid-template-columns:
       2.5rem
       8rem
-      1fr;
+      minmax(0, 1fr);
+
+    gap: 1.5rem;
+
+    padding: 3rem 0;
+  }
+
+  .recordBody h3 {
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
   }
 
   .educationRecord {
     grid-template-columns:
       2.5rem
       7rem
-      1fr;
+      minmax(0, 1fr);
+
+    gap: 1.25rem;
   }
 
   .educationResult {
     grid-column: 3;
+
+    margin-top: 0.4rem;
   }
 
   .trajectoryLine {
-    grid-template-columns:
-      repeat(2, 1fr);
-
-    row-gap: 4rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    min-height: 270px;
   }
 
-  .trajectoryLine::before,
+  .trajectoryLine::before {
+    display: block;
+  }
+
   .trajectorySignal {
-    display: none;
+    display: block;
+  }
+
+  .trajectoryItem {
+    min-width: 0;
+    padding-right: clamp(1rem, 2vw, 2rem);
+  }
+
+  .trajectoryItem strong {
+    font-size: clamp(1.05rem, 1.8vw, 1.5rem);
+  }
+
+  .trajectoryItem p {
+    max-width: 230px;
+    font-size: 0.64rem;
   }
 }
 
+
 /* =========================================================
    MOBILE
+   up to 700px
 ========================================================= */
 
 @media (max-width: 700px) {
   .page {
-    width: calc(100% - 2.5rem);
+    width: calc(100% - 1.5rem);
+
+    padding: 1.5rem 0 3rem;
   }
+
+  .hero {
+    padding-bottom: 1.5rem;
+  }
+
+  .eyebrow {
+    gap: 0.7rem;
+
+    font-size: 0.48rem;
+    line-height: 1.5;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+
+    margin-top: 2rem;
+  }
+
+  /* -------------------------
+     Journey map
+  ------------------------- */
 
   .journeyMap {
-    min-height: 370px;
+    min-height: 300px;
   }
 
-  .nodePractice {
-    left: 34%;
+  .journeyMap::before {
+    width: 75px;
   }
 
-  .nodeText strong {
-    display: none;
+  .journeyMap::after {
+    right: 0.75rem;
+    top: 0.75rem;
+
+    font-size: 0.32rem;
   }
 
-  .mapFooter p {
-    display: none;
+  .mapGrid {
+    background-size: 30px 30px;
   }
+
+  .v2Node {
+    width: 100px;
+  }
+
+  .v2Dot {
+    width: 30px;
+    height: 30px;
+  }
+
+  .v2Dot::before {
+    inset: -5px;
+  }
+
+  .v2Dot i {
+    width: 6px;
+    height: 6px;
+  }
+
+  .v2Foundation {
+    left: 15%;
+    top: calc(75% - 15px);
+  }
+
+  .v2Practice {
+    left: 50%;
+    top: calc(20.192% - 15px);
+  }
+
+  .v2Intelligence {
+    left: 85%;
+    top: calc(75% - 15px);
+  }
+
+  .v2Number {
+    right: calc(50% + 22px);
+    top: 9px;
+
+    font-size: 0.35rem;
+  }
+
+  .v2Text {
+    margin-top: 0.55rem;
+  }
+
+  .v2Text small {
+    font-size: 0.34rem;
+  }
+
+  .v2Text strong {
+    margin-top: 0.18rem;
+
+    font-size: 0.47rem;
+  }
+
+  .v2MapFooter {
+    left: 50%;
+    right: auto;
+    bottom: 0.65rem;
+
+    width: max-content;
+
+    transform: translateX(-50%);
+
+    justify-content: center;
+
+    gap: 0.55rem;
+
+    font-size: 0.34rem;
+  }
+
+  .v2MapFooter i {
+    width: 18px;
+  }
+
+  /* -------------------------
+     Summary cards
+  ------------------------- */
 
   .heroStats {
     grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .statRow {
+    grid-template-columns:
+      42px
+      48px
+      minmax(0, 1fr)
+      14px;
+
+    gap: 0.7rem;
+
+    padding: 1rem;
   }
 
   .statRow + .statRow {
@@ -1348,317 +1542,390 @@
     border-top: 1px solid var(--accent-line);
   }
 
-  .statRow {
-    grid-template-columns:
-      48px
-      58px
-      minmax(0, 1fr)
-      15px;
-
-    gap: 0.8rem;
-
-    padding: 1.25rem;
-  }
-
   .statIcon {
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
+
+    border-radius: 8px;
   }
 
   .statIcon svg {
-    width: 21px;
-    height: 21px;
+    width: 19px;
+    height: 19px;
   }
 
   .statNumber {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .statContent {
+    gap: 0.4rem;
+  }
+
+  .statContent span {
+    font-size: 0.47rem;
   }
 
   .statContent p {
-    font-size: 0.62rem;
+    max-width: none;
+
+    font-size: 0.58rem;
+    line-height: 1.55;
   }
 
-  .experienceRecord,
-  .educationRecord {
-    grid-template-columns:
-      2rem
-      1fr;
+  .statArrow {
+    font-size: 1.5rem;
+  }
+
+  /* -------------------------
+     Sections
+  ------------------------- */
+
+  .experienceSection,
+  .educationSection {
+    margin-top: 2rem;
+  }
+
+  .sectionHeader,
+  .trajectoryHeader {
+    grid-template-columns: 1fr;
 
     gap: 1rem;
   }
 
-  .recordPeriod,
-  .recordBody,
-  .educationPeriod,
-  .educationMain,
-  .educationResult {
-    grid-column: 2;
+  .sectionHeader {
+    padding-bottom: 1rem;
   }
 
-  .recordPeriod,
-  .educationPeriod {
+  .sectionHeader h2 {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
+  }
+
+  .sectionHeader > p,
+  .trajectoryHeader p {
+    max-width: none;
+
+    font-size: 0.68rem;
+  }
+
+  /* -------------------------
+     Experience
+  ------------------------- */
+
+  .experienceRecord {
+    display: grid;
+
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+
+    gap:
+      0.8rem
+      1rem;
+
+    padding: 2rem 0;
+  }
+
+  .recordIndex {
+    grid-column: 1;
+    grid-row: 1;
+
+    padding-top: 0.1rem;
+  }
+
+  .recordPeriod {
+    grid-column: 2;
+    grid-row: 1;
+
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+
+    gap:
+      0.4rem
+      0.6rem;
+  }
+
+  .recordPeriod > span {
+    margin-bottom: 0;
+  }
+
+  .recordBody {
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    width: 100%;
+    max-width: none;
+  }
+
+  .recordBody h3 {
+    max-width: none;
+
+    font-size: clamp(1.9rem, 9vw, 2.7rem);
+    line-height: 1;
   }
 
   .organization {
     flex-direction: column;
     align-items: flex-start;
 
-    gap: 0.35rem;
+    gap: 0.3rem;
+
+    margin-top: 0.8rem;
+  }
+
+  .recordBody > p {
+    width: 100%;
+    max-width: none;
+
+    margin-top: 1.2rem;
+
+    font-size: 0.75rem;
+    line-height: 1.72;
+  }
+
+  .external {
+    margin-top: 1.15rem;
+  }
+
+  /* -------------------------
+     Education
+  ------------------------- */
+
+  .educationRecord {
+    display: grid;
+
+    grid-template-columns:
+      auto
+      minmax(0, 1fr);
+
+    gap:
+      0.8rem
+      1rem;
+
+    padding: 1.8rem 0;
+  }
+
+  .educationRecord .recordIndex {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .educationPeriod {
+    grid-column: 2;
+    grid-row: 1;
+
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    gap: 0.5rem;
+  }
+
+  .educationMain {
+    grid-column: 1 / -1;
+    grid-row: 2;
+
+    min-width: 0;
+  }
+
+  .educationResult {
+    grid-column: 1 / -1;
+    grid-row: 3;
+
+    margin-top: 0.25rem;
   }
 
   .educationTitle {
     flex-direction: column;
+
+    gap: 0.55rem;
+  }
+
+  .educationTitle h3 {
+    font-size: clamp(1.5rem, 7.5vw, 2.1rem);
+  }
+
+  .educationDescription {
+    max-width: none;
+  }
+
+  /* -------------------------
+     Trajectory
+  ------------------------- */
+
+  .trajectory {
+    margin-top: 4rem;
+  }
+
+  .trajectoryHeader {
+    margin-bottom: 2.5rem;
   }
 
   .trajectoryLine {
     grid-template-columns: 1fr;
 
-    gap: 3rem;
+    gap: 0;
+
+    min-height: 0;
+  }
+
+  .trajectoryLine::before,
+  .trajectorySignal {
+    display: none;
+  }
+
+  .trajectoryItem {
+    display: grid;
+
+    grid-template-columns:
+      34px
+      minmax(0, 1fr);
+
+    column-gap: 1rem;
+
+    padding:
+      0
+      0
+      2.5rem;
+  }
+
+  .trajectoryIndex {
+    grid-column: 1;
+
+    margin: 0;
+  }
+
+  .trajectoryNode {
+    grid-column: 1;
+
+    width: 22px;
+    height: 22px;
+
+    margin-top: 0.7rem;
+    margin-bottom: 0;
+  }
+
+  .routeLabel {
+    grid-column: 2;
+    grid-row: 1;
+
+    margin:
+      0
+      0
+      0.6rem;
+  }
+
+  .trajectoryItem > div:last-child {
+    grid-column: 2;
+    grid-row: 2 / span 2;
+  }
+
+  .trajectoryItem strong {
+    max-width: none;
+
+    font-size: 1.3rem;
+  }
+
+  .trajectoryItem p {
+    max-width: none;
+
+    margin-top: 0.65rem;
+
+    font-size: 0.65rem;
   }
 }
 
-/* HERO TRIANGLE ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¾ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â DEFINITIVE OVERRIDE */
-.journeyMap .nodeFoundation { left: 10%; top: 68%; right: auto; bottom: auto; transform: none; }
-.journeyMap .nodePractice { left: 47%; top: 18%; right: auto; bottom: auto; transform: none; }
-.journeyMap .nodeIntelligence { left: auto; right: 9%; top: 68%; bottom: auto; transform: translateY(-50%); }
-.journeyMap .routeOne { left: 13%; top: 71%; bottom: auto; width: 46%; transform: rotate(-34deg); }
-.journeyMap .routeTwo { left: 50%; top: 23%; bottom: auto; width: 45%; transform: rotate(34deg); }
-.journeyMap .routeThree { left: 13%; top: 71%; bottom: auto; width: 77%; transform: rotate(0deg); }
-.journeyMap .signalPulse { left: 13%; top: 71%; right: auto; bottom: auto; width: 8px; height: 8px; transform: translate(-50%, -50%); offset-path: none !important; offset-distance: unset !important; animation: heroTrianglePulseFinal 7.5s linear infinite !important; }
-@keyframes heroTrianglePulseFinal {
-  0% { left: 13%; top: 71%; }
-  8% { left: 22%; top: 59.5%; }
-  16% { left: 31%; top: 48%; }
-  24% { left: 40%; top: 36.5%; }
-  33.333% { left: 50%; top: 23%; }
-  41% { left: 59%; top: 34.5%; }
-  49% { left: 68%; top: 46%; }
-  57% { left: 77%; top: 57.5%; }
-  66.666% { left: 87%; top: 71%; }
-  75% { left: 68.5%; top: 71%; }
-  83% { left: 50%; top: 71%; }
-  91% { left: 31.5%; top: 71%; }
-  100% { left: 13%; top: 71%; }
-}
-
-
-/* HERO TRIANGLE ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â¦ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â¦ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â ONE SYNCHRONIZED 7.5s CYCLE */
-.journeyMap .nodeDot { border-color: rgba(197,255,22,.35); box-shadow: none; }
-.journeyMap .nodeText small { color: var(--muted); }
-.journeyMap .nodeText strong { color: var(--text-soft); }
-.journeyMap .nodeFoundation .nodeDot { animation: foundationSync 7.5s linear infinite !important; }
-.journeyMap .nodeFoundation .nodeText small, .journeyMap .nodeFoundation .nodeText strong { animation: foundationTextSync 7.5s linear infinite !important; }
-.journeyMap .nodePractice .nodeDot { animation: practiceSync 7.5s linear infinite !important; }
-.journeyMap .nodePractice .nodeText small, .journeyMap .nodePractice .nodeText strong { animation: practiceTextSync 7.5s linear infinite !important; }
-.journeyMap .nodeIntelligence .nodeDot { animation: intelligenceSync 7.5s linear infinite !important; }
-.journeyMap .nodeIntelligence .nodeText small, .journeyMap .nodeIntelligence .nodeText strong { animation: intelligenceTextSync 7.5s linear infinite !important; }
-@keyframes foundationSync { 0%,3%,97%,100% { border-color: var(--accent); box-shadow: 0 0 0 6px rgba(197,255,22,.09),0 0 25px rgba(197,255,22,.28); } 3.01%,96.99% { border-color: rgba(197,255,22,.35); box-shadow:none; } }
-@keyframes foundationTextSync { 0%,3%,97%,100% { color:var(--accent); text-shadow:0 0 12px rgba(197,255,22,.25); } 3.01%,96.99% { color:var(--text-soft); text-shadow:none; } }
-@keyframes practiceSync { 0%,31.8% { border-color:rgba(197,255,22,.35); box-shadow:none; } 31.81%,34.8% { border-color:var(--accent); box-shadow:0 0 0 6px rgba(197,255,22,.09),0 0 25px rgba(197,255,22,.28); } 34.81%,100% { border-color:rgba(197,255,22,.35); box-shadow:none; } }
-@keyframes practiceTextSync { 0%,31.8% { color:var(--text-soft); text-shadow:none; } 31.81%,34.8% { color:var(--accent); text-shadow:0 0 12px rgba(197,255,22,.25); } 34.81%,100% { color:var(--text-soft); text-shadow:none; } }
-@keyframes intelligenceSync { 0%,65.1% { border-color:rgba(197,255,22,.35); box-shadow:none; } 65.11%,68.2% { border-color:var(--accent); box-shadow:0 0 0 6px rgba(197,255,22,.09),0 0 25px rgba(197,255,22,.28); } 68.21%,100% { border-color:rgba(197,255,22,.35); box-shadow:none; } }
-@keyframes intelligenceTextSync { 0%,65.1% { color:var(--text-soft); text-shadow:none; } 65.11%,68.2% { color:var(--accent); text-shadow:0 0 12px rgba(197,255,22,.25); } 68.21%,100% { color:var(--text-soft); text-shadow:none; } }
-
-
-
-
 
 /* =========================================================
-   HERO TRIANGLE ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â FINAL GEOMETRY POLISH
+   SMALL MOBILE
+   up to 480px
 ========================================================= */
 
-.journeyMap .nodeFoundation {
-  left: 10%;
-  top: 67%;
+@media (max-width: 480px) {
+  .page {
+    width: calc(100% - 1rem);
+
+    padding-bottom: 2.5rem;
+  }
+
+  .journeyMap {
+    min-height: 280px;
+  }
+
+  .v2Node {
+    width: 88px;
+  }
+
+  .v2Text strong {
+    font-size: 0.43rem;
+  }
+
+  .v2MapFooter {
+    font-size: 0.31rem;
+  }
+
+  .statRow {
+    grid-template-columns:
+      38px
+      42px
+      minmax(0, 1fr)
+      12px;
+
+    gap: 0.55rem;
+
+    padding: 0.85rem;
+  }
+
+  .statIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .statIcon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .statNumber {
+    font-size: 1.55rem;
+  }
+
+  .statContent span {
+    font-size: 0.43rem;
+  }
+
+  .statContent p {
+    font-size: 0.55rem;
+  }
+
+  .recordBody h3 {
+    font-size: clamp(1.75rem, 8.8vw, 2.35rem);
+  }
+
+  .recordBody > p {
+    font-size: 0.71rem;
+    line-height: 1.68;
+  }
 }
-
-.journeyMap .nodeFoundation .nodeText {
-  transform: translateY(-8px);
-}
-
-.journeyMap .routeOne {
-  left: 13%;
-  top: 71%;
-  width: 49%;
-  transform: rotate(-35deg);
-}
-
-.journeyMap .nodeIntelligence {
-  right: 7%;
-  top: 67%;
-  transform: translateY(-50%);
-}
-
-.journeyMap .nodeIntelligence .nodeText {
-  transform: translate(8px, -10px);
-}
-
-.journeyMap .routeTwo {
-  left: 50%;
-  top: 23%;
-  width: 42%;
-  transform: rotate(34deg);
-}
-
-.journeyMap .routeThree {
-  left: 13%;
-  top: 71%;
-  width: 72%;
-  transform: rotate(0deg);
-}
-
-
-
-
-/* HERO TRIANGLE ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â FINAL NODE / LABEL ALIGNMENT */
-.journeyMap .nodeFoundation { left:10%; top:68%; right:auto; bottom:auto; transform:none; }
-.journeyMap .nodePractice { left:47%; top:18%; right:auto; bottom:auto; transform:none; }
-.journeyMap .nodeIntelligence { left:auto; right:9%; top:68%; bottom:auto; transform:translateY(-50%); }
-.journeyMap .nodeFoundation, .journeyMap .nodeIntelligence { grid-template-columns:auto 32px; grid-template-rows:auto auto; align-items:center; }
-.journeyMap .nodeFoundation .nodeNumber, .journeyMap .nodeIntelligence .nodeNumber { grid-column:1; grid-row:1; }
-.journeyMap .nodeFoundation .nodeDot, .journeyMap .nodeIntelligence .nodeDot { grid-column:2; grid-row:1; }
-.journeyMap .nodeFoundation .nodeText, .journeyMap .nodeIntelligence .nodeText { grid-column:1 / 3; grid-row:2; margin-top:.75rem; transform:none; align-items:center; text-align:center; margin-left:1.8rem; }
-.journeyMap .nodePractice { grid-template-columns:auto 32px; grid-template-rows:auto auto; }
-.journeyMap .nodePractice .nodeNumber { grid-column:1; grid-row:1; }
-.journeyMap .nodePractice .nodeDot { grid-column:2; grid-row:1; }
-.journeyMap .nodePractice .nodeText { grid-column:1 / 3; grid-row:2; margin-top:.75rem; margin-left:1.8rem; align-items:center; text-align:center; transform:none; }
-
-.journeyMap .routeOne, .journeyMap .routeTwo, .journeyMap .routeThree { position:absolute; z-index:2; height:1px; transform-origin:left center; background:rgba(197,255,22,.58); pointer-events:none; }
-.journeyMap .routeOne { left:13%; top:71%; width:47%; transform:rotate(-35deg); }
-.journeyMap .routeTwo { left:50%; top:23%; width:46%; transform:rotate(35deg); }
-.journeyMap .routeThree { left:13%; top:71%; width:74%; transform:rotate(0deg); }
-
-.journeyMap .signalPulse { position:absolute; z-index:20; left:13%; top:71%; right:auto; bottom:auto; width:8px; height:8px; transform:translate(-50%,-50%); border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent),0 0 18px rgba(197,255,22,.65),0 0 30px rgba(197,255,22,.25); pointer-events:none; offset-path:none !important; animation:heroTrianglePulseFinal 7.5s linear infinite !important; }
-@keyframes heroTrianglePulseFinal {
-  0% { left:13%; top:71%; }
-  8.333% { left:22.25%; top:59%; }
-  16.666% { left:31.5%; top:47%; }
-  25% { left:40.75%; top:35%; }
-  33.333% { left:50%; top:23%; }
-  41.666% { left:59.25%; top:35%; }
-  50% { left:68.5%; top:47%; }
-  58.333% { left:77.75%; top:59%; }
-  66.666% { left:87%; top:71%; }
-  75% { left:68.5%; top:71%; }
-  83.333% { left:50%; top:71%; }
-  91.666% { left:31.5%; top:71%; }
-  100% { left:13%; top:71%; }
-}
-.journeyMap .mapFooter { position:absolute; left:2rem; bottom:1.6rem; right:auto; display:block; }
-
-
-
-
-/* JOURNEY MAP V2 */
-.journeyMap { position: relative; min-height: 440px; overflow: hidden; }
-.triangleSvg { position:absolute; inset:0; width:100%; height:100%; overflow:visible; pointer-events:none; z-index:2; }
-.trianglePath { fill:none; stroke:rgba(197,255,22,.55); stroke-width:1; vector-effect:non-scaling-stroke; }
-.triangleSignal { fill:var(--accent); filter:drop-shadow(0 0 5px var(--accent)) drop-shadow(0 0 10px rgba(197,255,22,.65)); }
-.v2Node { position:absolute; z-index:5; display:flex; flex-direction:column; align-items:center; width:150px; pointer-events:none; }
-.v2Foundation { left:15%; top:75%; transform:translate(-50%,-15px); }
-.v2Practice { left:50%; top:20%; transform:translate(-50%,-15px); }
-.v2Intelligence { left:85%; top:75%; transform:translate(-50%,-15px); }
-.v2Number { position:absolute; right:calc(50% + 30px); top:12px; color:var(--muted); font-size:.44rem; font-variant-numeric:tabular-nums; }
-.v2Dot { position:relative; width:38px; height:38px; display:grid; place-items:center; border:1px solid rgba(197,255,22,.38); border-radius:50%; background:#050807; box-shadow:0 0 0 6px rgba(197,255,22,.025); }
-.v2Dot::before { content:""; position:absolute; inset:-7px; border:1px solid rgba(197,255,22,.06); border-radius:inherit; }
-.v2Dot i { width:7px; height:7px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px rgba(197,255,22,.65); }
-.v2Text { display:flex; flex-direction:column; align-items:center; margin-top:.8rem; text-align:center; }
-.v2Text small { color:var(--muted); font-size:.43rem; letter-spacing:.13em; }
-.v2Text strong { margin-top:.25rem; color:var(--text-soft); font-size:.58rem; font-weight:500; letter-spacing:.06em; }
-.v2Foundation .v2Dot,.v2Foundation .v2Text small,.v2Foundation .v2Text strong { animation:v2FoundationActive 7.5s linear infinite; }
-.v2Practice .v2Dot,.v2Practice .v2Text small,.v2Practice .v2Text strong { animation:v2PracticeActive 7.5s linear infinite; }
-.v2Intelligence .v2Dot,.v2Intelligence .v2Text small,.v2Intelligence .v2Text strong { animation:v2IntelligenceActive 7.5s linear infinite; }
-.v2MapFooter { position:absolute; left:2rem; bottom:1.6rem; z-index:5; display:flex; align-items:center; gap:.75rem; color:var(--muted); font-size:.43rem; letter-spacing:.12em; }
-.v2MapFooter i { width:22px; height:1px; background:var(--accent-line); }
-.v2MapFooter strong { color:var(--accent); font-weight:500; }
-
-/* SVG HERO â€” CORRECT ARRIVAL TIMING */
-/* Final timing and legend position adjustment */
-.v2MapFooter { bottom:0.8rem; }
-
-
-
-
-/* NODE ACTIVE TIMING */
-/* NODE WINDOW POSITIONING */
 
 
 /* =========================================================
-   JOURNEY MAP V2 — SINGLE AUTHORITATIVE NODE TIMING
-   ========================================================= */
+   REDUCED MOTION
+========================================================= */
 
-@keyframes v2FoundationActive {
-  0%, 2.25% {
-    color: var(--accent);
-    border-color: var(--accent);
-    box-shadow:
-      0 0 0 7px rgba(197,255,22,.07),
-      0 0 26px rgba(197,255,22,.22);
-  }
-
-  2.26%, 97.75% {
-    color: var(--text-soft);
-    border-color: rgba(197,255,22,.38);
-    box-shadow:
-      0 0 0 6px rgba(197,255,22,.025);
-  }
-
-  97.76%, 100% {
-    color: var(--accent);
-    border-color: var(--accent);
-    box-shadow:
-      0 0 0 7px rgba(197,255,22,.07),
-      0 0 26px rgba(197,255,22,.22);
-  }
-}
-
-@keyframes v2PracticeActive {
-  0%, 31.05% {
-    color: var(--text-soft);
-    border-color: rgba(197,255,22,.38);
-    box-shadow:
-      0 0 0 6px rgba(197,255,22,.025);
-  }
-
-  31.06%, 35.55% {
-    color: var(--accent);
-    border-color: var(--accent);
-    box-shadow:
-      0 0 0 7px rgba(197,255,22,.07),
-      0 0 26px rgba(197,255,22,.22);
-  }
-
-  35.56%, 100% {
-    color: var(--text-soft);
-    border-color: rgba(197,255,22,.38);
-    box-shadow:
-      0 0 0 6px rgba(197,255,22,.025);
-  }
-}
-
-@keyframes v2IntelligenceActive {
-  0%, 63.95% {
-    color: var(--text-soft);
-    border-color: rgba(197,255,22,.38);
-    box-shadow:
-      0 0 0 6px rgba(197,255,22,.025);
-  }
-
-  63.96%, 68.45% {
-    color: var(--accent);
-    border-color: var(--accent);
-    box-shadow:
-      0 0 0 7px rgba(197,255,22,.07),
-      0 0 26px rgba(197,255,22,.22);
-  }
-
-  68.46%, 100% {
-    color: var(--text-soft);
-    border-color: rgba(197,255,22,.38);
-    box-shadow:
-      0 0 0 6px rgba(197,255,22,.025);
+@media (prefers-reduced-motion: reduce) {
+  .v2Signal,
+  .v2Foundation .v2Dot,
+  .v2Foundation .v2Text small,
+  .v2Foundation .v2Text strong,
+  .v2Practice .v2Dot,
+  .v2Practice .v2Text small,
+  .v2Practice .v2Text strong,
+  .v2Intelligence .v2Dot,
+  .v2Intelligence .v2Text small,
+  .v2Intelligence .v2Text strong,
+  .trajectorySignal span {
+    animation: none;
   }
 }

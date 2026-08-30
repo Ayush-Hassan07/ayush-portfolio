@@ -26,6 +26,40 @@
 .admin-sidebar-foot { font-size: .82rem; }
 .editor-back, .admin-user { font-size: .9rem; }
 .editor-intro > p:last-child { font-size: 1rem; max-width: 560px; }
+
+@media (max-width: 700px) {
+  .admin-frame > .admin-sidebar.mobile-open {
+    bottom: 0;
+    padding: 22px 28px;
+    overflow-y: auto;
+  }
+
+  .admin-frame > .admin-sidebar.mobile-open nav {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 55px;
+    overflow: visible;
+  }
+
+  .admin-frame > .admin-sidebar.mobile-open nav a {
+    border-bottom: 1px solid var(--admin-line);
+    flex-shrink: 0;
+    font-size: .95rem;
+    gap: 14px;
+    padding: 17px 0;
+  }
+
+  .admin-frame > .admin-sidebar.mobile-open nav a span {
+    display: inline;
+    font-size: .72rem;
+  }
+
+  .admin-frame > .admin-sidebar.mobile-open .admin-sidebar-foot {
+    display: block;
+    margin-top: 2rem;
+  }
+}
 .project-form label, .password-form label, .totp-setup label { font-size: .82rem; letter-spacing: .06em; }
 .project-form input, .project-form textarea, .project-form select, .password-form input, .totp-setup input { font-size: 1.05rem; line-height: 1.45; min-height: 44px; }
 .project-form textarea { min-height: 130px; }
@@ -155,3 +189,86 @@
 .media-item img { background:#dfe6dc; height:220px; object-fit:contain; object-position:center; padding:8px; width:100%; box-sizing:border-box; }
 .project-form label.check-row { display:flex; align-items:center; gap:12px; color:var(--admin-ink); cursor:pointer; }
 .project-form label.check-row input[type="checkbox"] { width:20px; height:20px; flex:0 0 auto; margin:0; padding:0; accent-color:var(--admin-deep); }
+
+/* Responsive editor layout */
+@media (max-width: 950px) {
+  .admin-content,
+  .editor-shell {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .editor-grid {
+    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  }
+
+  .media-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .editor-header {
+    gap: 1.25rem;
+  }
+
+  .editor-grid {
+    display: block;
+    padding-top: 0;
+  }
+
+  .project-list,
+  .media-gallery {
+    margin-top: 3.5rem;
+  }
+
+  .project-row {
+    grid-template-columns: 24px minmax(0, 1fr) auto;
+    gap: 10px;
+  }
+
+  .project-row .delete-action {
+    grid-column: 3;
+    grid-row: 1;
+  }
+
+  .media-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .media-picker {
+    max-height: 20rem;
+    overflow-y: auto;
+  }
+
+  .media-picker-option {
+    min-width: 80px !important;
+  }
+
+  .form-actions {
+    flex-wrap: wrap;
+  }
+
+  .form-actions button,
+  .project-form > button {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .admin-content,
+  .editor-shell {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .editor-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .project-row strong {
+    overflow-wrap: anywhere;
+  }
+}

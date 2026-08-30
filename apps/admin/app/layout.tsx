@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import "./globals.css";
 import AdminFrame from "./AdminFrame";
 
@@ -14,3 +14,4 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     </html>
   );
 }
+

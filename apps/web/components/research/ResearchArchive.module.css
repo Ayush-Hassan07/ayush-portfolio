@@ -1,2 +1,811 @@
-.research{width:100%}.intro{min-height:5rem;display:flex;align-items:center;justify-content:space-between;gap:3rem;padding:1.2rem 0;border-bottom:1px solid var(--accent-line)}.intro>div{display:flex;align-items:center;gap:1rem}.intro span,.intro small{font-size:.42rem;font-weight:700;letter-spacing:.14em}.intro span{color:var(--accent)}.intro small{color:var(--muted)}.intro p{width:min(100%,32rem);margin:0;color:var(--muted);font-size:.68rem;line-height:1.6}.records{border-top:1px solid var(--line)}.record{display:grid;grid-template-columns:4rem minmax(0,1fr) 22rem;min-height:24rem;border-bottom:1px solid var(--line);overflow:hidden}.record:nth-child(even){grid-template-columns:22rem minmax(0,1fr) 4rem}.record:nth-child(even) .recordIndex{grid-column:3;grid-row:1;border-left:1px solid var(--line);border-right:0}.record:nth-child(even) .content{grid-column:2;grid-row:1}.record:nth-child(even) .visual{grid-column:1;grid-row:1;border-left:0;border-right:1px solid var(--line)}.recordIndex{display:flex;flex-direction:column;align-items:center;gap:1rem;padding:1.25rem 0;border-right:1px solid var(--line)}.recordIndex>span{color:var(--muted);font-size:.36rem;writing-mode:vertical-rl;transform:rotate(180deg)}.recordIndex>i{width:1px;flex:1;background:linear-gradient(var(--accent),var(--line))}.recordIndex>strong{color:var(--accent);font-size:.65rem}.content{min-width:0;display:flex;flex-direction:column;justify-content:center;padding:clamp(1.6rem,3vw,2.5rem)}.metadata{display:grid;grid-template-columns:.6fr 1.7fr .8fr;margin-bottom:1.2rem;border-block:1px solid var(--line)}.metadata>span{min-height:3.5rem;display:flex;flex-direction:column;justify-content:center;gap:.35rem;padding:.65rem;border-right:1px solid var(--line)}.metadata>span:last-child{border:0}.metadata small,.artifacts small,.signalStatus small{color:var(--muted);font-size:.34rem;font-weight:700;letter-spacing:.12em}.metadata strong{color:var(--text-soft);font-size:.46rem;text-transform:uppercase}.recordLabel{color:var(--accent);font-size:.4rem;font-weight:700;letter-spacing:.14em}.content h2{max-width:22ch;margin:.8rem 0 0;color:var(--text);font-size:clamp(1.85rem,2.7vw,3.1rem);font-weight:500;line-height:1.02;letter-spacing:-.045em}.artifacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1.8rem;border:1px solid var(--line)}.primaryArtifact,.secondaryArtifact{min-height:4.3rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem .95rem;color:var(--accent)}.primaryArtifact{border-right:1px solid var(--line)}.artifacts strong{display:block;margin-top:.35rem;color:var(--text);font-size:.5rem;letter-spacing:.08em}.visual{min-width:0;display:flex;flex-direction:column;border-left:1px solid var(--line);background:radial-gradient(circle at 40% 50%,rgba(223,255,99,.045),transparent 8rem)}.visualHeader{min-height:3rem;padding:0 .9rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.visualHeader span,.visualHeader small{font-size:.36rem;font-weight:700;letter-spacing:.13em}.visualHeader span{color:var(--accent)}.visualHeader small{color:var(--muted)}.signalBody{flex:1;display:grid;grid-template-columns:minmax(9rem,1fr) 8rem;align-items:center;gap:.8rem;padding:1rem}.signalGraphic{position:relative;min-height:13rem;display:grid;place-items:center}.orbitOuter,.orbitMiddle,.orbitInner{position:absolute;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%)}.orbitOuter{width:9rem;height:9rem;border:1px dashed rgba(223,255,99,.18);animation:orbitResearch 30s linear infinite}.orbitMiddle{width:6.7rem;height:6.7rem;border:1px solid rgba(223,255,99,.18)}.orbitInner{width:4.7rem;height:4.7rem;border:1px solid rgba(223,255,99,.28)}.core{width:3.4rem;height:3.4rem;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(223,255,99,.45);border-radius:50%;background:radial-gradient(circle,rgba(223,255,99,.12),transparent 70%)}.core small{color:var(--muted);font-size:.3rem}.core strong{color:var(--accent);font-size:1rem}.signalStatus{display:flex;flex-direction:column;border-left:1px solid var(--line)}.signalStatus>span{min-height:4rem;display:flex;flex-direction:column;justify-content:center;gap:.35rem;padding:.65rem;border-bottom:1px solid var(--line)}.signalStatus>span:last-child{border:0}.signalStatus strong{color:var(--accent);font-size:.47rem}.signalStatus>span:last-child strong{color:var(--text)}@keyframes orbitResearch{to{transform:translate(-50%,-50%) rotate(360deg)}}
-@media(max-width:1050px){.record,.record:nth-child(even){grid-template-columns:3rem 1fr}.recordIndex,.record:nth-child(even) .recordIndex{grid-column:1;grid-row:1/span 2;border-left:0;border-right:1px solid var(--line)}.content,.record:nth-child(even) .content{grid-column:2;grid-row:1}.visual,.record:nth-child(even) .visual{grid-column:2;grid-row:2;min-height:18rem;border:0;border-top:1px solid var(--line)}.signalBody{grid-template-columns:minmax(10rem,1fr) 10rem}}@media(max-width:700px){.intro{align-items:flex-start;flex-direction:column;gap:.7rem}.record,.record:nth-child(even){grid-template-columns:2.4rem minmax(0,1fr)}.content{padding:1.6rem 1rem}.metadata{grid-template-columns:1fr}.metadata>span{border-right:0;border-bottom:1px solid var(--line)}.artifacts{grid-template-columns:1fr}.primaryArtifact{border-right:0;border-bottom:1px solid var(--line)}.signalBody{grid-template-columns:1fr}.signalStatus{border-left:0;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr)}.signalStatus>span{min-height:3.5rem;border:0;border-right:1px solid var(--line)}.signalStatus>span:last-child{border:0}}
+.research {
+  width: 100%;
+}
+
+/* =========================================================
+   INTRO
+   ========================================================= */
+
+.intro {
+  min-height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--accent-line);
+}
+
+.intro > div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.intro span,
+.intro small {
+  font-size: 0.42rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.intro span {
+  color: var(--accent);
+}
+
+.intro small {
+  color: var(--muted);
+}
+
+.intro p {
+  width: min(100%, 32rem);
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   RECORDS — DESKTOP
+   ========================================================= */
+
+.records {
+  border-top: 1px solid var(--line);
+}
+
+.record {
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) 22rem;
+  min-height: 24rem;
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.record:nth-child(even) {
+  grid-template-columns: 22rem minmax(0, 1fr) 4rem;
+}
+
+.record:nth-child(even) .recordIndex {
+  grid-column: 3;
+  grid-row: 1;
+  border-left: 1px solid var(--line);
+  border-right: 0;
+}
+
+.record:nth-child(even) .content {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.record:nth-child(even) .visual {
+  grid-column: 1;
+  grid-row: 1;
+  border-left: 0;
+  border-right: 1px solid var(--line);
+}
+
+/* =========================================================
+   RECORD INDEX
+   ========================================================= */
+
+.recordIndex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-right: 1px solid var(--line);
+}
+
+.recordIndex > span {
+  color: var(--muted);
+  font-size: 0.36rem;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.recordIndex > i {
+  width: 1px;
+  flex: 1;
+  background: linear-gradient(var(--accent), var(--line));
+}
+
+.recordIndex > strong {
+  color: var(--accent);
+  font-size: 0.65rem;
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.6rem, 3vw, 2.5rem);
+}
+
+.metadata {
+  display: grid;
+  grid-template-columns: 0.6fr 1.7fr 0.8fr;
+  margin-bottom: 1.2rem;
+  border-block: 1px solid var(--line);
+}
+
+.metadata > span {
+  min-width: 0;
+  min-height: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.65rem;
+  border-right: 1px solid var(--line);
+}
+
+.metadata > span:last-child {
+  border-right: 0;
+}
+
+.metadata small,
+.artifacts small,
+.signalStatus small {
+  color: var(--muted);
+  font-size: 0.34rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.metadata strong {
+  color: var(--text-soft);
+  font-size: 0.46rem;
+  line-height: 1.45;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.recordLabel {
+  color: var(--accent);
+  font-size: 0.4rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.content h2 {
+  max-width: 22ch;
+  margin: 0.8rem 0 0;
+  color: var(--text);
+  font-size: clamp(1.85rem, 2.7vw, 3.1rem);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   ARTIFACT LINKS
+   ========================================================= */
+
+.artifacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.8rem;
+  border: 1px solid var(--line);
+}
+
+.primaryArtifact,
+.secondaryArtifact {
+  min-height: 4.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 0.95rem;
+  color: var(--accent);
+}
+
+.primaryArtifact {
+  border-right: 1px solid var(--line);
+}
+
+.artifacts strong {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--text);
+  font-size: 0.5rem;
+  letter-spacing: 0.08em;
+}
+
+/* =========================================================
+   RESEARCH SIGNAL
+   ========================================================= */
+
+.visual {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--line);
+  background:
+    radial-gradient(
+      circle at 40% 50%,
+      rgba(223, 255, 99, 0.045),
+      transparent 8rem
+    );
+}
+
+.visualHeader {
+  min-height: 3rem;
+  padding: 0 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.visualHeader span,
+.visualHeader small {
+  font-size: 0.36rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+}
+
+.visualHeader span {
+  color: var(--accent);
+}
+
+.visualHeader small {
+  color: var(--muted);
+}
+
+.signalBody {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(9rem, 1fr) 8rem;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.signalGraphic {
+  position: relative;
+  min-height: 13rem;
+  display: grid;
+  place-items: center;
+}
+
+.orbitOuter,
+.orbitMiddle,
+.orbitInner {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.orbitOuter {
+  width: 9rem;
+  height: 9rem;
+  border: 1px dashed rgba(223, 255, 99, 0.18);
+  animation: orbitResearch 30s linear infinite;
+}
+
+.orbitMiddle {
+  width: 6.7rem;
+  height: 6.7rem;
+  border: 1px solid rgba(223, 255, 99, 0.18);
+}
+
+.orbitInner {
+  width: 4.7rem;
+  height: 4.7rem;
+  border: 1px solid rgba(223, 255, 99, 0.28);
+}
+
+.core {
+  position: relative;
+  z-index: 1;
+  width: 3.4rem;
+  height: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(223, 255, 99, 0.45);
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle,
+      rgba(223, 255, 99, 0.12),
+      transparent 70%
+    );
+}
+
+.core small {
+  color: var(--muted);
+  font-size: 0.3rem;
+}
+
+.core strong {
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.signalStatus {
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--line);
+}
+
+.signalStatus > span {
+  min-height: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.65rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.signalStatus > span:last-child {
+  border-bottom: 0;
+}
+
+.signalStatus strong {
+  color: var(--accent);
+  font-size: 0.47rem;
+}
+
+.signalStatus > span:last-child strong {
+  color: var(--text);
+}
+
+@keyframes orbitResearch {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* =========================================================
+   TABLET / COMPACT LAPTOP — 701px to 1050px
+   ========================================================= */
+
+@media (min-width: 701px) and (max-width: 1050px) {
+  .intro {
+    min-height: 4.5rem;
+    gap: 2rem;
+  }
+
+  .intro p {
+    max-width: 27rem;
+  }
+
+  /*
+   * Keep each research record horizontal.
+   * Do not stack the whole visual below the publication.
+   */
+  .record,
+  .record:nth-child(even) {
+    grid-template-columns:
+      2.5rem
+      minmax(0, 1.25fr)
+      minmax(14rem, 0.75fr);
+    min-height: 30rem;
+  }
+
+  /*
+   * At compact widths we intentionally stop alternating
+   * the physical column order. Consistency uses space better.
+   */
+  .record:nth-child(even) .recordIndex,
+  .recordIndex {
+    grid-column: 1;
+    grid-row: 1;
+    border-left: 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .record:nth-child(even) .content,
+  .content {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .record:nth-child(even) .visual,
+  .visual {
+    grid-column: 3;
+    grid-row: 1;
+    border-left: 1px solid var(--line);
+    border-right: 0;
+  }
+
+  .recordIndex {
+    padding: 1rem 0;
+  }
+
+  .content {
+    padding: clamp(1.3rem, 2.4vw, 2rem);
+  }
+
+  .metadata {
+    grid-template-columns: 0.75fr 1.55fr 0.85fr;
+    margin-bottom: 1rem;
+  }
+
+  .metadata > span {
+    min-height: 3.2rem;
+    padding: 0.55rem;
+  }
+
+  .content h2 {
+    max-width: 18ch;
+    margin-top: 0.75rem;
+    font-size: clamp(1.75rem, 3.4vw, 2.65rem);
+    line-height: 1.01;
+  }
+
+  .artifacts {
+    margin-top: 1.4rem;
+  }
+
+  .primaryArtifact,
+  .secondaryArtifact {
+    min-height: 4rem;
+    padding: 0.7rem 0.75rem;
+  }
+
+  /*
+   * Compact the signal into a vertical instrument panel.
+   */
+  .signalBody {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(12rem, 1fr) auto;
+    gap: 0;
+    padding: 0;
+  }
+
+  .signalGraphic {
+    min-height: 13rem;
+  }
+
+  .orbitOuter {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  .orbitMiddle {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  .orbitInner {
+    width: 4.3rem;
+    height: 4.3rem;
+  }
+
+  .core {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  .signalStatus {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .signalStatus > span {
+    min-width: 0;
+    min-height: 4rem;
+    padding: 0.55rem;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+
+  .signalStatus > span:last-child {
+    border-right: 0;
+  }
+}
+
+/* =========================================================
+   MOBILE — up to 700px
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .intro {
+    min-height: 0;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding: 1.15rem 0 1.35rem;
+  }
+
+  .intro > div {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .intro p {
+    width: 100%;
+    max-width: 30rem;
+    font-size: 0.66rem;
+    line-height: 1.55;
+  }
+
+  /*
+   * The vertical desktop rail becomes a compact header.
+   * It no longer steals mobile content width.
+   */
+  .record,
+  .record:nth-child(even) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+
+  .recordIndex,
+  .record:nth-child(even) .recordIndex {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 2.6rem;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0 0.7rem;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .recordIndex > span {
+    writing-mode: initial;
+    transform: none;
+    font-size: 0.34rem;
+    letter-spacing: 0.12em;
+  }
+
+  .recordIndex > i {
+    width: auto;
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(
+      90deg,
+      var(--accent),
+      var(--line)
+    );
+  }
+
+  .recordIndex > strong {
+    font-size: 0.55rem;
+  }
+
+  .content,
+  .record:nth-child(even) .content {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 1.35rem 0.7rem 1.5rem;
+  }
+
+  /*
+   * Metadata remains compact instead of becoming three
+   * full-width stacked blocks.
+   */
+  .metadata {
+    grid-template-columns: 0.7fr 1.55fr 0.85fr;
+    margin-bottom: 1.15rem;
+  }
+
+  .metadata > span {
+    min-width: 0;
+    min-height: 3.25rem;
+    padding: 0.55rem 0.45rem;
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+  }
+
+  .metadata strong {
+    font-size: 0.4rem;
+    line-height: 1.4;
+  }
+
+  .recordLabel {
+    font-size: 0.36rem;
+  }
+
+  .content h2 {
+    max-width: none;
+    margin-top: 0.7rem;
+    font-size: clamp(1.65rem, 8.7vw, 2.35rem);
+    line-height: 0.99;
+    letter-spacing: -0.045em;
+  }
+
+  .artifacts {
+    grid-template-columns: 1fr;
+    margin-top: 1.3rem;
+  }
+
+  .primaryArtifact,
+  .secondaryArtifact {
+    min-height: 4.2rem;
+    padding: 0.8rem;
+  }
+
+  .primaryArtifact {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .visual,
+  .record:nth-child(even) .visual {
+    grid-column: 1;
+    grid-row: 3;
+    min-height: 0;
+    padding: 0 0.7rem;
+    border: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .visualHeader {
+    min-height: 2.7rem;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .signalBody {
+    display: block;
+    padding: 0;
+  }
+
+  .signalGraphic {
+    display: none;
+  }
+
+  .orbitOuter {
+    width: 7.5rem;
+    height: 7.5rem;
+  }
+
+  .orbitMiddle {
+    width: 5.7rem;
+    height: 5.7rem;
+  }
+
+  .orbitInner {
+    width: 4.1rem;
+    height: 4.1rem;
+  }
+
+  .core {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .core strong {
+    font-size: 0.9rem;
+  }
+
+  .signalStatus {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border: 0;
+  }
+
+  .signalStatus > span {
+    min-width: 0;
+    min-height: 3.7rem;
+    padding: 0.55rem;
+    border-bottom: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+
+  .signalStatus > span:last-child {
+    border-right: 1px solid var(--line);
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE — up to 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .intro {
+    padding-top: 1rem;
+  }
+
+  .intro > div {
+    align-items: center;
+  }
+
+  .intro span,
+  .intro small {
+    font-size: 0.37rem;
+  }
+
+  .intro p {
+    font-size: 0.62rem;
+  }
+
+  .recordIndex {
+    min-height: 2.35rem;
+    padding-inline: 0.65rem;
+  }
+
+  .content {
+    padding: 1.15rem 0.7rem 1.3rem;
+  }
+
+  /*
+   * Venue needs the most room.
+   */
+  .metadata {
+    grid-template-columns: 0.65fr 1.7fr 0.8fr;
+  }
+
+  .metadata > span {
+    min-height: 3rem;
+    padding: 0.45rem 0.35rem;
+  }
+
+  .metadata small,
+  .artifacts small,
+  .signalStatus small {
+    font-size: 0.29rem;
+  }
+
+  .metadata strong {
+    font-size: 0.36rem;
+  }
+
+  .content h2 {
+    font-size: clamp(1.45rem, 8.1vw, 1.95rem);
+    line-height: 1;
+  }
+
+  .artifacts {
+    margin-top: 1.15rem;
+  }
+
+  .primaryArtifact,
+  .secondaryArtifact {
+    min-height: 3.85rem;
+    padding: 0.7rem;
+  }
+
+  .artifacts strong {
+    font-size: 0.45rem;
+  }
+
+  .signalStatus > span {
+    min-height: 3.35rem;
+    padding: 0.45rem;
+  }
+
+  .signalStatus strong {
+    font-size: 0.42rem;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitOuter {
+    animation: none;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .signalStatus > span { min-height: 3.25rem; padding: .45rem; }
+  .signalStatus strong { font-size: .42rem; }
+}
