@@ -198,3 +198,72 @@ model technology {
   project_technology project_technology[]
 }
 
+model analytics_session {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  session_key       String   @unique @db.VarChar(100)
+  visitor_key       String   @db.VarChar(100)
+
+  started_at        DateTime @default(now()) @db.Timestamp(6)
+  last_seen_at      DateTime @default(now()) @db.Timestamp(6)
+
+  entry_path        String?  @db.VarChar(500)
+  exit_path         String?  @db.VarChar(500)
+
+  referrer          String?
+  referrer_domain   String?  @db.VarChar(255)
+
+  device_type       String?  @db.VarChar(30)
+
+  screen_width      Int?
+  screen_height     Int?
+
+  language          String?  @db.VarChar(30)
+
+  is_returning      Boolean  @default(false)
+
+  event_count       Int      @default(0)
+  duration_seconds  Int      @default(0)
+
+  created_at        DateTime @default(now()) @db.Timestamp(6)
+  updated_at        DateTime @default(now()) @db.Timestamp(6)
+
+  events            analytics_event[]
+
+  @@index([visitor_key])
+  @@index([started_at])
+  @@index([last_seen_at])
+  @@index([device_type])
+  @@index([referrer_domain])
+}
+
+model analytics_event {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+
+  session_id        String   @db.Uuid
+
+  event_type        String   @db.VarChar(60)
+
+  path              String   @db.VarChar(500)
+
+  entity_type       String?  @db.VarChar(50)
+  entity_id         String?  @db.VarChar(150)
+  entity_slug       String?  @db.VarChar(250)
+
+  action            String?  @db.VarChar(100)
+  label             String?  @db.VarChar(250)
+
+  value             Int?
+
+  occurred_at       DateTime @default(now()) @db.Timestamp(6)
+
+  metadata          Json?
+
+  session           analytics_session @relation(fields: [session_id], references: [id], onDelete: Cascade)
+
+  @@index([session_id])
+  @@index([event_type])
+  @@index([path])
+  @@index([entity_type, entity_id])
+  @@index([occurred_at])
+}

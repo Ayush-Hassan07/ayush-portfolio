@@ -369,6 +369,27 @@
     transform: none;
   }
 
+  .coreStage {
+    width: 94% !important;
+  }
+
+  .coreNode[style*="--x:50%"][style*="--y:9%"] {
+    --y: 14% !important;
+  }
+
+  .coreNode[style*="--x:91%"],
+  .coreNode[style*="--x: 91%"] {
+    --x: 85% !important;
+  }
+
+  .coreNode[style*="--x:52%"][style*="--y:91%"] {
+    --y: 86% !important;
+  }
+
+  .coreNode[style*="--x:9%"][style*="--y:52%"] {
+    --x: 15% !important;
+  }
+
   .coreField {
     transform: none;
   }
@@ -384,7 +405,6 @@
     transform: translate(-50%, -50%);
   }
 
-  .coreNode span,
   .stageLabel span:last-child,
   .telemetry {
     display: none;
@@ -520,12 +540,6 @@
   }
 }
 
-@media (max-width: 479px) {
-  .identityCopy h1 {
-    font-size: clamp(2.8rem, 12vw, 4rem);
-  }
-}
-
 /* Keep the core rings clear of the telemetry readout. */
 .connectionMap{inset:4%;width:92%;height:92%}.ringOne{width:58%;height:58%;margin:-29%}.ringTwo{width:52%;height:52%;margin:-26%}.fragmentRing{width:47%;height:47%;margin:-23.5%}.telemetry{z-index:30}
 .coreNode[style*="--x:91%"],
@@ -547,4 +561,12 @@
 /* Core node indexes remain visible above each label at every viewport. */
 .coreNode span { display: flex !important; flex-direction: column; align-items: center; }
 .coreNode small { display: block !important; margin-bottom: .2rem; color: var(--accent) !important; font-size: .42rem !important; font-weight: 800; line-height: 1; letter-spacing: .08em; }
-@media (max-width: 479px) { .coreNode strong { display: none !important; } }
+
+/* Keep all hero specialisms visually aligned with FULL-STACK. */
+.specialisms span {
+  color: var(--accent);
+}
+
+.identityCopy h1 {
+  line-height: .94;
+}

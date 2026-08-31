@@ -1,4 +1,7 @@
+"use client";
+
 import type { ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import SystemRail from "./SystemRail";
 import TopNav from "./TopNav";
 import styles from "./PublicShell.module.css";
@@ -20,6 +23,19 @@ export default function PublicShell({
   linkedinUrl,
   googleScholarUrl,
 }: Props) {
+  const pathname = usePathname();
+  const validPath = pathname === "/" ||
+    pathname === "/skills" ||
+    pathname === "/projects" ||
+    pathname === "/research" ||
+    pathname === "/journey" ||
+    pathname === "/certifications" ||
+    /^\/projects\/[^/]+$/.test(pathname);
+
+  if (!validPath) {
+    return <>{children}</>;
+  }
+
   return (
     <div className={styles.shell}>
       <SystemRail

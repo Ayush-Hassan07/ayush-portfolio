@@ -9,3 +9,29 @@
 @media(max-width:1023px){.workspace{grid-template-columns:1fr!important;min-height:0!important}.index{width:100%;min-width:0;border-right:0}.inspector{display:none!important}.systemRow{width:100%;min-width:0;grid-template-columns:2.1rem 2.8rem minmax(0,1fr) auto;gap:.85rem;padding:1rem 1.15rem}.stack{display:none}.mobileStack{display:block;margin-top:.5rem;color:rgba(243,246,237,.38);font-size:.4rem;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rowState{display:block;justify-self:end;font-size:.4rem}}
 @media(max-width:767px){.consoleHeader{min-height:4.4rem;padding:0 1rem}.consoleHeader>div:first-child{flex-direction:column;gap:.3rem}.consoleHeader small{display:block;color:rgba(243,246,237,.38);font-size:.4rem}.consoleState{font-size:.42rem}.systemRow{min-height:7.2rem;grid-template-columns:1.8rem 2rem minmax(0,1fr);gap:.65rem;padding:.9rem 1rem}.rowState{display:none}.identity small{margin-bottom:.4rem;font-size:.4rem}.identity strong{font-size:1.05rem;line-height:1.15}.mobileStack{max-width:100%;font-size:.38rem}.signal{width:100%}}
 @media(max-width:479px){.consoleHeader{min-height:4rem;padding-inline:.8rem}.consoleHeader>div:first-child{gap:.25rem}.consoleHeader>div:first-child>span{font-size:.43rem}.consoleHeader small{font-size:.36rem}.consoleState{gap:.4rem;font-size:.37rem}.systemRow{min-height:6.7rem;grid-template-columns:1.4rem 1.6rem minmax(0,1fr);gap:.55rem;padding:.8rem}.number{font-size:.45rem}.identity strong{font-size:.96rem}.identity small{font-size:.36rem}.mobileStack{margin-top:.42rem;font-size:.34rem}.signal i{width:.3rem;height:.3rem}}
+
+/* Compact layout for the sidebar-constrained 1440px view. */
+@media (min-width: 1151px) and (max-width: 1500px) {
+  .workspace {
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+  }
+
+  .systemRow {
+    grid-template-columns: 2rem 2.5rem minmax(0, 1fr) 3rem;
+  }
+
+  .stack {
+    display: none;
+  }
+
+  .mobileStack {
+    display: block;
+    margin-top: .55rem;
+    color: var(--muted);
+    font-size: .39rem;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
