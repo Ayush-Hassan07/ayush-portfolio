@@ -392,7 +392,7 @@ export default function StatisticsPage() {
           </button>
         ))}
 
-        <button
+        {/* <button
           className="statistics-refresh"
           type="button"
           onClick={() =>
@@ -403,7 +403,7 @@ export default function StatisticsPage() {
           {loading
             ? "Loadingâ€¦"
             : "Refresh"}
-        </button>
+        </button> */}
       </section>
 
       {error && (

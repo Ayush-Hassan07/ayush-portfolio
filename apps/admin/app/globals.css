@@ -1038,3 +1038,34 @@
 .admin-not-found span {
   color: var(--admin-muted);
 }
+
+@media (min-width: 761px) and (max-width: 900px) {
+  .statistics-range {
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .statistics-range > button:not(.statistics-refresh) {
+    display: none;
+  }
+
+  .statistics-range-select {
+    align-items: center;
+    display: flex;
+    flex: 1 1 0;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .statistics-range-select .themed-select,
+  .statistics-period-select {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .statistics-period-select .themed-select-trigger,
+  .statistics-range-select .themed-select-trigger {
+    min-width: 0;
+    width: 100%;
+  }
+}
