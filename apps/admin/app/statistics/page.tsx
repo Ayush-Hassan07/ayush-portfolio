@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import ThemedSelect from "./ThemedSelect";
 
 type StatisticsRange =
   | "today"
@@ -364,15 +365,13 @@ export default function StatisticsPage() {
       >
         <label className="statistics-range-select">
           <span>Range</span>
-          <select value={range} onChange={(event) => setRange(event.target.value as StatisticsRange)}>
-            {ranges.map((item) => <option key={item.value} value={item.value}>{item.label}</option>)}
-          </select>
+          <ThemedSelect ariaLabel="Statistics range" value={range} options={ranges} onChange={(value) => setRange(value as StatisticsRange)} />
         </label>
 
         {(range === "1m" || range === "1y") && (
           <>
-            {range === "1m" && <select className="statistics-period-select" value={month} onChange={(event) => setMonth(event.target.value)}>{months.map((item, index) => <option key={item} value={index + 1}>{item}</option>)}</select>}
-            <select className="statistics-period-select" value={year} onChange={(event) => setYear(event.target.value)}>{years.map((item) => <option key={item} value={item}>{item}</option>)}</select>
+            {range === "1m" && <ThemedSelect className="statistics-period-select" ariaLabel="Month" value={month} options={months.map((label, index) => ({ value: String(index + 1), label }))} onChange={setMonth} />}
+            <ThemedSelect className="statistics-period-select" ariaLabel="Year" value={year} options={years.map((label) => ({ value: label, label }))} onChange={setYear} />
           </>
         )}
 
@@ -783,10 +782,7 @@ export default function StatisticsPage() {
                   </h2>
                   <label className="statistics-inline-filter">
                     <span>Project</span>
-                    <select value={projectFilter} onChange={(event) => setProjectFilter(event.target.value)}>
-                      <option value="">All projects</option>
-                      {statistics.projects.options.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
-                    </select>
+                    <ThemedSelect ariaLabel="Project filter" value={projectFilter} options={[{ value: "", label: "All projects" }, ...statistics.projects.options.map((item) => ({ value: item.id, label: item.title }))]} onChange={setProjectFilter} />
                   </label>
                 </div>
               </div>
@@ -844,10 +840,7 @@ export default function StatisticsPage() {
                   </h2>
                   <label className="statistics-inline-filter">
                     <span>Research</span>
-                    <select value={researchFilter} onChange={(event) => setResearchFilter(event.target.value)}>
-                      <option value="">All research</option>
-                      {statistics.research.options.map((item) => <option key={item.id} value={item.id}>{item.title}</option>)}
-                    </select>
+                    <ThemedSelect ariaLabel="Research filter" value={researchFilter} options={[{ value: "", label: "All research" }, ...statistics.research.options.map((item) => ({ value: item.id, label: item.title }))]} onChange={setResearchFilter} />
                   </label>
                 </div>
 
