@@ -216,6 +216,12 @@ export class AdminService {
   }
   listCertifications() {
     return this.prisma.certification.findMany({
+      include: {
+        certification_media: {
+          orderBy: { sort_order: 'asc' },
+          include: { media: { select: { id: true, storage_key: true } } },
+        },
+      },
       orderBy: [
         { featured: 'desc' },
         { sort_order: 'asc' },
@@ -224,8 +230,8 @@ export class AdminService {
       ],
     });
   }
-  createCertification(input: Record<string, unknown>) {
-    return this.prisma.certification.create({
+  async createCertification(input: Record<string, unknown>) {
+    const certification = await this.prisma.certification.create({
       data: {
         name: String(input.name ?? '').trim(),
         issuer: String(input.issuer ?? '').trim(),
@@ -257,9 +263,11 @@ export class AdminService {
             : Number(input.sort_order),
       },
     });
+    await this.saveCertificationMedia(certification.id, input.media_ids);
+    return certification;
   }
-  updateCertification(id: string, input: Record<string, unknown>) {
-    return this.prisma.certification.update({
+  async updateCertification(id: string, input: Record<string, unknown>) {
+    const certification = await this.prisma.certification.update({
       where: { id },
       data: {
         name: input.name === undefined ? undefined : String(input.name).trim(),
@@ -317,6 +325,15 @@ export class AdminService {
             : Number(input.sort_order),
         updated_at: new Date(),
       },
+    });
+    if (input.media_ids !== undefined) await this.saveCertificationMedia(id, input.media_ids);
+    return certification;
+  }
+  private async saveCertificationMedia(certificationId: string, value: unknown) {
+    if (!Array.isArray(value) || value.some((id) => typeof id !== 'string')) return;
+    await this.prisma.certification_media.deleteMany({ where: { certification_id: certificationId } });
+    if (value.length) await this.prisma.certification_media.createMany({
+      data: value.map((media_id, sort_order) => ({ certification_id: certificationId, media_id: media_id as string, sort_order })),
     });
   }
   deleteCertification(id: string) {

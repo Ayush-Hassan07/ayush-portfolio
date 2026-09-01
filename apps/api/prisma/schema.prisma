@@ -36,6 +36,7 @@ model media_asset {
   byte_size    Int
   created_at   DateTime @default(now()) @db.Timestamp(6)
   project_media project_media[]
+  certification_media certification_media[]
 }
 
 model admin_otp_challenge {
@@ -65,9 +66,20 @@ model certification {
   category       String?   @db.VarChar(100)
   featured       Boolean   @default(false)
   sort_order     Int       @default(0)
+  certification_media certification_media[]
 
   created_at     DateTime  @default(now()) @db.Timestamp(6)
   updated_at     DateTime  @default(now()) @db.Timestamp(6)
+}
+
+model certification_media {
+  certification_id String @db.Uuid
+  media_id         String @db.Uuid
+  sort_order       Int    @default(0)
+  certification    certification @relation(fields: [certification_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  media            media_asset @relation(fields: [media_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  @@id([certification_id, media_id])
+  @@index([media_id])
 }
 
 model education {

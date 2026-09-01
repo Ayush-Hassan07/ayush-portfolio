@@ -74,6 +74,12 @@ export class PublicService {
 
   getCertifications() {
     return this.prisma.certification.findMany({
+      include: {
+        certification_media: {
+          orderBy: { sort_order: 'asc' },
+          include: { media: { select: { storage_key: true } } },
+        },
+      },
       orderBy: [
         { featured: 'desc' },
         { sort_order: 'asc' },

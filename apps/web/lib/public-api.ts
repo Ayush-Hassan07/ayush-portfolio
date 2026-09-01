@@ -41,6 +41,7 @@ export type PublicCertification = {
   category: string | null;
   featured: boolean;
   sort_order: number;
+  certification_media?: { media: { storage_key: string } }[];
 };
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';

@@ -6,6 +6,12 @@ import styles from "./certifications.module.css";
 const api =
   process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
+function certificateImages(certificate: { image_url: string | null; certification_media?: { media: { storage_key: string } }[] }) {
+  const images = (certificate.certification_media ?? []).map(({ media }) => `${api}/media/${media.storage_key}`);
+  if (certificate.image_url) images.unshift(`${api}${certificate.image_url}`);
+  return [...new Set(images)];
+}
+
 function year(date: string | null) {
   return date?.slice(0, 4) ?? "—";
 }
@@ -144,7 +150,7 @@ export default async function CertificationsPage() {
                     </div>
 
                     {certificate.image_url ? (
-                      <CertificatePreview src={`${api}${certificate.image_url}`} alt={`${certificate.name} certificate`} />
+                      <CertificatePreview src={certificateImages(certificate)[0]} images={certificateImages(certificate)} alt={`${certificate.name} certificate`} />
                     ) : (
                       <div className={styles.visualPlaceholder}>
                         <span>DOCUMENT RECORD</span>
@@ -301,7 +307,7 @@ export default async function CertificationsPage() {
                     </div>
 
                     {certificate.image_url ? (
-                      <CertificatePreview src={`${api}${certificate.image_url}`} alt={`${certificate.name} certificate`} />
+                      <CertificatePreview src={certificateImages(certificate)[0]} images={certificateImages(certificate)} alt={`${certificate.name} certificate`} />
                     ) : (
                       <div className={styles.visualPlaceholder}>
                         <span>

@@ -1,19 +1,9 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import styles from "./certifications.module.css";
-
-type Props = { src: string; alt: string };
-
-export default function CertificatePreview({ src, alt }: Props) {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (!open) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const handleKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => { document.body.style.overflow = previousOverflow; window.removeEventListener("keydown", handleKeyDown); };
-  }, [open]);
-  return <><button type="button" className={styles.previewTrigger} onClick={() => setOpen(true)} aria-label={`Open ${alt}`}><img src={src} alt={alt} /></button>{open && <div className={styles.lightbox} role="dialog" aria-modal="true" aria-label={alt} onMouseDown={(event) => { if (event.target === event.currentTarget) setOpen(false); }}><div className={styles.lightboxPanel}><button type="button" className={styles.lightboxClose} onClick={() => setOpen(false)} aria-label="Close certificate preview">×</button><img className={styles.lightboxImage} src={src} alt={alt} /></div></div>}</>;
+type Props = { src: string; alt: string; images?: string[] };
+export default function CertificatePreview({ src, alt, images = [src] }: Props) {
+  const [open, setOpen] = useState(false); const [activeIndex, setActiveIndex] = useState(0); const activeSrc = images[activeIndex] ?? src;
+  useEffect(() => { if (!open) return; const previous = document.body.style.overflow; document.body.style.overflow = "hidden"; const key = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); if (event.key === "ArrowRight") setActiveIndex(i => (i + 1) % images.length); if (event.key === "ArrowLeft") setActiveIndex(i => (i - 1 + images.length) % images.length); }; window.addEventListener("keydown", key); return () => { document.body.style.overflow = previous; window.removeEventListener("keydown", key); }; }, [open, images.length]);
+  return <><button type="button" className={styles.previewTrigger} onClick={() => { setActiveIndex(Math.max(0, images.indexOf(src))); setOpen(true); }} aria-label={`Open ${alt}`}><img src={src} alt={alt} /></button>{open && <div className={styles.lightbox} role="dialog" aria-modal="true" aria-label={alt} onMouseDown={e => { if (e.target === e.currentTarget) setOpen(false); }}><div className={styles.lightboxPanel}><button type="button" className={styles.lightboxClose} onClick={() => setOpen(false)} aria-label="Close certificate preview">×</button><img className={styles.lightboxImage} src={activeSrc} alt={`${alt} ${activeIndex + 1}`} />{images.length > 1 && <div className={styles.certificateThumbnails}>{images.map((image, index) => <button type="button" key={image} className={index === activeIndex ? styles.certificateThumbnailActive : styles.certificateThumbnail} onClick={() => setActiveIndex(index)} aria-label={`View certificate image ${index + 1}`}><img src={image} alt="" /></button>)}</div>}</div></div>}</>;
 }
