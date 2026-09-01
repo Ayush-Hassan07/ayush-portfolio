@@ -1,13 +1,36 @@
+import type { Metadata } from "next";
+
 import {
   getPublicEducation,
   getPublicExperience,
 } from "../../lib/public-api";
-import JourneyScrollButton from "./JourneyScrollButton";
 
+import JourneyScrollButton from "./JourneyScrollButton";
 import styles from "./page.module.css";
 
+export const metadata: Metadata = {
+  title: "Journey",
+
+  description:
+    "Professional experience, education, and engineering development across software, AI/ML, and research.",
+
+  alternates: {
+    canonical: "/journey",
+  },
+
+  openGraph: {
+    title: "Journey | Ayush Hassan Raiyan",
+    description:
+      "Professional experience, education, and engineering development across software, AI/ML, and research.",
+    url: "/journey",
+    type: "website",
+  },
+};
+
 function year(date: string | null) {
-  if (!date) return "PRESENT";
+  if (!date) {
+    return "PRESENT";
+  }
 
   const parsed = new Date(date);
 
@@ -17,7 +40,9 @@ function year(date: string | null) {
 }
 
 function monthYear(date: string | null) {
-  if (!date) return "PRESENT";
+  if (!date) {
+    return "PRESENT";
+  }
 
   const parsed = new Date(date);
 
@@ -56,7 +81,10 @@ export default async function JourneyPage() {
           {/* Visual Journey Map */}
 
           <div className={styles.journeyMap}>
-            <div className={styles.mapGrid} aria-hidden="true" />
+            <div
+              className={styles.mapGrid}
+              aria-hidden="true"
+            />
 
             <svg
               className={styles.triangleSvg}
@@ -70,29 +98,56 @@ export default async function JourneyPage() {
               />
             </svg>
 
-            <span className={styles.v2Signal} aria-hidden="true" />
+            <span
+              className={styles.v2Signal}
+              aria-hidden="true"
+            />
 
-            <div className={`${styles.v2Node} ${styles.v2Foundation}`}>
-              <span className={styles.v2Number}>01</span>
-              <div className={styles.v2Dot}><i /></div>
+            <div
+              className={`${styles.v2Node} ${styles.v2Foundation}`}
+            >
+              <span className={styles.v2Number}>
+                01
+              </span>
+
+              <div className={styles.v2Dot}>
+                <i />
+              </div>
+
               <div className={styles.v2Text}>
                 <small>FOUNDATION</small>
                 <strong>COMPUTING</strong>
               </div>
             </div>
 
-            <div className={`${styles.v2Node} ${styles.v2Practice}`}>
-              <span className={styles.v2Number}>02</span>
-              <div className={styles.v2Dot}><i /></div>
+            <div
+              className={`${styles.v2Node} ${styles.v2Practice}`}
+            >
+              <span className={styles.v2Number}>
+                02
+              </span>
+
+              <div className={styles.v2Dot}>
+                <i />
+              </div>
+
               <div className={styles.v2Text}>
                 <small>PRACTICE</small>
                 <strong>ENGINEERING</strong>
               </div>
             </div>
 
-            <div className={`${styles.v2Node} ${styles.v2Intelligence}`}>
-              <span className={styles.v2Number}>03</span>
-              <div className={styles.v2Dot}><i /></div>
+            <div
+              className={`${styles.v2Node} ${styles.v2Intelligence}`}
+            >
+              <span className={styles.v2Number}>
+                03
+              </span>
+
+              <div className={styles.v2Dot}>
+                <i />
+              </div>
+
               <div className={styles.v2Text}>
                 <small>INTELLIGENCE</small>
                 <strong>AI / RESEARCH</strong>
@@ -135,7 +190,10 @@ export default async function JourneyPage() {
               </div>
 
               <strong className={styles.statNumber}>
-                {String(experience.length).padStart(2, "0")}
+                {String(experience.length).padStart(
+                  2,
+                  "0",
+                )}
               </strong>
 
               <div className={styles.statContent}>
@@ -147,7 +205,9 @@ export default async function JourneyPage() {
                 </p>
               </div>
 
-              <span className={styles.statArrow}>&rsaquo;</span>
+              <span className={styles.statArrow}>
+                &rsaquo;
+              </span>
             </JourneyScrollButton>
 
             <JourneyScrollButton
@@ -166,7 +226,10 @@ export default async function JourneyPage() {
               </div>
 
               <strong className={styles.statNumber}>
-                {String(education.length).padStart(2, "0")}
+                {String(education.length).padStart(
+                  2,
+                  "0",
+                )}
               </strong>
 
               <div className={styles.statContent}>
@@ -178,7 +241,9 @@ export default async function JourneyPage() {
                 </p>
               </div>
 
-              <span className={styles.statArrow}>&rsaquo;</span>
+              <span className={styles.statArrow}>
+                &rsaquo;
+              </span>
             </JourneyScrollButton>
           </div>
         </div>
@@ -199,8 +264,9 @@ export default async function JourneyPage() {
           </div>
 
           <p>
-            Roles where technical knowledge was applied in practical,
-            academic and production-oriented environments.
+            Roles where technical knowledge was applied in
+            practical, academic and production-oriented
+            environments.
           </p>
         </header>
 
@@ -288,16 +354,24 @@ export default async function JourneyPage() {
                 key={item.id}
               >
                 <div className={styles.recordIndex}>
-                  {String(index + 1).padStart(2, "0")}
+                  {String(index + 1).padStart(
+                    2,
+                    "0",
+                  )}
                 </div>
 
                 <div className={styles.educationPeriod}>
-                  <span>{year(item.start_date)}</span>
+                  <span>
+                    {year(item.start_date)}
+                  </span>
+
                   <i>&rarr;</i>
 
                   <span
                     className={
-                      current ? styles.current : undefined
+                      current
+                        ? styles.current
+                        : undefined
                     }
                   >
                     {year(item.end_date)}
@@ -305,17 +379,25 @@ export default async function JourneyPage() {
                 </div>
 
                 <div className={styles.educationMain}>
-                  <div className={styles.educationTitle}>
+                  <div
+                    className={styles.educationTitle}
+                  >
                     <h3>{item.degree}</h3>
 
                     {current && (
-                      <span className={styles.currentBadge}>
+                      <span
+                        className={
+                          styles.currentBadge
+                        }
+                      >
                         CURRENT
                       </span>
                     )}
                   </div>
 
-                  <strong>{item.institution}</strong>
+                  <strong>
+                    {item.institution}
+                  </strong>
 
                   {item.field && (
                     <p className={styles.field}>
@@ -324,17 +406,27 @@ export default async function JourneyPage() {
                   )}
 
                   {item.description && (
-                    <p className={styles.educationDescription}>
+                    <p
+                      className={
+                        styles.educationDescription
+                      }
+                    >
                       {item.description}
                     </p>
                   )}
                 </div>
 
-                <div className={styles.educationResult}>
+                <div
+                  className={
+                    styles.educationResult
+                  }
+                >
                   {item.result ? (
                     <>
                       <span>RESULT</span>
-                      <strong>{item.result}</strong>
+                      <strong>
+                        {item.result}
+                      </strong>
                     </>
                   ) : (
                     <span>IN PROGRESS</span>
@@ -351,12 +443,14 @@ export default async function JourneyPage() {
       ===================================================== */}
 
       <section className={styles.trajectory}>
-        <header className={styles.trajectoryHeader}>
+        <header
+          className={styles.trajectoryHeader}
+        >
           <span>// TRAJECTORY</span>
 
           <p>
-            How the academic foundation, engineering practice and
-            intelligent-systems work connect.
+            How the academic foundation, engineering practice
+            and intelligent-systems work connect.
           </p>
         </header>
 
@@ -424,7 +518,9 @@ function TrajectoryStage({
   return (
     <div
       className={`${styles.trajectoryItem} ${
-        current ? styles.trajectoryCurrent : ""
+        current
+          ? styles.trajectoryCurrent
+          : ""
       }`}
     >
       <span className={styles.trajectoryIndex}>
@@ -441,7 +537,9 @@ function TrajectoryStage({
 
       <div>
         <small>{label}</small>
+
         <strong>{title}</strong>
+
         <p>{description}</p>
       </div>
     </div>

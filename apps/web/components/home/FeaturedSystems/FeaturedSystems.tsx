@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   useEffect,
@@ -11,6 +12,7 @@ import { trackAnalyticsEvent } from "@/lib/analytics";
 import type { PublicProject } from "../../../lib/public-api";
 
 import styles from "./FeaturedSystems.module.css";
+import a11y from "./AccessibilityOverrides.module.css";
 
 type Props = {
   projects: PublicProject[];
@@ -251,7 +253,7 @@ export default function FeaturedSystems({
                     }
                   >
                     <span
-                      className={styles.index}
+                      className={`${styles.index} ${a11y.index}`}
                     >
                       {number}
                     </span>
@@ -265,7 +267,9 @@ export default function FeaturedSystems({
                         className={
                           styles.statusDot
                         }
+                        aria-hidden="true"
                       />
+
                       {project.status ||
                         "SYSTEM"}
                     </div>
@@ -287,9 +291,16 @@ export default function FeaturedSystems({
                       className={styles.visual}
                     >
                       {image ? (
-                        <img
+                        <Image
                           src={image}
                           alt=""
+                          fill
+                          sizes="
+                            (max-width: 700px) calc(100vw - 2rem),
+                            (max-width: 1050px) 50vw,
+                            33vw
+                          "
+                          quality={75}
                           className={
                             styles.projectImage
                           }
@@ -316,12 +327,14 @@ export default function FeaturedSystems({
                         className={
                           styles.visualGrid
                         }
+                        aria-hidden="true"
                       />
 
                       <div
                         className={
                           styles.visualCorners
                         }
+                        aria-hidden="true"
                       >
                         <i />
                         <i />
@@ -337,6 +350,7 @@ export default function FeaturedSystems({
                         <span>
                           SYS_{number}
                         </span>
+
                         <span>
                           FEATURED
                         </span>
@@ -355,9 +369,7 @@ export default function FeaturedSystems({
                       }
                     >
                       <span
-                        className={
-                          styles.record
-                        }
+                        className={`${styles.record} ${a11y.record}`}
                       >
                         SYSTEM / {number}
                       </span>
@@ -451,9 +463,7 @@ export default function FeaturedSystems({
                       </Link>
 
                       <span
-                        className={
-                          styles.coordinates
-                        }
+                        className={`${styles.coordinates} ${a11y.coordinates}`}
                       >
                         AHR / {number}
                       </span>
@@ -505,8 +515,8 @@ export default function FeaturedSystems({
                   }
                   className={
                     index === startIndex
-                      ? styles.carouselDotActive
-                      : styles.carouselDot
+                      ? `${styles.carouselDotActive} ${a11y.carouselDotActive}`
+                      : `${styles.carouselDot} ${a11y.carouselDot}`
                   }
                   aria-label={
                     "Show featured projects starting from " +
@@ -522,9 +532,7 @@ export default function FeaturedSystems({
             </div>
 
             <span
-              className={
-                styles.carouselCounter
-              }
+              className={`${styles.carouselCounter} ${a11y.carouselCounter}`}
             >
               {String(
                 startIndex + 1,

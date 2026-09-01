@@ -25,12 +25,20 @@ export default function HomeHero({
   technologies,
   capabilities,
 }: Props) {
-  const api = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
-  const image = profileImage ? `${api}/media/${profileImage}` : null;
+  const api =
+    process.env.NEXT_PUBLIC_API_URL ??
+    "http://localhost:4000";
+
+  const image = profileImage
+    ? `${api}/media/${profileImage}`
+    : null;
 
   return (
     <section className={styles.hero}>
-      <div className={styles.backgroundGeometry} />
+      <div
+        className={styles.backgroundGeometry}
+        aria-hidden="true"
+      />
 
       <div className={styles.identityHero}>
         <div className={styles.identitySide}>
@@ -43,27 +51,49 @@ export default function HomeHero({
             {image && (
               <div className={styles.portraitStage}>
                 <div className={styles.portraitFrame}>
-                  <img src={image} alt={name} />
-                  <span className={styles.scanBeam} aria-hidden="true" />
+                  <img
+                    src={image}
+                    alt={name}
+                    className={styles.portraitImage}
+                  />
+
+                  <span
+                    className={styles.scanBeam}
+                    aria-hidden="true"
+                  />
                 </div>
-                <span className={styles.portraitCornerTop} />
-                <span className={styles.portraitCornerBottom} />
+
+                <span
+                  className={styles.portraitCornerTop}
+                  aria-hidden="true"
+                />
+
+                <span
+                  className={styles.portraitCornerBottom}
+                  aria-hidden="true"
+                />
               </div>
             )}
 
             <div className={styles.identityCopy}>
               <h1>{name}</h1>
+
               <div className={styles.specialisms}>
                 <span>FULL-STACK</span>
-                <i />
+
+                <i aria-hidden="true" />
+
                 <span>AI / ML</span>
-                <i />
+
+                <i aria-hidden="true" />
+
                 <span>RESEARCH</span>
               </div>
+
               <p className={styles.heroSummary}>
-                Building practical software across full-stack development,
-                AI/ML and applied research, with a focus on systems that solve
-                real problems.
+                Building practical software across full-stack
+                development, AI/ML and applied research, with a
+                focus on systems that solve real problems.
               </p>
             </div>
           </div>
@@ -76,13 +106,19 @@ export default function HomeHero({
                   <strong>{location}</strong>
                 </span>
               )}
+
               <span>
                 <small>FOCUS</small>
-                <strong>Software + Intelligence</strong>
+                <strong>
+                  Software + Intelligence
+                </strong>
               </span>
+
               <span>
                 <small>STATE</small>
-                <strong>Open to Opportunities</strong>
+                <strong>
+                  Open to Opportunities
+                </strong>
               </span>
             </div>
 
@@ -116,9 +152,14 @@ export default function HomeHero({
       <div className={styles.systemExit}>
         <div>
           <span>THE SYSTEM CONTINUES</span>
-          <small>PROJECTS &times; TECHNOLOGIES &times; RESEARCH</small>
+
+          <small>
+            PROJECTS &times; TECHNOLOGIES &times; RESEARCH
+          </small>
         </div>
-        <i />
+
+        <i aria-hidden="true" />
+
         <span>EXPLORE THE WORK &darr;</span>
       </div>
     </section>

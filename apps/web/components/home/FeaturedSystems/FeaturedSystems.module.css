@@ -1,16 +1,527 @@
-.section{position:relative;width:100%;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}.sectionHeader{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;min-height:118px;padding:1.8rem clamp(1.25rem,4vw,4.5rem);border-bottom:1px solid rgba(255,255,255,.1)}.headingGroup{display:flex;flex-direction:column;gap:.65rem}.eyebrow,.record,.headerMeta,.status,.coordinates{font-family:monospace;text-transform:uppercase;letter-spacing:.12em}.eyebrow{font-size:.7rem;color:var(--accent,#c7ff3d)}.title{margin:0;font-size:clamp(1.8rem,3vw,3.3rem);font-weight:500;line-height:.98;letter-spacing:-.05em}.headerMeta{display:flex;gap:1.5rem;font-size:.63rem;color:rgba(255,255,255,.45)}.allSystems{color:rgba(255,255,255,.82);text-decoration:none}.allSystems:hover,.systemTitle a:hover,.openSystem:hover{color:var(--accent,#c7ff3d)}.systemGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.system{min-width:0;height:100%;padding:1rem;border-right:1px solid rgba(255,255,255,.1)}.system:last-child{border-right:0}.systemTop{min-height:38px;display:flex;justify-content:space-between;gap:1rem}.index{font-family:monospace;color:rgba(255,255,255,.38);font-size:.68rem}.status{display:flex;gap:.45rem;color:rgba(255,255,255,.48);font-size:.58rem}.statusDot{width:5px;height:5px;margin-top:.2rem;border-radius:50%;background:var(--accent);box-shadow:0 0 9px var(--accent)}.visualLink{display:block;color:inherit;text-decoration:none}.visual{position:relative;aspect-ratio:16/8.5;overflow:hidden;border:1px solid rgba(255,255,255,.11)}.projectImage{width:100%;height:100%;display:block;object-fit:cover;filter:saturate(.78);transition:transform .6s,filter .4s}.system:hover .projectImage{transform:scale(1.025);filter:saturate(1)}.visualGrid{position:absolute;inset:0;opacity:.25;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:32px 32px}.visualCorners{position:absolute;inset:0}.visualCorners i{position:absolute;width:18px;height:18px;border-color:var(--accent);border-style:solid}.visualCorners i:nth-child(1){top:0;left:0;border-width:1px 0 0 1px}.visualCorners i:nth-child(2){top:0;right:0;border-width:1px 1px 0 0}.visualCorners i:nth-child(3){right:0;bottom:0;border-width:0 1px 1px 0}.visualCorners i:nth-child(4){bottom:0;left:0;border-width:0 0 1px 1px}.visualReadout{position:absolute;right:12px;bottom:10px;left:12px;display:flex;justify-content:space-between;color:rgba(255,255,255,.55);font:.54rem monospace}.visualFallback{position:absolute;inset:0;display:grid;place-items:center}.visualFallback>span{font:300 clamp(3rem,7vw,7rem) monospace;color:rgba(255,255,255,.04)}.fallbackCross:before,.fallbackCross:after{content:"";position:absolute;top:50%;left:50%;background:rgba(199,255,61,.2);transform:translate(-50%,-50%)}.fallbackCross:before{width:80px;height:1px}.fallbackCross:after{width:1px;height:80px}.systemBody{display:flex;min-height:220px;flex-direction:column;padding-top:1rem}.systemIdentity{min-height:80px}.record{display:block;margin-bottom:.55rem;font-size:.56rem;color:rgba(255,255,255,.34)}.systemTitle{margin:0;font-size:clamp(1.25rem,1.7vw,1.75rem);font-weight:500;line-height:1.08}.systemTitle a{color:inherit;text-decoration:none}.description{display:-webkit-box;margin:.75rem 0 1rem;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2;font-size:.74rem;line-height:1.6;color:rgba(255,255,255,.5)}.technologies{display:flex;flex-wrap:wrap;gap:.38rem;margin-bottom:1.2rem}.technologies span{padding:.28rem .45rem;border:1px solid rgba(255,255,255,.1);font: .54rem monospace;color:rgba(255,255,255,.55)}.systemFooter{margin-top:auto;padding-top:.9rem;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.08)}.openSystem{font:.62rem monospace;color:rgba(255,255,255,.82);text-decoration:none}.coordinates{font-size:.52rem;color:rgba(255,255,255,.25)}
-@media(max-width:1050px){.visual{aspect-ratio:16/9}.systemBody,.systemIdentity{min-height:auto}}
-@media(max-width:700px){.sectionHeader{align-items:flex-start;flex-direction:column}.system{border-right:0}.visual{aspect-ratio:4/3}.headerMeta{width:100%;justify-content:space-between}}
+.section {
+  position: relative;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-.carouselViewport{width:100%;overflow:hidden}
-.carouselTrack{display:flex;width:100%;transition:transform 900ms cubic-bezier(.22,.8,.3,1);will-change:transform}
-.carouselTrack .system{flex:0 0 33.333333%;width:33.333333%;min-width:33.333333%;max-width:33.333333%;box-sizing:border-box}
-@media(max-width:1050px){.carouselTrack .system{flex-basis:50%;width:50%;min-width:50%;max-width:50%}}
-@media(max-width:700px){.carouselTrack .system{flex-basis:100%;width:100%;min-width:100%;max-width:100%}}
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 118px;
+  padding: 1.8rem clamp(1.25rem, 4vw, 4.5rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-.carouselControls{min-height:68px;display:grid;grid-template-columns:70px 1fr 70px;align-items:center;border-top:1px solid rgba(255,255,255,.08)}.carouselArrow{width:100%;height:68px;border:0;background:transparent;color:rgba(255,255,255,.62);font:1rem monospace;cursor:pointer}.carouselArrow:hover{color:var(--accent,#c7ff3d);background:rgba(199,255,61,.025)}.carouselArrow:first-child{border-right:1px solid rgba(255,255,255,.08)}.carouselArrow:last-child{border-left:1px solid rgba(255,255,255,.08)}.carouselCenter{display:flex;align-items:center;justify-content:center;gap:1rem}.carouselDots{display:flex;align-items:center;gap:.5rem}.carouselDot,.carouselDotActive{padding:0;border:0;cursor:pointer}.carouselDot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.22)}.carouselDotActive{width:20px;height:5px;border-radius:999px;background:var(--accent,#c7ff3d);box-shadow:0 0 8px rgba(199,255,61,.45)}.carouselCounter{font: .55rem monospace;letter-spacing:.12em;color:rgba(255,255,255,.35)}
-.carouselControls{min-height:68px;display:grid;grid-template-columns:70px 1fr 70px;align-items:center;border-top:1px solid rgba(255,255,255,.08)}.carouselArrow{width:100%;height:68px;border:0;background:transparent;color:rgba(255,255,255,.62);font:1rem monospace;cursor:pointer}.carouselArrow:hover{color:var(--accent,#c7ff3d);background:rgba(199,255,61,.025)}.carouselArrow:first-child{border-right:1px solid rgba(255,255,255,.08)}.carouselArrow:last-child{border-left:1px solid rgba(255,255,255,.08)}.carouselCenter{display:flex;align-items:center;justify-content:center;gap:1rem}.carouselDots{display:flex;align-items:center;gap:.5rem}.carouselDot,.carouselDotActive{padding:0;border:0;cursor:pointer}.carouselDot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.22)}.carouselDotActive{width:20px;height:5px;border-radius:999px;background:var(--accent,#c7ff3d);box-shadow:0 0 8px rgba(199,255,61,.45)}.carouselCounter{font: .55rem monospace;letter-spacing:.12em;color:rgba(255,255,255,.35)}
-@media(max-width:700px){.carouselControls{min-height:58px;grid-template-columns:58px 1fr 58px}.carouselArrow{height:58px}}
-@media(prefers-reduced-motion:reduce){.carouselTrack{transition:none}.projectImage{transition:none}}
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
 
-.moreTechnologies{color:var(--accent,#c7ff3d)!important;border-color:rgba(199,255,61,.28)!important;background:rgba(199,255,61,.035);cursor:help}
+.eyebrow,
+.record,
+.headerMeta,
+.status,
+.coordinates {
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  color: var(--accent, #c7ff3d);
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 3.3rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.05em;
+}
+
+.headerMeta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.63rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.allSystems {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+}
+
+.allSystems:hover,
+.allSystems:focus-visible,
+.systemTitle a:hover,
+.systemTitle a:focus-visible,
+.openSystem:hover,
+.openSystem:focus-visible {
+  color: var(--accent, #c7ff3d);
+}
+
+.systemGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.system {
+  min-width: 0;
+  height: 100%;
+  padding: 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.system:last-child {
+  border-right: 0;
+}
+
+.systemTop {
+  min-height: 38px;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.index {
+  font-family: monospace;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.68rem;
+}
+
+.status {
+  display: flex;
+  gap: 0.45rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.58rem;
+}
+
+.statusDot {
+  width: 5px;
+  height: 5px;
+  margin-top: 0.2rem;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 9px var(--accent);
+}
+
+.visualLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.visual {
+  position: relative;
+  aspect-ratio: 16 / 8.5;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: saturate(0.78);
+  transition:
+    transform 0.6s,
+    filter 0.4s;
+}
+
+.system:hover .projectImage {
+  transform: scale(1.025);
+  filter: saturate(1);
+}
+
+.visualGrid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 32px 32px;
+}
+
+.visualCorners {
+  position: absolute;
+  inset: 0;
+}
+
+.visualCorners i {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: var(--accent);
+  border-style: solid;
+}
+
+.visualCorners i:nth-child(1) {
+  top: 0;
+  left: 0;
+  border-width: 1px 0 0 1px;
+}
+
+.visualCorners i:nth-child(2) {
+  top: 0;
+  right: 0;
+  border-width: 1px 1px 0 0;
+}
+
+.visualCorners i:nth-child(3) {
+  right: 0;
+  bottom: 0;
+  border-width: 0 1px 1px 0;
+}
+
+.visualCorners i:nth-child(4) {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 1px 1px;
+}
+
+.visualReadout {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  left: 12px;
+  display: flex;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.78);
+  font: 0.54rem monospace;
+}
+
+.visualFallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+.visualFallback > span {
+  font: 300 clamp(3rem, 7vw, 7rem) monospace;
+  color: rgba(255, 255, 255, 0.08);
+}
+
+.fallbackCross::before,
+.fallbackCross::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: rgba(199, 255, 61, 0.35);
+  transform: translate(-50%, -50%);
+}
+
+.fallbackCross::before {
+  width: 80px;
+  height: 1px;
+}
+
+.fallbackCross::after {
+  width: 1px;
+  height: 80px;
+}
+
+.systemBody {
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  padding-top: 1rem;
+}
+
+.systemIdentity {
+  min-height: 80px;
+}
+
+.record {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-size: 0.56rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.systemTitle {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.7vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.08;
+}
+
+.systemTitle a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.description {
+  display: -webkit-box;
+  margin: 0.75rem 0 1rem;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 0.74rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+  margin-bottom: 1.2rem;
+}
+
+.technologies span {
+  padding: 0.28rem 0.45rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  font: 0.54rem monospace;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.moreTechnologies {
+  color: var(--accent, #c7ff3d) !important;
+  border-color: rgba(199, 255, 61, 0.28) !important;
+  background: rgba(199, 255, 61, 0.035);
+  cursor: help;
+}
+
+.systemFooter {
+  margin-top: auto;
+  padding-top: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.openSystem {
+  font: 0.62rem monospace;
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+}
+
+.coordinates {
+  font-size: 0.52rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* =========================================================
+   CAROUSEL
+   ========================================================= */
+
+.carouselViewport {
+  width: 100%;
+  overflow: hidden;
+}
+
+.carouselTrack {
+  display: flex;
+  width: 100%;
+  transition: transform 900ms cubic-bezier(0.22, 0.8, 0.3, 1);
+  will-change: transform;
+}
+
+.carouselTrack .system {
+  flex: 0 0 33.333333%;
+  width: 33.333333%;
+  min-width: 33.333333%;
+  max-width: 33.333333%;
+  box-sizing: border-box;
+}
+
+.carouselControls {
+  min-height: 68px;
+  display: grid;
+  grid-template-columns: 70px 1fr 70px;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.carouselArrow {
+  width: 100%;
+  height: 68px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  font: 1rem monospace;
+  cursor: pointer;
+}
+
+.carouselArrow:hover,
+.carouselArrow:focus-visible {
+  color: var(--accent, #c7ff3d);
+  background: rgba(199, 255, 61, 0.025);
+}
+
+.carouselArrow:first-child {
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.carouselArrow:last-child {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.carouselCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.carouselDots {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/*
+ * The BUTTON itself is 44 x 44 for touch accessibility.
+ * The visible dot is drawn with ::before.
+ *
+ * This preserves the existing tiny-dot design while satisfying
+ * Lighthouse's target-size requirement.
+ */
+.carouselDot,
+.carouselDotActive {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.carouselDot::before,
+.carouselDotActive::before {
+  content: "";
+  display: block;
+  height: 5px;
+  transition:
+    width 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.carouselDot::before {
+  width: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.carouselDotActive::before {
+  width: 20px;
+  border-radius: 999px;
+  background: var(--accent, #c7ff3d);
+  box-shadow: 0 0 8px rgba(199, 255, 61, 0.45);
+}
+
+.carouselDot:hover::before,
+.carouselDot:focus-visible::before {
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.carouselDot:focus-visible,
+.carouselDotActive:focus-visible {
+  outline: 1px solid var(--accent, #c7ff3d);
+  outline-offset: -6px;
+}
+
+.carouselCounter {
+  font: 0.55rem monospace;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1050px) {
+  .visual {
+    aspect-ratio: 16 / 9;
+  }
+
+  .systemBody,
+  .systemIdentity {
+    min-height: auto;
+  }
+
+  .carouselTrack .system {
+    flex-basis: 50%;
+    width: 50%;
+    min-width: 50%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 700px) {
+  .sectionHeader {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .system {
+    border-right: 0;
+  }
+
+  .visual {
+    aspect-ratio: 4 / 3;
+  }
+
+  .headerMeta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .carouselTrack .system {
+    flex-basis: 100%;
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .carouselControls {
+    min-height: 58px;
+    grid-template-columns: 58px 1fr 58px;
+  }
+
+  .carouselArrow {
+    height: 58px;
+  }
+
+  .carouselCenter {
+    gap: 0.35rem;
+  }
+
+  .carouselDot,
+  .carouselDotActive {
+    width: 44px;
+    height: 44px;
+    flex-basis: 44px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .carouselTrack,
+  .projectImage {
+    transition: none;
+  }
+}

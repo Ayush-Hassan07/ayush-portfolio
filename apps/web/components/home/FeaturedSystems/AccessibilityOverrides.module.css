@@ -1,0 +1,6 @@
+.index,.record,.coordinates,.carouselCounter{color:rgba(255,255,255,.62)}
+.carouselDot,.carouselDotActive{position:relative;width:32px;height:32px;display:grid;place-items:center;padding:0;border:0;border-radius:0;background:transparent}
+.carouselDot::before,.carouselDotActive::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.carouselDotActive::before{width:8px;height:8px}
+.carouselDot{color:rgba(255,255,255,.62)}
+.carouselDotActive{color:var(--accent,#c7ff3d)}

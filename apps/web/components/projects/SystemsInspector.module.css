@@ -1,23 +1,884 @@
-.systems{width:100%}.consoleHeader{min-height:3.25rem;padding:0 1rem;display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-bottom:0;color:var(--muted);font-size:.47rem;font-weight:700;letter-spacing:.15em}.consoleHeader>div:first-child{display:flex;gap:1rem}.consoleHeader>div:first-child>span{color:var(--accent)}.consoleHeader small{font-size:.47rem}.consoleState{display:flex;gap:.55rem;align-items:center}.consoleState i,.status i{width:.35rem;height:.35rem;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}.workspace{display:grid;grid-template-columns:minmax(27rem,.88fr) minmax(32rem,1.12fr);min-height:44rem;border:1px solid var(--line);background:var(--surface)}.index{border-right:1px solid var(--line)}.systemRow{position:relative;width:100%;min-height:8.6rem;padding:1rem 1.4rem;display:grid;grid-template-columns:2.3rem 3.5rem minmax(0,1fr) minmax(10rem,.65fr) 3.4rem;gap:1rem;align-items:center;border:0;border-bottom:1px solid var(--line);background:transparent;color:inherit;text-align:left;cursor:pointer}.systemRow:before{content:"";position:absolute;inset:0 auto 0 0;width:2px;background:var(--accent);transform:scaleY(0);transition:transform 220ms}.systemRowActive{background:linear-gradient(90deg,rgba(223,255,99,.045),transparent 65%)}.systemRowActive:before{transform:scaleY(1)}.number{color:var(--muted);font-size:.53rem}.systemRowActive .number{color:var(--accent)}.signal{height:1px;background:var(--line)}.signal i{display:block;width:.34rem;height:.34rem;border-radius:50%;background:var(--muted);transform:translate(-50%,-50%)}.systemRowActive .signal{background:rgba(223,255,99,.22)}.systemRowActive .signal i{margin-left:100%;background:var(--accent);box-shadow:0 0 10px var(--accent)}.identity{min-width:0;display:flex;flex-direction:column}.identity small{margin-bottom:.5rem;color:var(--muted);font-size:.42rem}.identity strong{color:var(--text);font-size:clamp(1.1rem,1.55vw,1.55rem);font-weight:500;line-height:1.15}.systemRowActive .identity strong{color:var(--accent)}.stack{display:flex;flex-wrap:wrap;gap:.35rem}.stack>span,.tech{padding:.32rem .42rem;border:1px solid var(--line);color:var(--muted);font-size:.4rem}.rowState{justify-self:end;color:var(--muted);font-size:.39rem;letter-spacing:.12em}.systemRowActive .rowState{color:var(--accent)}.mobileStack{display:none}.inspector{position:sticky;top:0;min-width:0;overflow:hidden;background:radial-gradient(circle at 50% 32%,rgba(223,255,99,.045),transparent 18rem),var(--surface)}.inspectorGrid{position:absolute;inset:0;opacity:.25;background:linear-gradient(rgba(223,255,99,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(223,255,99,.035) 1px,transparent 1px);background-size:42px 42px}.inspectorHeader{position:relative;z-index:2;min-height:4.8rem;padding:1.25rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.inspectorHeader>div{display:flex;flex-direction:column;gap:.35rem}.inspectorHeader span,.inspectorHeader small{font-size:.44rem;font-weight:700;letter-spacing:.14em}.inspectorHeader>div>span{color:var(--accent)}.inspectorHeader small{color:var(--muted)}.status{display:flex;align-items:center;gap:.5rem;color:var(--text-soft);text-transform:uppercase}.visual{position:relative;z-index:2;height:16rem;display:grid;place-items:center;border-bottom:1px solid var(--line);overflow:hidden}.visual:before{content:"";position:absolute;width:76%;height:1px;background:rgba(223,255,99,.1)}.visual:after{content:"";position:absolute;height:76%;width:1px;background:rgba(223,255,99,.1)}.ringOuter,.ringInner{position:absolute;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%)}.ringOuter{width:12.5rem;height:12.5rem;border:1px dashed rgba(223,255,99,.15);animation:orbit 24s linear infinite}.ringInner{width:8.5rem;height:8.5rem;border:1px solid rgba(223,255,99,.18)}.core{position:relative;z-index:3;width:5.5rem;height:5.5rem;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(223,255,99,.36);border-radius:50%;background:rgba(223,255,99,.06)}.core small{color:var(--muted);font-size:.38rem}.core strong{color:var(--accent);font-size:1.45rem;font-weight:500}.coordinate{position:absolute;right:8%;bottom:17%;color:rgba(255,255,255,.23);font-size:.36rem;letter-spacing:.16em}.inspectorBody{position:relative;z-index:3;padding:1.6rem 1.75rem 1.75rem}.recordMeta{display:grid;grid-template-columns:repeat(3,1fr);margin-bottom:1.6rem;border:1px solid var(--line)}.recordMeta span{padding:.75rem;display:flex;flex-direction:column;gap:.3rem;border-right:1px solid var(--line)}.recordMeta span:last-child{border:0}.recordMeta small,.techLabel{color:var(--muted);font-size:.37rem;letter-spacing:.13em}.recordMeta strong{color:var(--text-soft);font-size:.53rem;text-transform:uppercase}.inspectorBody h2{max-width:16ch;margin:0;font-size:clamp(2rem,3.5vw,3.9rem);font-weight:500;line-height:.98;letter-spacing:-.055em}.inspectorBody>p{max-width:44rem;margin:1.2rem 0 0;color:var(--muted);font-size:.72rem;line-height:1.7}.technologyPanel{margin-top:1.5rem}.techLabel{display:block;margin-bottom:.65rem;font-weight:700}.technologyPanel>div{display:flex;flex-wrap:wrap;gap:.4rem}.tech{display:flex;align-items:center;gap:.4rem;color:var(--text-soft);font-size:.43rem}.tech i{width:.24rem;height:.24rem;border-radius:50%;background:var(--accent)}.inspectAction{margin-top:1.7rem;padding-top:1rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--accent-line)}.inspectAction span{display:flex;flex-direction:column;gap:.25rem;font-size:.54rem;font-weight:700;letter-spacing:.12em}.inspectAction small{color:var(--muted);font-size:.35rem}.inspectAction strong{color:var(--accent);font-size:1.25rem}@keyframes orbit{to{transform:translate(-50%,-50%) rotate(360deg)}}@media(max-width:1150px){.workspace{grid-template-columns:minmax(25rem,.9fr) minmax(25rem,1.1fr)}.systemRow{grid-template-columns:2rem 2.5rem minmax(0,1fr) 3rem}.stack{display:none}.mobileStack{display:block;margin-top:.55rem;color:var(--muted);font-size:.39rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}@media(max-width:850px){.workspace{grid-template-columns:1fr}.index{border-right:0}.inspector{position:relative;border-top:1px solid var(--line)}}@media(max-width:560px){.consoleHeader{padding:0 .8rem}.consoleHeader small,.consoleState span{display:none}.systemRow{min-height:6.5rem;grid-template-columns:1.6rem 1.7rem minmax(0,1fr);gap:.7rem;padding:.8rem}.rowState{display:none}.identity strong{font-size:1rem}.inspectorHeader,.inspectorBody{padding-inline:1rem}.visual{height:14rem}.recordMeta span{padding:.6rem}}
-.recordMeta{min-height:5.5rem;margin-bottom:1.8rem;background:rgba(223,255,99,.015)}.recordMeta span{padding:1.1rem 1rem;justify-content:center;gap:.55rem}.recordMeta small{font-size:.48rem;font-weight:700;letter-spacing:.15em}.recordMeta strong{color:var(--text);font-size:.9rem;font-weight:650;letter-spacing:.04em}
-.visual{background:radial-gradient(circle at 50% 50%,rgba(223,255,99,.07),transparent 11rem),rgba(223,255,99,.012)}.visual:before,.visual:after{background:rgba(223,255,99,.24)}.ringOuter{border-color:rgba(223,255,99,.32);box-shadow:0 0 24px rgba(223,255,99,.04)}.ringInner{border-color:rgba(223,255,99,.35)}.core{border-color:rgba(223,255,99,.7);background:radial-gradient(circle,rgba(223,255,99,.18),rgba(223,255,99,.035) 67%);box-shadow:0 0 0 1.2rem rgba(223,255,99,.035),0 0 32px rgba(223,255,99,.1)}.core small{color:var(--text-soft);font-size:.44rem}.core strong{font-size:1.7rem;text-shadow:0 0 12px rgba(223,255,99,.35)}.coordinate{color:rgba(243,246,237,.5);font-size:.42rem}
-.stack>span{padding:.42rem .58rem;border-color:rgba(223,255,99,.24);background:rgba(223,255,99,.025);color:rgba(243,246,237,.78);font-size:.48rem;font-weight:650;letter-spacing:.04em}.rowState{color:rgba(243,246,237,.7);font-size:.48rem;font-weight:750;letter-spacing:.1em}.systemRowActive .rowState{color:var(--accent)}.systemRowActive .stack>span{border-color:rgba(223,255,99,.38);color:var(--text)}
-.techLabel{color:rgba(243,246,237,.72);font-size:.48rem;font-weight:750;letter-spacing:.14em}.tech{padding:.48rem .65rem;border-color:rgba(223,255,99,.28);background:rgba(223,255,99,.025);color:rgba(244,246,239,.86);font-size:.5rem;font-weight:650}.tech i{width:.3rem;height:.3rem;box-shadow:0 0 7px rgba(223,255,99,.7)}.inspectAction{padding-top:1.2rem;border-top-color:rgba(223,255,99,.2)}.inspectAction span{color:var(--text);font-size:.62rem;letter-spacing:.14em}.inspectAction small{color:rgba(243,246,237,.64);font-size:.42rem;letter-spacing:.14em}.inspectAction strong{font-size:1.4rem;text-shadow:0 0 10px rgba(223,255,99,.35)}
-.status{color:rgba(243,246,237,.72);font-weight:700;letter-spacing:.08em}.status i{background:rgba(243,246,237,.55);box-shadow:0 0 8px rgba(243,246,237,.25)}.systemRowActive .status,.systemRowActive .rowState{color:var(--accent)}.systemRowActive .status i{background:var(--accent);box-shadow:0 0 10px rgba(223,255,99,.7)}
-.statusongoing{color:var(--accent)!important}.statusongoing i{background:var(--accent)!important;box-shadow:0 0 12px rgba(223,255,99,.8)!important}.statusfinished{color:rgba(243,246,237,.62)!important}.statusfinished i{background:rgba(243,246,237,.42)!important;box-shadow:0 0 7px rgba(243,246,237,.2)!important}
-/* FINAL RESPONSIVE SYSTEMS INDEX: archive-only through 1023px */
-@media(max-width:1023px){.workspace{grid-template-columns:1fr!important;min-height:0!important}.index{width:100%;min-width:0;border-right:0}.inspector{display:none!important}.systemRow{width:100%;min-width:0;grid-template-columns:2.1rem 2.8rem minmax(0,1fr) auto;gap:.85rem;padding:1rem 1.15rem}.stack{display:none}.mobileStack{display:block;margin-top:.5rem;color:rgba(243,246,237,.38);font-size:.4rem;line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rowState{display:block;justify-self:end;font-size:.4rem}}
-@media(max-width:767px){.consoleHeader{min-height:4.4rem;padding:0 1rem}.consoleHeader>div:first-child{flex-direction:column;gap:.3rem}.consoleHeader small{display:block;color:rgba(243,246,237,.38);font-size:.4rem}.consoleState{font-size:.42rem}.systemRow{min-height:7.2rem;grid-template-columns:1.8rem 2rem minmax(0,1fr);gap:.65rem;padding:.9rem 1rem}.rowState{display:none}.identity small{margin-bottom:.4rem;font-size:.4rem}.identity strong{font-size:1.05rem;line-height:1.15}.mobileStack{max-width:100%;font-size:.38rem}.signal{width:100%}}
-@media(max-width:479px){.consoleHeader{min-height:4rem;padding-inline:.8rem}.consoleHeader>div:first-child{gap:.25rem}.consoleHeader>div:first-child>span{font-size:.43rem}.consoleHeader small{font-size:.36rem}.consoleState{gap:.4rem;font-size:.37rem}.systemRow{min-height:6.7rem;grid-template-columns:1.4rem 1.6rem minmax(0,1fr);gap:.55rem;padding:.8rem}.number{font-size:.45rem}.identity strong{font-size:.96rem}.identity small{font-size:.36rem}.mobileStack{margin-top:.42rem;font-size:.34rem}.signal i{width:.3rem;height:.3rem}}
+.systems {
+  width: 100%;
+}
 
-/* Compact layout for the sidebar-constrained 1440px view. */
-@media (min-width: 1151px) and (max-width: 1500px) {
+/* =========================================================
+   CONSOLE HEADER
+   ========================================================= */
+
+.consoleHeader {
+  min-height: 3.25rem;
+  padding: 0 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid var(--line);
+  border-bottom: 0;
+
+  color: var(--muted);
+
+  font-size: 0.47rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.consoleHeader > div:first-child {
+  display: flex;
+  gap: 1rem;
+}
+
+.consoleHeader > div:first-child > span {
+  color: var(--accent);
+}
+
+.consoleHeader small {
+  font-size: 0.47rem;
+}
+
+.consoleState {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.consoleState i,
+.status i {
+  width: 0.35rem;
+  height: 0.35rem;
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  box-shadow:
+    0 0 10px var(--accent);
+}
+
+/* =========================================================
+   WORKSPACE
+   ========================================================= */
+
+.workspace {
+  display: grid;
+
+  grid-template-columns:
+    minmax(27rem, 0.88fr)
+    minmax(32rem, 1.12fr);
+
+  min-height: 44rem;
+
+  border: 1px solid var(--line);
+
+  background: var(--surface);
+}
+
+.index {
+  border-right: 1px solid var(--line);
+}
+
+/* =========================================================
+   SYSTEM ROW
+   ========================================================= */
+
+.systemRow {
+  position: relative;
+
+  width: 100%;
+  min-height: 8.6rem;
+
+  padding: 1rem 1.4rem;
+
+  display: grid;
+
+  grid-template-columns:
+    2.3rem
+    3.5rem
+    minmax(0, 1fr)
+    minmax(10rem, 0.65fr)
+    3.4rem;
+
+  gap: 1rem;
+
+  align-items: center;
+
+  border: 0;
+  border-bottom: 1px solid var(--line);
+
+  background: transparent;
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.systemRow::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0 auto 0 0;
+
+  width: 2px;
+
+  background: var(--accent);
+
+  transform: scaleY(0);
+
+  transition:
+    transform 220ms;
+}
+
+.systemRowActive {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(223, 255, 99, 0.045),
+      transparent 65%
+    );
+}
+
+.systemRowActive::before {
+  transform: scaleY(1);
+}
+
+.number {
+  color: var(--muted);
+
+  font-size: 0.53rem;
+}
+
+.systemRowActive .number {
+  color: var(--accent);
+}
+
+.signal {
+  height: 1px;
+
+  background: var(--line);
+}
+
+.signal i {
+  display: block;
+
+  width: 0.34rem;
+  height: 0.34rem;
+
+  border-radius: 50%;
+
+  background: var(--muted);
+
+  transform:
+    translate(-50%, -50%);
+}
+
+.systemRowActive .signal {
+  background:
+    rgba(223, 255, 99, 0.22);
+}
+
+.systemRowActive .signal i {
+  margin-left: 100%;
+
+  background: var(--accent);
+
+  box-shadow:
+    0 0 10px var(--accent);
+}
+
+.identity {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.identity small {
+  margin-bottom: 0.5rem;
+
+  color: var(--muted);
+
+  font-size: 0.42rem;
+}
+
+.identity strong {
+  color: var(--text);
+
+  font-size:
+    clamp(
+      1.1rem,
+      1.55vw,
+      1.55rem
+    );
+
+  font-weight: 500;
+
+  line-height: 1.15;
+}
+
+.systemRowActive .identity strong {
+  color: var(--accent);
+}
+
+/* =========================================================
+   TECHNOLOGY STACK
+   ========================================================= */
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 0.35rem;
+}
+
+.stack > span,
+.tech {
+  padding:
+    0.32rem
+    0.42rem;
+
+  border:
+    1px solid
+    var(--line);
+
+  color: var(--muted);
+
+  font-size: 0.4rem;
+}
+
+.rowState {
+  justify-self: end;
+
+  color:
+    rgba(243, 246, 237, 0.7);
+
+  font-size: 0.48rem;
+  font-weight: 750;
+
+  letter-spacing: 0.1em;
+}
+
+.systemRowActive .rowState {
+  color: var(--accent);
+}
+
+/*
+  IMPORTANT ACCESSIBILITY FIX
+
+  This text is shown instead of the technology chips on
+  narrower desktop, tablet and mobile layouts.
+
+  Previous opacity values around .38 were below Lighthouse's
+  required contrast ratio on var(--surface).
+*/
+.mobileStack {
+  display: none;
+
+  color:
+    rgba(243, 246, 237, 0.72);
+}
+
+/* =========================================================
+   INSPECTOR
+   ========================================================= */
+
+.inspector {
+  position: sticky;
+
+  top: 0;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 32%,
+      rgba(223, 255, 99, 0.045),
+      transparent 18rem
+    ),
+    var(--surface);
+}
+
+.inspectorGrid {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.25;
+
+  background:
+    linear-gradient(
+      rgba(223, 255, 99, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(223, 255, 99, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    42px
+    42px;
+}
+
+.inspectorHeader {
+  position: relative;
+  z-index: 2;
+
+  min-height: 4.8rem;
+
+  padding:
+    1.25rem
+    1.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom:
+    1px solid
+    var(--line);
+}
+
+.inspectorHeader > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.35rem;
+}
+
+.inspectorHeader span,
+.inspectorHeader small {
+  font-size: 0.44rem;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.inspectorHeader > div > span {
+  color: var(--accent);
+}
+
+.inspectorHeader small {
+  color: var(--muted);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+
+  gap: 0.5rem;
+
+  color:
+    rgba(243, 246, 237, 0.72);
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   PROJECT VISUAL
+   ========================================================= */
+
+.visual {
+  position: relative;
+  z-index: 2;
+
+  height: 16rem;
+
+  display: grid;
+  place-items: center;
+
+  border-bottom:
+    1px solid
+    var(--line);
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(223, 255, 99, 0.07),
+      transparent 11rem
+    ),
+    rgba(223, 255, 99, 0.012);
+}
+
+.visual::before {
+  content: "";
+
+  position: absolute;
+
+  width: 76%;
+  height: 1px;
+
+  background:
+    rgba(223, 255, 99, 0.24);
+}
+
+.visual::after {
+  content: "";
+
+  position: absolute;
+
+  height: 76%;
+  width: 1px;
+
+  background:
+    rgba(223, 255, 99, 0.24);
+}
+
+.ringOuter,
+.ringInner {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  border-radius: 50%;
+
+  transform:
+    translate(-50%, -50%);
+}
+
+.ringOuter {
+  width: 12.5rem;
+  height: 12.5rem;
+
+  border:
+    1px dashed
+    rgba(223, 255, 99, 0.32);
+
+  box-shadow:
+    0 0 24px
+    rgba(223, 255, 99, 0.04);
+
+  animation:
+    orbit
+    24s
+    linear
+    infinite;
+}
+
+.ringInner {
+  width: 8.5rem;
+  height: 8.5rem;
+
+  border:
+    1px solid
+    rgba(223, 255, 99, 0.35);
+}
+
+.core {
+  position: relative;
+  z-index: 3;
+
+  width: 5.5rem;
+  height: 5.5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(223, 255, 99, 0.7);
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(223, 255, 99, 0.18),
+      rgba(223, 255, 99, 0.035) 67%
+    );
+
+  box-shadow:
+    0 0 0 1.2rem
+      rgba(223, 255, 99, 0.035),
+    0 0 32px
+      rgba(223, 255, 99, 0.1);
+}
+
+.core small {
+  color: var(--text-soft);
+
+  font-size: 0.44rem;
+}
+
+.core strong {
+  color: var(--accent);
+
+  font-size: 1.7rem;
+  font-weight: 500;
+
+  text-shadow:
+    0 0 12px
+    rgba(223, 255, 99, 0.35);
+}
+
+.coordinate {
+  position: absolute;
+
+  right: 8%;
+  bottom: 17%;
+
+  color:
+    rgba(243, 246, 237, 0.5);
+
+  font-size: 0.42rem;
+
+  letter-spacing: 0.16em;
+}
+
+/* =========================================================
+   INSPECTOR BODY
+   ========================================================= */
+
+.inspectorBody {
+  position: relative;
+  z-index: 3;
+
+  padding:
+    1.6rem
+    1.75rem
+    1.75rem;
+}
+
+.recordMeta {
+  min-height: 5.5rem;
+
+  margin-bottom: 1.8rem;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  border:
+    1px solid
+    var(--line);
+
+  background:
+    rgba(223, 255, 99, 0.015);
+}
+
+.recordMeta span {
+  padding:
+    1.1rem
+    1rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  gap: 0.55rem;
+
+  border-right:
+    1px solid
+    var(--line);
+}
+
+.recordMeta span:last-child {
+  border: 0;
+}
+
+.recordMeta small,
+.techLabel {
+  color: var(--muted);
+
+  font-size: 0.37rem;
+
+  letter-spacing: 0.13em;
+}
+
+.recordMeta small {
+  font-size: 0.48rem;
+  font-weight: 700;
+
+  letter-spacing: 0.15em;
+}
+
+.recordMeta strong {
+  color: var(--text);
+
+  font-size: 0.9rem;
+  font-weight: 650;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+.inspectorBody h2 {
+  max-width: 16ch;
+
+  margin: 0;
+
+  font-size:
+    clamp(
+      2rem,
+      3.5vw,
+      3.9rem
+    );
+
+  font-weight: 500;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+}
+
+.inspectorBody > p {
+  max-width: 44rem;
+
+  margin:
+    1.2rem
+    0
+    0;
+
+  color: var(--muted);
+
+  font-size: 0.72rem;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   TECHNOLOGY PANEL
+   ========================================================= */
+
+.technologyPanel {
+  margin-top: 1.5rem;
+}
+
+.techLabel {
+  display: block;
+
+  margin-bottom: 0.65rem;
+
+  color:
+    rgba(243, 246, 237, 0.72);
+
+  font-size: 0.48rem;
+  font-weight: 750;
+
+  letter-spacing: 0.14em;
+}
+
+.technologyPanel > div {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 0.4rem;
+}
+
+.tech {
+  padding:
+    0.48rem
+    0.65rem;
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.4rem;
+
+  border-color:
+    rgba(223, 255, 99, 0.28);
+
+  background:
+    rgba(223, 255, 99, 0.025);
+
+  color:
+    rgba(244, 246, 239, 0.86);
+
+  font-size: 0.5rem;
+  font-weight: 650;
+}
+
+.tech i {
+  width: 0.3rem;
+  height: 0.3rem;
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  box-shadow:
+    0 0 7px
+    rgba(223, 255, 99, 0.7);
+}
+
+/* =========================================================
+   INSPECT ACTION
+   ========================================================= */
+
+.inspectAction {
+  margin-top: 1.7rem;
+
+  padding-top: 1.2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-top:
+    1px solid
+    rgba(223, 255, 99, 0.2);
+}
+
+.inspectAction span {
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.25rem;
+
+  color: var(--text);
+
+  font-size: 0.62rem;
+  font-weight: 700;
+
+  letter-spacing: 0.14em;
+}
+
+.inspectAction small {
+  color:
+    rgba(243, 246, 237, 0.64);
+
+  font-size: 0.42rem;
+
+  letter-spacing: 0.14em;
+}
+
+.inspectAction strong {
+  color: var(--accent);
+
+  font-size: 1.4rem;
+
+  text-shadow:
+    0 0 10px
+    rgba(223, 255, 99, 0.35);
+}
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.status i {
+  background:
+    rgba(243, 246, 237, 0.55);
+
+  box-shadow:
+    0 0 8px
+    rgba(243, 246, 237, 0.25);
+}
+
+.systemRowActive .status,
+.systemRowActive .rowState {
+  color: var(--accent);
+}
+
+.systemRowActive .status i {
+  background: var(--accent);
+
+  box-shadow:
+    0 0 10px
+    rgba(223, 255, 99, 0.7);
+}
+
+.statusongoing {
+  color:
+    var(--accent) !important;
+}
+
+.statusongoing i {
+  background:
+    var(--accent) !important;
+
+  box-shadow:
+    0 0 12px
+    rgba(223, 255, 99, 0.8) !important;
+}
+
+.statusfinished {
+  color:
+    rgba(243, 246, 237, 0.62) !important;
+}
+
+.statusfinished i {
+  background:
+    rgba(243, 246, 237, 0.42) !important;
+
+  box-shadow:
+    0 0 7px
+    rgba(243, 246, 237, 0.2) !important;
+}
+
+.systemRowActive .stack > span {
+  border-color:
+    rgba(223, 255, 99, 0.38);
+
+  color: var(--text);
+}
+
+.stack > span {
+  padding:
+    0.42rem
+    0.58rem;
+
+  border-color:
+    rgba(223, 255, 99, 0.24);
+
+  background:
+    rgba(223, 255, 99, 0.025);
+
+  color:
+    rgba(243, 246, 237, 0.78);
+
+  font-size: 0.48rem;
+  font-weight: 650;
+
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================
+   ANIMATION
+   ========================================================= */
+
+@keyframes orbit {
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(360deg);
+  }
+}
+
+/* =========================================================
+   <= 1150PX
+   ========================================================= */
+
+@media (max-width: 1150px) {
   .workspace {
-    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    grid-template-columns:
+      minmax(25rem, 0.9fr)
+      minmax(25rem, 1.1fr);
   }
 
   .systemRow {
-    grid-template-columns: 2rem 2.5rem minmax(0, 1fr) 3rem;
+    grid-template-columns:
+      2rem
+      2.5rem
+      minmax(0, 1fr)
+      3rem;
   }
 
   .stack {
@@ -26,12 +887,367 @@
 
   .mobileStack {
     display: block;
-    margin-top: .55rem;
-    color: var(--muted);
-    font-size: .39rem;
+
+    margin-top: 0.55rem;
+
+    color:
+      rgba(243, 246, 237, 0.72);
+
+    font-size: 0.39rem;
+
     line-height: 1.4;
+
+    white-space: nowrap;
+
     overflow: hidden;
+
     text-overflow: ellipsis;
+  }
+}
+
+/* =========================================================
+   <= 850PX
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .index {
+    border-right: 0;
+  }
+
+  .inspector {
+    position: relative;
+
+    border-top:
+      1px solid
+      var(--line);
+  }
+}
+
+/* =========================================================
+   <= 560PX
+   ========================================================= */
+
+@media (max-width: 560px) {
+  .consoleHeader {
+    padding:
+      0
+      0.8rem;
+  }
+
+  .consoleHeader small,
+  .consoleState span {
+    display: none;
+  }
+
+  .systemRow {
+    min-height: 6.5rem;
+
+    grid-template-columns:
+      1.6rem
+      1.7rem
+      minmax(0, 1fr);
+
+    gap: 0.7rem;
+
+    padding: 0.8rem;
+  }
+
+  .rowState {
+    display: none;
+  }
+
+  .identity strong {
+    font-size: 1rem;
+  }
+
+  .inspectorHeader,
+  .inspectorBody {
+    padding-inline: 1rem;
+  }
+
+  .visual {
+    height: 14rem;
+  }
+
+  .recordMeta span {
+    padding: 0.6rem;
+  }
+}
+
+/* =========================================================
+   ARCHIVE-ONLY <= 1023PX
+   ========================================================= */
+
+@media (max-width: 1023px) {
+  .workspace {
+    grid-template-columns:
+      1fr !important;
+
+    min-height:
+      0 !important;
+  }
+
+  .index {
+    width: 100%;
+    min-width: 0;
+
+    border-right: 0;
+  }
+
+  .inspector {
+    display: none !important;
+  }
+
+  .systemRow {
+    width: 100%;
+    min-width: 0;
+
+    grid-template-columns:
+      2.1rem
+      2.8rem
+      minmax(0, 1fr)
+      auto;
+
+    gap: 0.85rem;
+
+    padding:
+      1rem
+      1.15rem;
+  }
+
+  .stack {
+    display: none;
+  }
+
+  .mobileStack {
+    display: block;
+
+    margin-top: 0.5rem;
+
+    /*
+      Raised from 0.38 to 0.72 specifically for WCAG
+      text contrast against the project workspace.
+    */
+    color:
+      rgba(243, 246, 237, 0.72);
+
+    font-size: 0.4rem;
+
+    line-height: 1.4;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+  }
+
+  .rowState {
+    display: block;
+
+    justify-self: end;
+
+    font-size: 0.4rem;
+  }
+}
+
+/* =========================================================
+   <= 767PX
+   ========================================================= */
+
+@media (max-width: 767px) {
+  .consoleHeader {
+    min-height: 4.4rem;
+
+    padding:
+      0
+      1rem;
+  }
+
+  .consoleHeader > div:first-child {
+    flex-direction: column;
+
+    gap: 0.3rem;
+  }
+
+  .consoleHeader small {
+    display: block;
+
+    color:
+      rgba(243, 246, 237, 0.68);
+
+    font-size: 0.4rem;
+  }
+
+  .consoleState {
+    font-size: 0.42rem;
+  }
+
+  .systemRow {
+    min-height: 7.2rem;
+
+    grid-template-columns:
+      1.8rem
+      2rem
+      minmax(0, 1fr);
+
+    gap: 0.65rem;
+
+    padding:
+      0.9rem
+      1rem;
+  }
+
+  .rowState {
+    display: none;
+  }
+
+  .identity small {
+    margin-bottom: 0.4rem;
+
+    font-size: 0.4rem;
+  }
+
+  .identity strong {
+    font-size: 1.05rem;
+
+    line-height: 1.15;
+  }
+
+  .mobileStack {
+    max-width: 100%;
+
+    color:
+      rgba(243, 246, 237, 0.72);
+
+    font-size: 0.38rem;
+  }
+
+  .signal {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   <= 479PX
+   ========================================================= */
+
+@media (max-width: 479px) {
+  .consoleHeader {
+    min-height: 4rem;
+
+    padding-inline: 0.8rem;
+  }
+
+  .consoleHeader > div:first-child {
+    gap: 0.25rem;
+  }
+
+  .consoleHeader > div:first-child > span {
+    font-size: 0.43rem;
+  }
+
+  .consoleHeader small {
+    color:
+      rgba(243, 246, 237, 0.68);
+
+    font-size: 0.36rem;
+  }
+
+  .consoleState {
+    gap: 0.4rem;
+
+    font-size: 0.37rem;
+  }
+
+  .systemRow {
+    min-height: 6.7rem;
+
+    grid-template-columns:
+      1.4rem
+      1.6rem
+      minmax(0, 1fr);
+
+    gap: 0.55rem;
+
+    padding: 0.8rem;
+  }
+
+  .number {
+    font-size: 0.45rem;
+  }
+
+  .identity strong {
+    font-size: 0.96rem;
+  }
+
+  .identity small {
+    font-size: 0.36rem;
+  }
+
+  .mobileStack {
+    margin-top: 0.42rem;
+
+    color:
+      rgba(243, 246, 237, 0.72);
+
+    font-size: 0.34rem;
+  }
+
+  .signal i {
+    width: 0.3rem;
+    height: 0.3rem;
+  }
+}
+
+/* =========================================================
+   SIDEBAR-CONSTRAINED DESKTOP
+   1151PX - 1500PX
+   ========================================================= */
+
+@media (min-width: 1151px) and (max-width: 1500px) {
+  .workspace {
+    grid-template-columns:
+      minmax(0, 0.9fr)
+      minmax(0, 1.1fr);
+  }
+
+  .systemRow {
+    grid-template-columns:
+      2rem
+      2.5rem
+      minmax(0, 1fr)
+      3rem;
+  }
+
+  .stack {
+    display: none;
+  }
+
+  .mobileStack {
+    display: block;
+
+    margin-top: 0.55rem;
+
+    /*
+      This is the desktop Lighthouse failure you showed.
+      Do not use var(--muted) here.
+    */
+    color:
+      rgba(243, 246, 237, 0.72);
+
+    font-size: 0.39rem;
+
+    line-height: 1.4;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
     white-space: nowrap;
   }
 }
