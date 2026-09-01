@@ -9,6 +9,7 @@ export class PublicMediaController {
   async image(@Param('key') key: string, @Res() response: Response) {
     if (!/^[a-f0-9-]+\.webp$/i.test(key)) return response.status(400).end();
     try {
+      response.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
       return response
         .type('image/webp')
         .send(await readFile(join(process.cwd(), 'storage', 'media', key)));
