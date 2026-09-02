@@ -132,6 +132,8 @@
   grid-template-columns: 0.6fr 1.7fr 0.8fr;
   margin-bottom: 1.2rem;
   border-block: 1px solid var(--line);
+  background: rgba(243, 246, 237, 0.035);
+  border: 1px solid rgba(223, 255, 99, 0.22);
 }
 
 .metadata > span {
@@ -142,7 +144,7 @@
   justify-content: center;
   gap: 0.35rem;
   padding: 0.65rem;
-  border-right: 1px solid var(--line);
+  border-right: 1px solid rgba(223, 255, 99, 0.18);
 }
 
 .metadata > span:last-child {
@@ -152,14 +154,14 @@
 .metadata small,
 .artifacts small,
 .signalStatus small {
-  color: var(--muted);
+  color: rgba(243, 246, 237, 0.72);
   font-size: 0.34rem;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
 
 .metadata strong {
-  color: var(--text-soft);
+  color: var(--text);
   font-size: 0.46rem;
   line-height: 1.45;
   text-transform: uppercase;
@@ -603,7 +605,7 @@
     min-width: 0;
     min-height: 3.25rem;
     padding: 0.55rem 0.45rem;
-    border-right: 1px solid var(--line);
+    border-right: 1px solid rgba(223, 255, 99, 0.18);
     border-bottom: 0;
   }
 
@@ -753,6 +755,7 @@
   .metadata > span {
     min-height: 3rem;
     padding: 0.45rem 0.35rem;
+    border-right: 1px solid rgba(223, 255, 99, 0.18);
   }
 
   .metadata small,
