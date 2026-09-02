@@ -414,7 +414,7 @@ export default function StatisticsPage() {
 
       {loading && !statistics ? (
         <div className="statistics-loading">
-          Reading analyticsâ€¦
+          Reading analytics...
         </div>
       ) : statistics ? (
         <>
