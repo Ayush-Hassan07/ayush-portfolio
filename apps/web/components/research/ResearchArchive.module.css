@@ -155,14 +155,14 @@
 .artifacts small,
 .signalStatus small {
   color: rgba(243, 246, 237, 0.72);
-  font-size: 0.34rem;
+  font-size: 0.42rem;
   font-weight: 700;
   letter-spacing: 0.12em;
 }
 
 .metadata strong {
   color: var(--text);
-  font-size: 0.46rem;
+  font-size: 0.58rem;
   line-height: 1.45;
   text-transform: uppercase;
   overflow-wrap: anywhere;
@@ -216,7 +216,7 @@
   display: block;
   margin-top: 0.35rem;
   color: var(--text);
-  font-size: 0.5rem;
+  font-size: 0.62rem;
   letter-spacing: 0.08em;
 }
 
@@ -610,7 +610,7 @@
   }
 
   .metadata strong {
-    font-size: 0.4rem;
+    font-size: 0.48rem;
     line-height: 1.4;
   }
 
@@ -761,11 +761,11 @@
   .metadata small,
   .artifacts small,
   .signalStatus small {
-    font-size: 0.29rem;
+    font-size: 0.36rem;
   }
 
   .metadata strong {
-    font-size: 0.36rem;
+    font-size: 0.44rem;
   }
 
   .content h2 {
@@ -784,7 +784,7 @@
   }
 
   .artifacts strong {
-    font-size: 0.45rem;
+    font-size: 0.54rem;
   }
 
   .signalStatus > span {
