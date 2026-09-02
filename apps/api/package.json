@@ -23,6 +23,7 @@
         "admin:bootstrap": "ts-node -r tsconfig-paths/register src/auth/bootstrap-admin.ts"
     },
     "dependencies": {
+        "@aws-sdk/client-s3": "^3.1123.0",
         "@nestjs/common": "^11.0.1",
         "@nestjs/core": "^11.0.1",
         "@nestjs/platform-express": "^11.0.1",

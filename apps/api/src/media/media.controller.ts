@@ -10,10 +10,9 @@ import {
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
+
 import { FileInterceptor } from "@nestjs/platform-express";
 import type { Response } from "express";
-import { readFile, unlink } from "node:fs/promises";
-import { join } from "node:path";
 
 import { AdminAuthGuard } from "../auth/admin-auth.guard";
 import { PrismaService } from "../prisma/prisma.service";
@@ -46,15 +45,20 @@ export class MediaController {
     }
 
     try {
-      const file = await readFile(
-        join(process.cwd(), "storage", "media", key),
-      );
+      const file =
+        await this.media.getImage(key);
+
+      if (!file) {
+        return response.status(404).end();
+      }
 
       return response
         .type("image/webp")
         .set({
-          "Cache-Control": "private, max-age=3600",
-          "X-Content-Type-Options": "nosniff",
+          "Cache-Control":
+            "private, max-age=3600",
+          "X-Content-Type-Options":
+            "nosniff",
         })
         .send(file);
     } catch {
@@ -71,7 +75,8 @@ export class MediaController {
     }),
   )
   async upload(
-    @UploadedFile() file: { buffer: Buffer } | undefined,
+    @UploadedFile()
+    file: { buffer: Buffer } | undefined,
   ) {
     if (!file?.buffer) {
       throw new BadRequestException(
@@ -79,28 +84,44 @@ export class MediaController {
       );
     }
 
-    const result = await this.media.optimizeImage(file.buffer);
+    const result =
+      await this.media.optimizeImage(
+        file.buffer,
+      );
 
-    return this.prisma.media_asset.create({
-      data: {
-        storage_key: result.key,
-        mime_type: "image/webp",
-        byte_size: result.bytes,
-      },
-    });
+    try {
+      return await this.prisma.media_asset.create({
+        data: {
+          storage_key: result.key,
+          mime_type: "image/webp",
+          byte_size: result.bytes,
+        },
+      });
+    } catch (error) {
+      await this.media
+        .deleteImage(result.key)
+        .catch(() => undefined);
+
+      throw error;
+    }
   }
 
   @Delete(":key")
-  async remove(@Param("key") key: string) {
+  async remove(
+    @Param("key") key: string,
+  ) {
     if (!/^[a-f0-9-]+\.webp$/i.test(key)) {
-      throw new BadRequestException("Invalid media key");
+      throw new BadRequestException(
+        "Invalid media key",
+      );
     }
 
-    const asset = await this.prisma.media_asset.findUnique({
-      where: {
-        storage_key: key,
-      },
-    });
+    const asset =
+      await this.prisma.media_asset.findUnique({
+        where: {
+          storage_key: key,
+        },
+      });
 
     if (!asset) {
       throw new BadRequestException(
@@ -108,13 +129,14 @@ export class MediaController {
       );
     }
 
-    const used = await this.prisma.project.count({
-      where: {
-        image_url: {
-          endsWith: key,
+    const used =
+      await this.prisma.project.count({
+        where: {
+          image_url: {
+            endsWith: key,
+          },
         },
-      },
-    });
+      });
 
     if (used) {
       throw new BadRequestException(
@@ -122,15 +144,13 @@ export class MediaController {
       );
     }
 
+    await this.media.deleteImage(key);
+
     await this.prisma.media_asset.delete({
       where: {
         storage_key: key,
       },
     });
-
-    await unlink(
-      join(process.cwd(), "storage", "media", key),
-    ).catch(() => undefined);
 
     return {
       deleted: true,
