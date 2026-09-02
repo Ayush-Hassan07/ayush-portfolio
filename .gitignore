@@ -54,3 +54,5 @@ apps/api/.windsurf/
 apps/api/skills-lock.json
 
 .pnpm-store/
+
+database-backups/
