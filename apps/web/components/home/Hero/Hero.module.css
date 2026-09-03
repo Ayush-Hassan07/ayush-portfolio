@@ -2510,3 +2510,15 @@
     opacity: 0;
   }
 }
+
+@media (max-width: 650px) {
+  .systemExit {
+    color: rgba(243, 246, 237, 0.72);
+    font-size: 0.46rem;
+    letter-spacing: 0.08em;
+  }
+
+  .systemExit small {
+    color: rgba(243, 246, 237, 0.58);
+  }
+}

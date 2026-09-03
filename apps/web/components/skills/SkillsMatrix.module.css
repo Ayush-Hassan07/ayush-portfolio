@@ -16,3 +16,8 @@
   .filterLabel { white-space: nowrap; flex: 0 0 auto; }
 }
 @media(max-width:700px){.searchTop{grid-template-columns:minmax(0,1fr) auto!important}.resultReadout{min-width:5.4rem!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:.45rem}.filterRow{display:grid!important;grid-template-columns:auto minmax(0,1fr);align-items:center!important;gap:.55rem!important}.filterSelect{width:100%;min-height:2.35rem;display:block;padding:0 .65rem;border:1px solid var(--line);background:var(--background);color:var(--text);font:.42rem monospace;letter-spacing:.07em;text-transform:uppercase}.filters{display:none!important}.resetFilters{grid-column:2;margin-left:0!important}.filterLabel{white-space:nowrap}.resultReadout>span{font-size:1.15rem!important}}
+
+.filterLabel{font-size:.52rem;color:rgba(243,246,237,.82)}
+.filter,.filterActive{min-height:2.2rem;padding:.48rem .72rem;font-size:.5rem;color:rgba(243,246,237,.82)}
+.filterActive{color:#050807!important}
+@media(max-width:700px){.filterLabel{font-size:.44rem}.filterSelect{font-size:.44rem!important}.filter,.filterActive{font-size:.42rem;min-height:2.15rem}}
