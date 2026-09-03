@@ -1906,11 +1906,22 @@
 
   gap: 1.5rem;
 
-  color: var(--muted-dim);
+  color: rgba(243, 246, 237, 0.72);
 
-  font-size: 0.32rem;
+  font-size: 0.48rem;
 
   letter-spacing: 0.11em;
+}
+
+.systemExit > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.systemExit small {
+  color: rgba(243, 246, 237, 0.58);
+  font-size: 0.42rem;
 }
 
 .systemExit i {
