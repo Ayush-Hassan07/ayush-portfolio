@@ -8,7 +8,7 @@ import AnalyticsTracker from "@/components/analytics/AnalyticsTracker";
 
 export const metadata: Metadata = {
   title: {
-    default: "Ayush Hassan Raiyan — Software Engineer",
+    default: "Ayush Hassan Raiyan | Software & AI/ML Engineer",
     template: "%s | Ayush Hassan Raiyan",
   },
 
