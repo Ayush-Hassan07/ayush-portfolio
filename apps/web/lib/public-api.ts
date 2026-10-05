@@ -68,7 +68,7 @@ export async function getPublicProjects() {
 }
 export async function getPublicProject(slug: string) { return request<PublicProject>(`projects/${encodeURIComponent(slug)}`); }
 export async function getPublicPublications() { return (await request<PublicPublication[]>('publications')) ?? []; }
-export async function getPublicSkills() { return (await request<PublicSkill[]>('skills', { fresh: true })) ?? []; }
+export async function getPublicSkills() { return (await request<PublicSkill[]>('skills')) ?? []; }
 export async function getPublicCertifications() { return (await request<PublicCertification[]>('certifications')) ?? []; }
 export type PublicEducation = { id: string; institution: string; degree: string; field: string | null; start_date: string; end_date: string | null; description: string | null; result: string | null; institution_url: string | null };
 export type PublicExperience = { id: string; company: string; position: string; location: string | null; start_date: string; end_date: string | null; description: string; company_url: string | null };
