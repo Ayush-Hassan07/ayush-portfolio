@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import styles from "./SystemsInspector.module.css";
@@ -20,6 +21,7 @@ export default function SystemsInspector({
 }: {
   projects: ProjectRecord[];
 }) {
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const active = projects[activeIndex];
@@ -54,7 +56,7 @@ export default function SystemsInspector({
               onFocus={() => setActiveIndex(index)}
               onClick={() => {
                 setActiveIndex(index);
-                window.location.href = `/projects/${project.slug}`;
+                router.push(`/projects/${project.slug}`);
               }}
             >
               <span className={styles.number}>{project.number}</span>
