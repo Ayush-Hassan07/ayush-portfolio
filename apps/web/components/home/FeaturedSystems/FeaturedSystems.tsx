@@ -5,8 +5,10 @@ import Link from "next/link";
 import {
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
+import type { PointerEvent } from "react";
 
 import { trackAnalyticsEvent } from "@/lib/analytics";
 import type { PublicProject } from "../../../lib/public-api";
@@ -56,6 +58,8 @@ export default function FeaturedSystems({
 
   const [paused, setPaused] =
     useState(false);
+
+  const swipeStartX = useRef<number | null>(null);
 
   useEffect(() => {
     const updateVisibleCount = () => {
@@ -136,6 +140,24 @@ export default function FeaturedSystems({
           : current + direction,
     );
 
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    swipeStartX.current = event.clientX;
+    setPaused(true);
+  };
+
+  const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    if (swipeStartX.current === null) return;
+    const distance = event.clientX - swipeStartX.current;
+    swipeStartX.current = null;
+    setPaused(false);
+    if (Math.abs(distance) >= 40) slide(distance < 0 ? 1 : -1);
+  };
+
+  const handlePointerCancel = () => {
+    swipeStartX.current = null;
+    setPaused(false);
+  };
+
   const trackProjectOpen = (
     project: PublicProject,
     source: string,
@@ -203,7 +225,12 @@ export default function FeaturedSystems({
         </div>
       </div>
 
-      <div className={styles.carouselViewport}>
+      <div
+        className={styles.carouselViewport}
+        onPointerDown={handlePointerDown}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerCancel}
+      >
         <div
           className={styles.carouselTrack}
           style={{
