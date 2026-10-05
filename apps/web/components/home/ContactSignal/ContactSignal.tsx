@@ -6,9 +6,7 @@ type Props = {
   email?: string | null;
 };
 
-export default function ContactSignal({
-  email,
-}: Props) {
+export default function ContactSignal({ email }: Props) {
   if (!email) {
     return null;
   }
@@ -30,9 +28,7 @@ export default function ContactSignal({
 
       <div className={styles.main}>
         <div className={styles.copy}>
-          <span className={styles.index}>
-            04 / CONNECTION
-          </span>
+          <span className={styles.index}>04 / CONNECTION</span>
 
           <h2 id="contact-signal-title">
             Have a system to build,
@@ -52,14 +48,10 @@ export default function ContactSignal({
         >
           <div className={styles.actionCopy}>
             <small>DIRECT CHANNEL</small>
-            <span className={styles.actionLabel}>
-              START A CONVERSATION
-            </span>
+            <span className={styles.actionLabel}>START A CONVERSATION</span>
           </div>
 
-          <span className={styles.actionArrow}>
-            ↗
-          </span>
+          <span className={styles.actionArrow}>↗</span>
         </TrackedLink>
       </div>
 
@@ -83,9 +75,7 @@ export default function ContactSignal({
           <i />
         </div>
 
-        <span className={styles.endpoint}>
-          AHR / END OF TRANSMISSION
-        </span>
+        <span className={styles.endpoint}>AHR / END OF TRANSMISSION</span>
       </div>
     </section>
   );

@@ -1,28 +1,20 @@
-'use client';
+"use client";
 
-import {
-  AnchorHTMLAttributes,
-  MouseEvent,
-  ReactNode,
-} from 'react';
+import { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react";
 
-import { trackAnalyticsEvent } from '@/lib/analytics';
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
-type TrackableEventType =
-  | 'CTA_CLICK'
-  | 'SOCIAL_CLICK'
-  | 'CONTACT_CLICK';
+type TrackableEventType = "CTA_CLICK" | "SOCIAL_CLICK" | "CONTACT_CLICK";
 
-type TrackedLinkProps =
-  AnchorHTMLAttributes<HTMLAnchorElement> & {
-    children: ReactNode;
-    eventType: TrackableEventType;
-    action: string;
-    label: string;
-    entityType?: string;
-    entityId?: string;
-    entitySlug?: string;
-  };
+type TrackedLinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
+  children: ReactNode;
+  eventType: TrackableEventType;
+  action: string;
+  label: string;
+  entityType?: string;
+  entityId?: string;
+  entitySlug?: string;
+};
 
 export default function TrackedLink({
   children,
@@ -35,9 +27,7 @@ export default function TrackedLink({
   onClick,
   ...anchorProps
 }: TrackedLinkProps) {
-  const handleClick = (
-    event: MouseEvent<HTMLAnchorElement>,
-  ) => {
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(event);
 
     if (event.defaultPrevented) {
@@ -56,10 +46,7 @@ export default function TrackedLink({
   };
 
   return (
-    <a
-      {...anchorProps}
-      onClick={handleClick}
-    >
+    <a {...anchorProps} onClick={handleClick}>
       {children}
     </a>
   );

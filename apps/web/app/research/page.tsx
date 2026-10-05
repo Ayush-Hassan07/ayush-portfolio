@@ -23,8 +23,7 @@ export default async function ResearchPage() {
     year: getYear(publication.publication_date),
     description: publication.description,
     paperUrl: publication.paper_url,
-    notebookUrl:
-      publication.notebook_url ?? publication.repository_url,
+    notebookUrl: publication.notebook_url ?? publication.repository_url,
   }));
 
   return (
@@ -34,9 +33,7 @@ export default async function ResearchPage() {
       ) : (
         <div className={styles.empty}>
           <span>// RESEARCH ARCHIVE</span>
-          <p>
-            No publication records are currently available.
-          </p>
+          <p>No publication records are currently available.</p>
         </div>
       )}
     </main>

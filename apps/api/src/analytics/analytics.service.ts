@@ -23,15 +23,14 @@ export class AnalyticsService {
       });
 
       if (!session) {
-        const previousSession =
-          await tx.analytics_session.findFirst({
-            where: {
-              visitor_key: data.visitorKey,
-            },
-            select: {
-              id: true,
-            },
-          });
+        const previousSession = await tx.analytics_session.findFirst({
+          where: {
+            visitor_key: data.visitorKey,
+          },
+          select: {
+            id: true,
+          },
+        });
 
         session = await tx.analytics_session.create({
           data: {
@@ -50,9 +49,7 @@ export class AnalyticsService {
             duration_seconds: 0,
           },
         });
-      } else if (
-        session.visitor_key !== data.visitorKey
-      ) {
+      } else if (session.visitor_key !== data.visitorKey) {
         throw new BadRequestException(
           'Session does not belong to this visitor.',
         );
@@ -74,9 +71,7 @@ export class AnalyticsService {
       });
 
       const durationIncrement =
-        data.eventType === 'ENGAGEMENT'
-          ? Math.max(0, data.value ?? 0)
-          : 0;
+        data.eventType === 'ENGAGEMENT' ? Math.max(0, data.value ?? 0) : 0;
 
       const now = new Date();
 
@@ -114,11 +109,11 @@ export class AnalyticsService {
     project?: string,
     research?: string,
   ) {
-    const {
-      normalizedRange,
-      startDate,
-      endDate,
-    } = this.resolveStatisticsRange(range, month, year);
+    const { normalizedRange, startDate, endDate } = this.resolveStatisticsRange(
+      range,
+      month,
+      year,
+    );
 
     const sessionWhere = startDate
       ? {
@@ -273,12 +268,7 @@ export class AnalyticsService {
       }),
 
       this.prisma.analytics_event.groupBy({
-        by: [
-          'entity_id',
-          'entity_slug',
-          'label',
-          'action',
-        ],
+        by: ['entity_id', 'entity_slug', 'label', 'action'],
         where: {
           ...eventWhere,
           event_type: 'CTA_CLICK',
@@ -296,11 +286,7 @@ export class AnalyticsService {
       }),
 
       this.prisma.analytics_event.groupBy({
-        by: [
-          'entity_id',
-          'label',
-          'action',
-        ],
+        by: ['entity_id', 'label', 'action'],
         where: {
           ...eventWhere,
           event_type: 'CTA_CLICK',
@@ -375,22 +361,18 @@ export class AnalyticsService {
       }),
     ]);
 
-    const [projectOptions, researchOptions] =
-      await Promise.all([
-        this.prisma.project.findMany({
-          select: { id: true, title: true, slug: true },
-          orderBy: { sort_order: 'asc' },
-        }),
-        this.prisma.publication.findMany({
-          select: { id: true, title: true },
-          orderBy: { publication_date: 'desc' },
-        }),
-      ]);
+    const [projectOptions, researchOptions] = await Promise.all([
+      this.prisma.project.findMany({
+        select: { id: true, title: true, slug: true },
+        orderBy: { sort_order: 'asc' },
+      }),
+      this.prisma.publication.findMany({
+        select: { id: true, title: true },
+        orderBy: { publication_date: 'desc' },
+      }),
+    ]);
 
-    const scrollDepth =
-      await this.getScrollDepthStatistics(
-        startDate,
-      );
+    const scrollDepth = await this.getScrollDepthStatistics(startDate);
 
     const trend = await this.getTrafficTrend(startDate);
 
@@ -409,24 +391,14 @@ export class AnalyticsService {
 
         returningSessionRate:
           sessions > 0
-            ? Number(
-                (
-                  (returningSessions /
-                    sessions) *
-                  100
-                ).toFixed(1),
-              )
+            ? Number(((returningSessions / sessions) * 100).toFixed(1))
             : 0,
 
-        totalEngagementSeconds:
-          engagement._sum
-            .duration_seconds ?? 0,
+        totalEngagementSeconds: engagement._sum.duration_seconds ?? 0,
 
-        averageEngagementSeconds:
-          Math.round(
-            engagement._avg
-              .duration_seconds ?? 0,
-          ),
+        averageEngagementSeconds: Math.round(
+          engagement._avg.duration_seconds ?? 0,
+        ),
       },
 
       pages: pageGroups.map((item) => ({
@@ -436,78 +408,56 @@ export class AnalyticsService {
 
       projects: {
         options: projectOptions,
-        views: projectGroups.map(
-          (item) => ({
-            slug: item.entity_slug,
-            views: item._count._all,
-          }),
-        ),
+        views: projectGroups.map((item) => ({
+          slug: item.entity_slug,
+          views: item._count._all,
+        })),
 
-        actions: projectCtaGroups.map(
-          (item) => ({
-            entityId: item.entity_id,
-            slug: item.entity_slug,
-            title: item.label,
-            action: item.action,
-            clicks: item._count._all,
-          }),
-        ),
+        actions: projectCtaGroups.map((item) => ({
+          entityId: item.entity_id,
+          slug: item.entity_slug,
+          title: item.label,
+          action: item.action,
+          clicks: item._count._all,
+        })),
       },
 
       research: {
         options: researchOptions,
         archiveViews: researchViews,
 
-        actions: researchCtaGroups.map(
-          (item) => ({
-            entityId: item.entity_id,
-            title: item.label,
-            action: item.action,
-            clicks: item._count._all,
-          }),
-        ),
+        actions: researchCtaGroups.map((item) => ({
+          entityId: item.entity_id,
+          title: item.label,
+          action: item.action,
+          clicks: item._count._all,
+        })),
       },
 
-      actions: actionGroups.map(
-        (item) => ({
-          action: item.action,
-          clicks: item._count._all,
-        }),
-      ),
+      actions: actionGroups.map((item) => ({
+        action: item.action,
+        clicks: item._count._all,
+      })),
 
-      social: socialGroups.map(
-        (item) => ({
-          action: item.action,
-          clicks: item._count._all,
-        }),
-      ),
+      social: socialGroups.map((item) => ({
+        action: item.action,
+        clicks: item._count._all,
+      })),
 
-      contact: contactGroups.map(
-        (item) => ({
-          action: item.action,
-          clicks: item._count._all,
-        }),
-      ),
+      contact: contactGroups.map((item) => ({
+        action: item.action,
+        clicks: item._count._all,
+      })),
 
-      devices: devices.map(
-        (item) => ({
-          device:
-            item.device_type ??
-            'unknown',
-          sessions:
-            item._count._all,
-        }),
-      ),
+      devices: devices.map((item) => ({
+        device: item.device_type ?? 'unknown',
+        sessions: item._count._all,
+      })),
 
-      referrers: referrers.map(
-        (item) => ({
-          domain:
-            item.referrer_domain ??
-            'Direct',
-          sessions:
-            item._count._all,
-        }),
-      ),
+      referrers: referrers.map((item) => ({
+        domain: item.referrer_domain ?? 'Direct',
+        sessions: item._count._all,
+      })),
 
       scrollDepth,
       trend,
@@ -524,7 +474,14 @@ export class AnalyticsService {
     if (range === '1m' && month && year) {
       const selectedMonth = Number(month);
       const selectedYear = Number(year);
-      if (Number.isInteger(selectedMonth) && selectedMonth >= 1 && selectedMonth <= 12 && Number.isInteger(selectedYear) && selectedYear >= 2000 && selectedYear <= 2100) {
+      if (
+        Number.isInteger(selectedMonth) &&
+        selectedMonth >= 1 &&
+        selectedMonth <= 12 &&
+        Number.isInteger(selectedYear) &&
+        selectedYear >= 2000 &&
+        selectedYear <= 2100
+      ) {
         return {
           normalizedRange: '1m',
           startDate: new Date(Date.UTC(selectedYear, selectedMonth - 1, 1)),
@@ -535,7 +492,11 @@ export class AnalyticsService {
 
     if (range === '1y' && year) {
       const selectedYear = Number(year);
-      if (Number.isInteger(selectedYear) && selectedYear >= 2000 && selectedYear <= 2100) {
+      if (
+        Number.isInteger(selectedYear) &&
+        selectedYear >= 2000 &&
+        selectedYear <= 2100
+      ) {
         return {
           normalizedRange: '1y',
           startDate: new Date(Date.UTC(selectedYear, 0, 1)),
@@ -556,43 +517,25 @@ export class AnalyticsService {
       case '7d':
         return {
           normalizedRange: '7d',
-          startDate: new Date(
-            now.getTime() -
-              7 *
-                24 *
-                60 *
-                60 *
-                1000,
-          ),
+          startDate: new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000),
         };
 
       case '90d':
         return {
           normalizedRange: '90d',
-          startDate: new Date(
-            now.getTime() -
-              90 *
-                24 *
-                60 *
-                60 *
-                1000,
-          ),
+          startDate: new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000),
         };
 
       case '1m':
         return {
           normalizedRange: '1m',
-          startDate: new Date(
-            now.getTime() - 30 * 24 * 60 * 60 * 1000,
-          ),
+          startDate: new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
         };
 
       case '1y':
         return {
           normalizedRange: '1y',
-          startDate: new Date(
-            now.getTime() - 365 * 24 * 60 * 60 * 1000,
-          ),
+          startDate: new Date(now.getTime() - 365 * 24 * 60 * 60 * 1000),
         };
 
       case 'all':
@@ -605,41 +548,31 @@ export class AnalyticsService {
       default:
         return {
           normalizedRange: '30d',
-          startDate: new Date(
-            now.getTime() -
-              30 *
-                24 *
-                60 *
-                60 *
-                1000,
-          ),
+          startDate: new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000),
         };
     }
   }
 
-  private async getScrollDepthStatistics(
-    startDate?: Date,
-  ) {
-    const events =
-      await this.prisma.analytics_event.findMany({
-        where: {
-          event_type: 'SCROLL_DEPTH',
+  private async getScrollDepthStatistics(startDate?: Date) {
+    const events = await this.prisma.analytics_event.findMany({
+      where: {
+        event_type: 'SCROLL_DEPTH',
 
-          ...(startDate
-            ? {
-                occurred_at: {
-                  gte: startDate,
-                },
-              }
-            : {}),
-        },
+        ...(startDate
+          ? {
+              occurred_at: {
+                gte: startDate,
+              },
+            }
+          : {}),
+      },
 
-        select: {
-          session_id: true,
-          path: true,
-          value: true,
-        },
-      });
+      select: {
+        session_id: true,
+        path: true,
+        value: true,
+      },
+    });
 
     const maximums = new Map<
       string,
@@ -654,16 +587,11 @@ export class AnalyticsService {
         continue;
       }
 
-      const key =
-        `${event.session_id}:${event.path}`;
+      const key = `${event.session_id}:${event.path}`;
 
-      const previous =
-        maximums.get(key);
+      const previous = maximums.get(key);
 
-      if (
-        !previous ||
-        event.value > previous.value
-      ) {
+      if (!previous || event.value > previous.value) {
         maximums.set(key, {
           path: event.path,
           value: event.value,
@@ -704,14 +632,7 @@ export class AnalyticsService {
       trackedPageVisits: maximums.size,
 
       averageDepth:
-        maximums.size > 0
-          ? Number(
-              (
-                totalDepth /
-                maximums.size
-              ).toFixed(1),
-            )
-          : 0,
+        maximums.size > 0 ? Number((totalDepth / maximums.size).toFixed(1)) : 0,
 
       ...distribution,
     };
@@ -739,17 +660,40 @@ export class AnalyticsService {
     if (sessions.length) availableDates.push(sessions[0].started_at);
     if (pageViews.length) availableDates.push(pageViews[0].occurred_at);
 
-    const effectiveStart = startDate ?? (availableDates.length
-      ? new Date(Math.min(...availableDates.map((date) => date.getTime())))
-      : now);
+    const effectiveStart =
+      startDate ??
+      (availableDates.length
+        ? new Date(Math.min(...availableDates.map((date) => date.getTime())))
+        : now);
     const toDateKey = (date: Date) => date.toISOString().slice(0, 10);
-    const buckets = new Map<string, { date: string; visitors: Set<string>; sessions: number; pageViews: number }>();
-    const cursor = new Date(Date.UTC(effectiveStart.getUTCFullYear(), effectiveStart.getUTCMonth(), effectiveStart.getUTCDate()));
-    const end = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+    const buckets = new Map<
+      string,
+      {
+        date: string;
+        visitors: Set<string>;
+        sessions: number;
+        pageViews: number;
+      }
+    >();
+    const cursor = new Date(
+      Date.UTC(
+        effectiveStart.getUTCFullYear(),
+        effectiveStart.getUTCMonth(),
+        effectiveStart.getUTCDate(),
+      ),
+    );
+    const end = new Date(
+      Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()),
+    );
 
     while (cursor.getTime() <= end.getTime()) {
       const key = toDateKey(cursor);
-      buckets.set(key, { date: key, visitors: new Set<string>(), sessions: 0, pageViews: 0 });
+      buckets.set(key, {
+        date: key,
+        visitors: new Set<string>(),
+        sessions: 0,
+        pageViews: 0,
+      });
       cursor.setUTCDate(cursor.getUTCDate() + 1);
     }
 
@@ -773,48 +717,20 @@ export class AnalyticsService {
     }));
   }
 
-  private validateAndNormalize(
-    input: AnalyticsEventInput,
-  ) {
-    if (
-      !input ||
-      typeof input !== 'object'
-    ) {
-      throw new BadRequestException(
-        'Invalid analytics payload.',
-      );
+  private validateAndNormalize(input: AnalyticsEventInput) {
+    if (!input || typeof input !== 'object') {
+      throw new BadRequestException('Invalid analytics payload.');
     }
 
-    const visitorKey =
-      this.requiredString(
-        input.visitorKey,
-        'visitorKey',
-        100,
-      );
+    const visitorKey = this.requiredString(input.visitorKey, 'visitorKey', 100);
 
-    const sessionKey =
-      this.requiredString(
-        input.sessionKey,
-        'sessionKey',
-        100,
-      );
+    const sessionKey = this.requiredString(input.sessionKey, 'sessionKey', 100);
 
-    if (
-      !ANALYTICS_EVENT_TYPES.includes(
-        input.eventType,
-      )
-    ) {
-      throw new BadRequestException(
-        'Invalid analytics event type.',
-      );
+    if (!ANALYTICS_EVENT_TYPES.includes(input.eventType)) {
+      throw new BadRequestException('Invalid analytics event type.');
     }
 
-    const path =
-      this.requiredString(
-        input.path,
-        'path',
-        500,
-      );
+    const path = this.requiredString(input.path, 'path', 500);
 
     if (!path.startsWith('/')) {
       throw new BadRequestException(
@@ -822,25 +738,14 @@ export class AnalyticsService {
       );
     }
 
-    const value =
-      this.optionalInteger(
-        input.value,
-        'value',
-        0,
-        86400,
-      );
+    const value = this.optionalInteger(input.value, 'value', 0, 86400);
 
     if (
-      input.eventType ===
-        'SCROLL_DEPTH' &&
+      input.eventType === 'SCROLL_DEPTH' &&
       value !== undefined &&
-      ![25, 50, 75, 100].includes(
-        value,
-      )
+      ![25, 50, 75, 100].includes(value)
     ) {
-      throw new BadRequestException(
-        'Invalid scroll depth value.',
-      );
+      throw new BadRequestException('Invalid scroll depth value.');
     }
 
     return {
@@ -848,108 +753,48 @@ export class AnalyticsService {
       sessionKey,
       eventType: input.eventType,
       path,
-      entityType:
-        this.optionalString(
-          input.entityType,
-          50,
-        ),
-      entityId:
-        this.optionalString(
-          input.entityId,
-          150,
-        ),
-      entitySlug:
-        this.optionalString(
-          input.entitySlug,
-          250,
-        ),
-      action:
-        this.optionalString(
-          input.action,
-          100,
-        ),
-      label:
-        this.optionalString(
-          input.label,
-          250,
-        ),
+      entityType: this.optionalString(input.entityType, 50),
+      entityId: this.optionalString(input.entityId, 150),
+      entitySlug: this.optionalString(input.entitySlug, 250),
+      action: this.optionalString(input.action, 100),
+      label: this.optionalString(input.label, 250),
       value,
-      referrer:
-        this.optionalString(
-          input.referrer,
-          2000,
-        ),
-      referrerDomain:
-        this.optionalString(
-          input.referrerDomain,
-          255,
-        ),
-      deviceType:
-        this.optionalDeviceType(
-          input.deviceType,
-        ),
-      screenWidth:
-        this.optionalInteger(
-          input.screenWidth,
-          'screenWidth',
-          1,
-          20000,
-        ),
-      screenHeight:
-        this.optionalInteger(
-          input.screenHeight,
-          'screenHeight',
-          1,
-          20000,
-        ),
-      language:
-        this.optionalString(
-          input.language,
-          30,
-        ),
-      metadata:
-        this.sanitizeMetadata(
-          input.metadata,
-        ),
+      referrer: this.optionalString(input.referrer, 2000),
+      referrerDomain: this.optionalString(input.referrerDomain, 255),
+      deviceType: this.optionalDeviceType(input.deviceType),
+      screenWidth: this.optionalInteger(
+        input.screenWidth,
+        'screenWidth',
+        1,
+        20000,
+      ),
+      screenHeight: this.optionalInteger(
+        input.screenHeight,
+        'screenHeight',
+        1,
+        20000,
+      ),
+      language: this.optionalString(input.language, 30),
+      metadata: this.sanitizeMetadata(input.metadata),
     };
   }
 
-  private requiredString(
-    value: unknown,
-    field: string,
-    maxLength: number,
-  ) {
-    if (
-      typeof value !== 'string' ||
-      !value.trim()
-    ) {
-      throw new BadRequestException(
-        `${field} is required.`,
-      );
+  private requiredString(value: unknown, field: string, maxLength: number) {
+    if (typeof value !== 'string' || !value.trim()) {
+      throw new BadRequestException(`${field} is required.`);
     }
 
-    return value
-      .trim()
-      .slice(0, maxLength);
+    return value.trim().slice(0, maxLength);
   }
 
-  private optionalString(
-    value: unknown,
-    maxLength: number,
-  ) {
+  private optionalString(value: unknown, maxLength: number) {
     if (typeof value !== 'string') {
       return undefined;
     }
 
-    const normalized =
-      value.trim();
+    const normalized = value.trim();
 
-    return normalized
-      ? normalized.slice(
-          0,
-          maxLength,
-        )
-      : undefined;
+    return normalized ? normalized.slice(0, maxLength) : undefined;
   }
 
   private optionalInteger(
@@ -958,10 +803,7 @@ export class AnalyticsService {
     min: number,
     max: number,
   ) {
-    if (
-      value === undefined ||
-      value === null
-    ) {
+    if (value === undefined || value === null) {
       return undefined;
     }
 
@@ -979,24 +821,13 @@ export class AnalyticsService {
     return value;
   }
 
-  private optionalDeviceType(
-    value: unknown,
-  ): DeviceType | undefined {
-    if (
-      value === undefined ||
-      value === null
-    ) {
+  private optionalDeviceType(value: unknown): DeviceType | undefined {
+    if (value === undefined || value === null) {
       return undefined;
     }
 
-    if (
-      value !== 'desktop' &&
-      value !== 'tablet' &&
-      value !== 'mobile'
-    ) {
-      throw new BadRequestException(
-        'Invalid device type.',
-      );
+    if (value !== 'desktop' && value !== 'tablet' && value !== 'mobile') {
+      throw new BadRequestException('Invalid device type.');
     }
 
     return value;
@@ -1004,73 +835,35 @@ export class AnalyticsService {
 
   private sanitizeMetadata(
     metadata: unknown,
-  ):
-    | Record<
-        string,
-        string | number | boolean
-      >
-    | undefined {
-    if (
-      metadata === undefined ||
-      metadata === null
-    ) {
+  ): Record<string, string | number | boolean> | undefined {
+    if (metadata === undefined || metadata === null) {
       return undefined;
     }
 
-    if (
-      typeof metadata !== 'object' ||
-      Array.isArray(metadata)
-    ) {
-      throw new BadRequestException(
-        'metadata must be an object.',
-      );
+    if (typeof metadata !== 'object' || Array.isArray(metadata)) {
+      throw new BadRequestException('metadata must be an object.');
     }
 
-    const safeMetadata: Record<
-      string,
-      string | number | boolean
-    > = {};
+    const safeMetadata: Record<string, string | number | boolean> = {};
 
-    for (const [
-      key,
-      value,
-    ] of Object.entries(
-      metadata as Record<
-        string,
-        unknown
-      >,
+    for (const [key, value] of Object.entries(
+      metadata as Record<string, unknown>,
     ).slice(0, 10)) {
-      const safeKey = key
-        .trim()
-        .slice(0, 50);
+      const safeKey = key.trim().slice(0, 50);
 
       if (!safeKey) {
         continue;
       }
 
-      if (
-        typeof value === 'string'
-      ) {
-        safeMetadata[safeKey] =
-          value.slice(0, 250);
-      } else if (
-        typeof value === 'number' &&
-        Number.isFinite(value)
-      ) {
-        safeMetadata[safeKey] =
-          value;
-      } else if (
-        typeof value === 'boolean'
-      ) {
-        safeMetadata[safeKey] =
-          value;
+      if (typeof value === 'string') {
+        safeMetadata[safeKey] = value.slice(0, 250);
+      } else if (typeof value === 'number' && Number.isFinite(value)) {
+        safeMetadata[safeKey] = value;
+      } else if (typeof value === 'boolean') {
+        safeMetadata[safeKey] = value;
       }
     }
 
-    return Object.keys(
-      safeMetadata,
-    ).length
-      ? safeMetadata
-      : undefined;
+    return Object.keys(safeMetadata).length ? safeMetadata : undefined;
   }
 }

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 
-import { trackAnalyticsEvent } from '@/lib/analytics';
+import { trackAnalyticsEvent } from "@/lib/analytics";
 
 const ENGAGEMENT_INTERVAL_MS = 15000;
 const PAGE_VIEW_DEDUPE_MS = 1500;
@@ -60,9 +60,7 @@ export default function AnalyticsTracker() {
 
   const lastEngagementAt = useRef(Date.now());
 
-  const reachedScrollDepths = useRef<Set<number>>(
-    new Set(),
-  );
+  const reachedScrollDepths = useRef<Set<number>>(new Set());
 
   /*
    * PAGE VIEW
@@ -73,7 +71,7 @@ export default function AnalyticsTracker() {
     }
 
     void trackAnalyticsEvent({
-      eventType: 'PAGE_VIEW',
+      eventType: "PAGE_VIEW",
       path: pathname,
     });
   }, [pathname]);
@@ -82,9 +80,7 @@ export default function AnalyticsTracker() {
    * PROJECT / RESEARCH VIEW
    */
   useEffect(() => {
-    const projectMatch = pathname.match(
-      /^\/projects\/([^/]+)$/,
-    );
+    const projectMatch = pathname.match(/^\/projects\/([^/]+)$/);
 
     if (projectMatch) {
       const slug = decodeURIComponent(projectMatch[1]);
@@ -92,9 +88,9 @@ export default function AnalyticsTracker() {
 
       if (shouldTrackEntityView(key)) {
         void trackAnalyticsEvent({
-          eventType: 'PROJECT_VIEW',
+          eventType: "PROJECT_VIEW",
           path: pathname,
-          entityType: 'project',
+          entityType: "project",
           entitySlug: slug,
           label: slug,
         });
@@ -103,16 +99,16 @@ export default function AnalyticsTracker() {
       return;
     }
 
-    if (pathname === '/research') {
+    if (pathname === "/research") {
       const key = `RESEARCH_VIEW:${pathname}`;
 
       if (shouldTrackEntityView(key)) {
         void trackAnalyticsEvent({
-          eventType: 'RESEARCH_VIEW',
+          eventType: "RESEARCH_VIEW",
           path: pathname,
-          entityType: 'research',
-          action: 'archive_view',
-          label: 'Research Archive',
+          entityType: "research",
+          action: "archive_view",
+          label: "Research Archive",
         });
       }
     }
@@ -127,14 +123,12 @@ export default function AnalyticsTracker() {
     const interval = window.setInterval(() => {
       const now = Date.now();
 
-      if (document.visibilityState !== 'visible') {
+      if (document.visibilityState !== "visible") {
         lastEngagementAt.current = now;
         return;
       }
 
-      const seconds = Math.floor(
-        (now - lastEngagementAt.current) / 1000,
-      );
+      const seconds = Math.floor((now - lastEngagementAt.current) / 1000);
 
       lastEngagementAt.current = now;
 
@@ -143,7 +137,7 @@ export default function AnalyticsTracker() {
       }
 
       void trackAnalyticsEvent({
-        eventType: 'ENGAGEMENT',
+        eventType: "ENGAGEMENT",
         path: window.location.pathname,
         value: Math.min(seconds, 60),
       });
@@ -162,8 +156,7 @@ export default function AnalyticsTracker() {
 
     const handleScroll = () => {
       const scrollableHeight =
-        document.documentElement.scrollHeight -
-        window.innerHeight;
+        document.documentElement.scrollHeight - window.innerHeight;
 
       if (scrollableHeight <= 0) {
         return;
@@ -171,12 +164,7 @@ export default function AnalyticsTracker() {
 
       const percentage = Math.min(
         100,
-        Math.max(
-          0,
-          Math.round(
-            (window.scrollY / scrollableHeight) * 100,
-          ),
-        ),
+        Math.max(0, Math.round((window.scrollY / scrollableHeight) * 100)),
       );
 
       for (const milestone of [25, 50, 75, 100]) {
@@ -187,7 +175,7 @@ export default function AnalyticsTracker() {
           reachedScrollDepths.current.add(milestone);
 
           void trackAnalyticsEvent({
-            eventType: 'SCROLL_DEPTH',
+            eventType: "SCROLL_DEPTH",
             path: pathname,
             value: milestone,
           });
@@ -195,15 +183,12 @@ export default function AnalyticsTracker() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll, {
+    window.addEventListener("scroll", handleScroll, {
       passive: true,
     });
 
     return () => {
-      window.removeEventListener(
-        'scroll',
-        handleScroll,
-      );
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [pathname]);
 

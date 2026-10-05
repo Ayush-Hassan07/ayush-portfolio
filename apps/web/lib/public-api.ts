@@ -23,11 +23,29 @@ export type PublicProject = {
   sort_order?: number;
   live_url: string | null;
   github_url: string | null;
-  project_technology?: { technology: { id: string; name: string; category: string | null } }[];
+  project_technology?: {
+    technology: { id: string; name: string; category: string | null };
+  }[];
   project_media?: { media: { storage_key: string } }[];
 };
-export type PublicPublication = { id: string; title: string; venue: string | null; publication_date: string | null; paper_url: string | null; notebook_url: string | null; repository_url: string | null; description: string | null; featured: boolean };
-export type PublicSkill = { id: string; name: string; category: string; sort_order: number; featured: boolean };
+export type PublicPublication = {
+  id: string;
+  title: string;
+  venue: string | null;
+  publication_date: string | null;
+  paper_url: string | null;
+  notebook_url: string | null;
+  repository_url: string | null;
+  description: string | null;
+  featured: boolean;
+};
+export type PublicSkill = {
+  id: string;
+  name: string;
+  category: string;
+  sort_order: number;
+  featured: boolean;
+};
 export type PublicCertification = {
   id: string;
   name: string;
@@ -44,12 +62,17 @@ export type PublicCertification = {
   certification_media?: { media: { storage_key: string } }[];
 };
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000';
+const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
-async function request<T>(path: string, options?: { fresh?: boolean }): Promise<T | null> {
+async function request<T>(
+  path: string,
+  options?: { fresh?: boolean },
+): Promise<T | null> {
   try {
     const response = await fetch(`${apiUrl}/public/${path}`, {
-      ...(options?.fresh ? { cache: "no-store" as const } : { next: { revalidate: 60 } }),
+      ...(options?.fresh
+        ? { cache: "no-store" as const }
+        : { next: { revalidate: 60 } }),
     });
 
     if (!response.ok) return null;
@@ -60,17 +83,48 @@ async function request<T>(path: string, options?: { fresh?: boolean }): Promise<
 }
 
 export function getPublicProfile() {
-  return request<PublicProfile>('profile');
+  return request<PublicProfile>("profile");
 }
 
 export async function getPublicProjects() {
-  return (await request<PublicProject[]>('projects')) ?? [];
+  return (await request<PublicProject[]>("projects")) ?? [];
 }
-export async function getPublicProject(slug: string) { return request<PublicProject>(`projects/${encodeURIComponent(slug)}`); }
-export async function getPublicPublications() { return (await request<PublicPublication[]>('publications')) ?? []; }
-export async function getPublicSkills() { return (await request<PublicSkill[]>('skills')) ?? []; }
-export async function getPublicCertifications() { return (await request<PublicCertification[]>('certifications')) ?? []; }
-export type PublicEducation = { id: string; institution: string; degree: string; field: string | null; start_date: string; end_date: string | null; description: string | null; result: string | null; institution_url: string | null };
-export type PublicExperience = { id: string; company: string; position: string; location: string | null; start_date: string; end_date: string | null; description: string; company_url: string | null };
-export async function getPublicEducation() { return (await request<PublicEducation[]>('education')) ?? []; }
-export async function getPublicExperience() { return (await request<PublicExperience[]>('experience')) ?? []; }
+export async function getPublicProject(slug: string) {
+  return request<PublicProject>(`projects/${encodeURIComponent(slug)}`);
+}
+export async function getPublicPublications() {
+  return (await request<PublicPublication[]>("publications")) ?? [];
+}
+export async function getPublicSkills() {
+  return (await request<PublicSkill[]>("skills")) ?? [];
+}
+export async function getPublicCertifications() {
+  return (await request<PublicCertification[]>("certifications")) ?? [];
+}
+export type PublicEducation = {
+  id: string;
+  institution: string;
+  degree: string;
+  field: string | null;
+  start_date: string;
+  end_date: string | null;
+  description: string | null;
+  result: string | null;
+  institution_url: string | null;
+};
+export type PublicExperience = {
+  id: string;
+  company: string;
+  position: string;
+  location: string | null;
+  start_date: string;
+  end_date: string | null;
+  description: string;
+  company_url: string | null;
+};
+export async function getPublicEducation() {
+  return (await request<PublicEducation[]>("education")) ?? [];
+}
+export async function getPublicExperience() {
+  return (await request<PublicExperience[]>("experience")) ?? [];
+}

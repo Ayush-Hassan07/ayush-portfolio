@@ -1,11 +1,6 @@
 "use client";
 
-import {
-  CSSProperties,
-  PointerEvent,
-  useRef,
-  useState,
-} from "react";
+import { CSSProperties, PointerEvent, useRef, useState } from "react";
 
 import styles from "./Hero.module.css";
 
@@ -16,12 +11,7 @@ const states = {
     title: "Software Engineering",
     detail:
       "Full-stack systems, APIs, databases and production-oriented application engineering.",
-    signals: [
-      "FULL STACK",
-      "WEB SYSTEMS",
-      "APIs",
-      "DATABASES",
-    ],
+    signals: ["FULL STACK", "WEB SYSTEMS", "APIs", "DATABASES"],
     x: 50,
     y: 9,
     panelX: 50,
@@ -35,12 +25,7 @@ const states = {
     title: "AI & Machine Learning",
     detail:
       "Machine-learning systems built around data, evaluation, model development and explainability.",
-    signals: [
-      "ML",
-      "MODELS",
-      "DATA",
-      "EXPLAINABILITY",
-    ],
+    signals: ["ML", "MODELS", "DATA", "EXPLAINABILITY"],
     x: 91,
     y: 48,
     panelX: 70,
@@ -54,12 +39,7 @@ const states = {
     title: "Research & Experimentation",
     detail:
       "Experimental work evaluated through evidence, technical analysis and publication.",
-    signals: [
-      "EXPERIMENT",
-      "RESULT",
-      "EVIDENCE",
-      "PUBLICATION",
-    ],
+    signals: ["EXPERIMENT", "RESULT", "EVIDENCE", "PUBLICATION"],
     x: 52,
     y: 91,
     panelX: 52,
@@ -73,12 +53,7 @@ const states = {
     title: "Cybersecurity Research",
     detail:
       "Detection-focused work across DDoS, zero-day, malware and robust intelligent systems.",
-    signals: [
-      "DDoS",
-      "ZERO-DAY",
-      "MALWARE",
-      "DETECTION",
-    ],
+    signals: ["DDoS", "ZERO-DAY", "MALWARE", "DETECTION"],
     x: 9,
     y: 52,
     panelX: 30,
@@ -92,17 +67,13 @@ type StateKey = keyof typeof states;
 export default function IntelligenceCore() {
   const ref = useRef<HTMLDivElement>(null);
 
-  const activationTimer =
-    useRef<ReturnType<typeof setTimeout> | null>(null);
+  const activationTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const deactivationTimer =
-    useRef<ReturnType<typeof setTimeout> | null>(null);
+  const deactivationTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const [hovered, setHovered] =
-    useState<StateKey | null>(null);
+  const [hovered, setHovered] = useState<StateKey | null>(null);
 
-  const [pinned, setPinned] =
-    useState<StateKey | null>(null);
+  const [pinned, setPinned] = useState<StateKey | null>(null);
 
   const [pointer, setPointer] = useState({
     x: 0,
@@ -111,32 +82,19 @@ export default function IntelligenceCore() {
 
   const active = pinned ?? hovered;
 
-  const current = active
-    ? states[active]
-    : null;
+  const current = active ? states[active] : null;
 
-  function move(
-    e: PointerEvent<HTMLDivElement>,
-  ) {
-    const bounds =
-      ref.current?.getBoundingClientRect();
+  function move(e: PointerEvent<HTMLDivElement>) {
+    const bounds = ref.current?.getBoundingClientRect();
 
     if (!bounds) {
       return;
     }
 
     setPointer({
-      x:
-        ((e.clientX - bounds.left) /
-          bounds.width -
-          0.5) *
-        2,
+      x: ((e.clientX - bounds.left) / bounds.width - 0.5) * 2,
 
-      y:
-        ((e.clientY - bounds.top) /
-          bounds.height -
-          0.5) *
-        2,
+      y: ((e.clientY - bounds.top) / bounds.height - 0.5) * 2,
     });
   }
 
@@ -145,9 +103,7 @@ export default function IntelligenceCore() {
       return;
     }
 
-    clearTimeout(
-      activationTimer.current,
-    );
+    clearTimeout(activationTimer.current);
 
     activationTimer.current = null;
   }
@@ -157,16 +113,12 @@ export default function IntelligenceCore() {
       return;
     }
 
-    clearTimeout(
-      deactivationTimer.current,
-    );
+    clearTimeout(deactivationTimer.current);
 
     deactivationTimer.current = null;
   }
 
-  function activateWithDelay(
-    key: StateKey,
-  ) {
+  function activateWithDelay(key: StateKey) {
     cancelActivationTimer();
     cancelDeactivationTimer();
 
@@ -178,11 +130,10 @@ export default function IntelligenceCore() {
       return;
     }
 
-    activationTimer.current =
-      setTimeout(() => {
-        setHovered(key);
-        activationTimer.current = null;
-      }, 90);
+    activationTimer.current = setTimeout(() => {
+      setHovered(key);
+      activationTimer.current = null;
+    }, 90);
   }
 
   function scheduleDeactivate() {
@@ -197,14 +148,13 @@ export default function IntelligenceCore() {
       Without this, leaving the node destroys
       the panel before the pointer can reach it.
     */
-    deactivationTimer.current =
-      setTimeout(() => {
-        if (!pinned) {
-          setHovered(null);
-        }
+    deactivationTimer.current = setTimeout(() => {
+      if (!pinned) {
+        setHovered(null);
+      }
 
-        deactivationTimer.current = null;
-      }, 220);
+      deactivationTimer.current = null;
+    }, 220);
   }
 
   function keepActive() {
@@ -227,9 +177,7 @@ export default function IntelligenceCore() {
     });
   }
 
-  function handleFocus(
-    key: StateKey,
-  ) {
+  function handleFocus(key: StateKey) {
     cancelActivationTimer();
     cancelDeactivationTimer();
 
@@ -257,52 +205,28 @@ export default function IntelligenceCore() {
       }
     >
       <div className={styles.stageLabel}>
-        <span>
-          ENGINEERED INTELLIGENCE / CORE
-        </span>
+        <span>ENGINEERED INTELLIGENCE / CORE</span>
 
-        <span>
-          INTERACTIVE SYSTEM
-        </span>
+        <span>INTERACTIVE SYSTEM</span>
       </div>
 
-      <div
-        className={styles.coreField}
-      />
+      <div className={styles.coreField} />
 
-      <div
-        className={styles.scanLine}
-      />
+      <div className={styles.scanLine} />
 
       <svg
         viewBox="0 0 100 100"
         className={styles.connectionMap}
         aria-hidden="true"
       >
-        <circle
-          cx="50"
-          cy="50"
-          r="40"
-        />
+        <circle cx="50" cy="50" r="40" />
 
-        <circle
-          cx="50"
-          cy="50"
-          r="32"
-        />
+        <circle cx="50" cy="50" r="32" />
 
-        <circle
-          cx="50"
-          cy="50"
-          r="23"
-          className={styles.dashed}
-        />
+        <circle cx="50" cy="50" r="23" className={styles.dashed} />
 
         {(
-          Object.entries(states) as [
-            StateKey,
-            (typeof states)[StateKey],
-          ][]
+          Object.entries(states) as [StateKey, (typeof states)[StateKey]][]
         ).map(([key, state]) => (
           <line
             key={key}
@@ -310,11 +234,7 @@ export default function IntelligenceCore() {
             y1="50"
             x2={state.x}
             y2={state.y}
-            className={
-              key === active
-                ? styles.activeMapLine
-                : styles.mapLine
-            }
+            className={key === active ? styles.activeMapLine : styles.mapLine}
           />
         ))}
       </svg>
@@ -324,34 +244,20 @@ export default function IntelligenceCore() {
       <div className={styles.ringThree} />
       <div className={styles.fragmentRing} />
 
-      <div
-        className={
-          styles.intelligenceCenter
-        }
-      >
-        <div
-          className={styles.centerGlow}
-        />
+      <div className={styles.intelligenceCenter}>
+        <div className={styles.centerGlow} />
 
-        <div
-          className={styles.centerReticle}
-        />
+        <div className={styles.centerReticle} />
 
-        <small>
-          SYSTEM CORE
-        </small>
+        <small>SYSTEM CORE</small>
 
         <strong>
           INTELLIGENT
-          <span>
-            SYSTEMS
-          </span>
+          <span>SYSTEMS</span>
         </strong>
       </div>
 
-      {(
-        Object.keys(states) as StateKey[]
-      ).map((key) => {
+      {(Object.keys(states) as StateKey[]).map((key) => {
         const state = states[key];
 
         return (
@@ -359,9 +265,7 @@ export default function IntelligenceCore() {
             key={key}
             type="button"
             className={`${styles.coreNode} ${
-              active === key
-                ? styles.coreNodeActive
-                : ""
+              active === key ? styles.coreNodeActive : ""
             }`}
             style={
               {
@@ -369,30 +273,18 @@ export default function IntelligenceCore() {
                 "--y": `${state.y}%`,
               } as CSSProperties
             }
-            onPointerEnter={() =>
-              activateWithDelay(key)
-            }
-            onPointerLeave={
-              scheduleDeactivate
-            }
-            onFocus={() =>
-              handleFocus(key)
-            }
+            onPointerEnter={() => activateWithDelay(key)}
+            onPointerLeave={scheduleDeactivate}
+            onFocus={() => handleFocus(key)}
             onBlur={handleBlur}
-            onClick={() =>
-              toggle(key)
-            }
+            onClick={() => toggle(key)}
           >
             <i />
 
             <span>
-              <small>
-                {state.code}
-              </small>
+              <small>{state.code}</small>
 
-              <strong>
-                {state.label}
-              </strong>
+              <strong>{state.label}</strong>
             </span>
           </button>
         );
@@ -401,59 +293,33 @@ export default function IntelligenceCore() {
       {current && (
         <div
           className={`${styles.signalDock} ${styles.signalDockVisible}`}
-          data-position={
-            current.panelPosition
-          }
+          data-position={current.panelPosition}
           style={
             {
-              "--panel-x":
-                `${current.panelX}%`,
+              "--panel-x": `${current.panelX}%`,
 
-              "--panel-y":
-                `${current.panelY}%`,
+              "--panel-y": `${current.panelY}%`,
             } as CSSProperties
           }
           onPointerEnter={keepActive}
-          onPointerLeave={
-            scheduleDeactivate
-          }
+          onPointerLeave={scheduleDeactivate}
         >
-          <div
-            className={
-              styles.signalContent
-            }
-          >
-            <div
-              className={
-                styles.signalHeader
-              }
-            >
+          <div className={styles.signalContent}>
+            <div className={styles.signalHeader}>
               <span>
                 {current.code}
                 {" / ACTIVE SIGNAL"}
               </span>
             </div>
 
-            <strong>
-              {current.title}
-            </strong>
+            <strong>{current.title}</strong>
 
-            <p>
-              {current.detail}
-            </p>
+            <p>{current.detail}</p>
 
-            <div
-              className={
-                styles.signalTags
-              }
-            >
-              {current.signals.map(
-                (signal) => (
-                  <span key={signal}>
-                    {signal}
-                  </span>
-                ),
-              )}
+            <div className={styles.signalTags}>
+              {current.signals.map((signal) => (
+                <span key={signal}>{signal}</span>
+              ))}
             </div>
           </div>
         </div>
@@ -462,24 +328,17 @@ export default function IntelligenceCore() {
       <div className={styles.telemetry}>
         <span>
           MODE
-          <strong>
-            BUILD
-          </strong>
+          <strong>BUILD</strong>
         </span>
 
         <span>
           FOCUS
-          <strong>
-            {current?.label ??
-              "SYSTEM"}
-          </strong>
+          <strong>{current?.label ?? "SYSTEM"}</strong>
         </span>
 
         <span>
           STATE
-          <strong>
-            ONLINE
-          </strong>
+          <strong>ONLINE</strong>
         </span>
       </div>
     </div>

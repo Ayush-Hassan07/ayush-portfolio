@@ -3,10 +3,7 @@ import { notFound } from "next/navigation";
 
 import TrackedLink from "@/components/analytics/TrackedLink";
 import ProjectGallery from "../../../components/projects/ProjectGallery";
-import {
-  getPublicProject,
-  getPublicProjects,
-} from "../../../lib/public-api";
+import { getPublicProject, getPublicProjects } from "../../../lib/public-api";
 
 import styles from "./page.module.css";
 
@@ -26,14 +23,10 @@ export default async function ProjectPage({
     notFound();
   }
 
-  const api =
-    process.env.NEXT_PUBLIC_API_URL ??
-    "http://localhost:4000";
+  const api = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
   const technologies =
-    project.project_technology?.map(
-      ({ technology }) => technology,
-    ) ?? [];
+    project.project_technology?.map(({ technology }) => technology) ?? [];
 
   const media =
     project.project_media?.map(({ media }) => ({
@@ -56,34 +49,22 @@ export default async function ProjectPage({
     (item) => item.slug === project.slug,
   );
 
-  const previous =
-    currentIndex > 0
-      ? allProjects[currentIndex - 1]
-      : null;
+  const previous = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
 
   const next =
-    currentIndex >= 0 &&
-    currentIndex < allProjects.length - 1
+    currentIndex >= 0 && currentIndex < allProjects.length - 1
       ? allProjects[currentIndex + 1]
       : null;
 
-  const number = String(
-    Math.max(currentIndex, 0) + 1,
-  ).padStart(2, "0");
+  const number = String(Math.max(currentIndex, 0) + 1).padStart(2, "0");
 
   return (
     <main className={styles.page}>
       <div className={styles.topline}>
-        <Link href="/projects">
-          ← SYSTEM ARCHIVE
-        </Link>
+        <Link href="/projects">← SYSTEM ARCHIVE</Link>
 
         <span>
-          RECORD {number} /{" "}
-          {String(allProjects.length).padStart(
-            2,
-            "0",
-          )}
+          RECORD {number} / {String(allProjects.length).padStart(2, "0")}
         </span>
       </div>
 
@@ -100,28 +81,13 @@ export default async function ProjectPage({
 
           <h1>{project.title}</h1>
 
-          {(project.summary ||
-            project.description) && (
-            <div
-              className={
-                styles.identityDescriptionWrap
-              }
-            >
-              <p
-                className={
-                  styles.identityDescription
-                }
-              >
-                {project.summary ||
-                  project.description}
+          {(project.summary || project.description) && (
+            <div className={styles.identityDescriptionWrap}>
+              <p className={styles.identityDescription}>
+                {project.summary || project.description}
               </p>
 
-              <a
-                href="#overview"
-                className={
-                  styles.overviewJump
-                }
-              >
+              <a href="#overview" className={styles.overviewJump}>
                 READ OVERVIEW ↓
               </a>
             </div>
@@ -129,20 +95,15 @@ export default async function ProjectPage({
 
           <div className={styles.quickStack}>
             {technologies.map((technology) => (
-              <span key={technology.id}>
-                {technology.name}
-              </span>
+              <span key={technology.id}>{technology.name}</span>
             ))}
           </div>
 
-          {(project.live_url ||
-            project.github_url) && (
+          {(project.live_url || project.github_url) && (
             <div className={styles.actions}>
               {project.live_url && (
                 <TrackedLink
-                  className={
-                    styles.primaryAction
-                  }
+                  className={styles.primaryAction}
                   href={project.live_url}
                   target="_blank"
                   rel="noreferrer"
@@ -159,9 +120,7 @@ export default async function ProjectPage({
 
               {project.github_url && (
                 <TrackedLink
-                  className={
-                    styles.secondaryAction
-                  }
+                  className={styles.secondaryAction}
                   href={project.github_url}
                   target="_blank"
                   rel="noreferrer"
@@ -182,22 +141,9 @@ export default async function ProjectPage({
         <aside className={styles.identityMeta}>
           {[
             ["RECORD", number],
-            [
-              "STATE",
-              project.status ?? "PROJECT",
-            ],
-            [
-              "TECHNOLOGIES",
-              String(
-                technologies.length,
-              ).padStart(2, "0"),
-            ],
-            [
-              "MEDIA",
-              String(
-                galleryImages.length,
-              ).padStart(2, "0"),
-            ],
+            ["STATE", project.status ?? "PROJECT"],
+            ["TECHNOLOGIES", String(technologies.length).padStart(2, "0")],
+            ["MEDIA", String(galleryImages.length).padStart(2, "0")],
           ].map(([label, value]) => (
             <div key={label}>
               <small>{label}</small>
@@ -210,15 +156,10 @@ export default async function ProjectPage({
       <section className={styles.mediaSection}>
         <div className={styles.sectionHeader}>
           <span>// PROJECT MEDIA</span>
-          <small>
-            INTERFACE / IMPLEMENTATION
-          </small>
+          <small>INTERFACE / IMPLEMENTATION</small>
         </div>
 
-        <ProjectGallery
-          images={galleryImages}
-          title={project.title}
-        />
+        <ProjectGallery images={galleryImages} title={project.title} />
       </section>
 
       <section className={styles.systemBrief}>
@@ -232,10 +173,7 @@ export default async function ProjectPage({
         </div>
 
         <div className={styles.briefContent}>
-          <div
-            id="overview"
-            className={styles.briefDescription}
-          >
+          <div id="overview" className={styles.briefDescription}>
             <small>OVERVIEW</small>
 
             <p>
@@ -246,22 +184,9 @@ export default async function ProjectPage({
 
           <div className={styles.factGrid}>
             {[
-              [
-                "STATUS",
-                project.status ?? "PROJECT",
-              ],
-              [
-                "STACK SIZE",
-                String(
-                  technologies.length,
-                ).padStart(2, "0"),
-              ],
-              [
-                "MEDIA RECORDS",
-                String(
-                  galleryImages.length,
-                ).padStart(2, "0"),
-              ],
+              ["STATUS", project.status ?? "PROJECT"],
+              ["STACK SIZE", String(technologies.length).padStart(2, "0")],
+              ["MEDIA RECORDS", String(galleryImages.length).padStart(2, "0")],
               [
                 "ACCESS",
                 project.live_url
@@ -283,42 +208,23 @@ export default async function ProjectPage({
       {technologies.length > 0 && (
         <section className={styles.stack}>
           <div className={styles.sectionHeader}>
-            <span>
-              // TECHNOLOGY PROFILE
-            </span>
+            <span>// TECHNOLOGY PROFILE</span>
 
             <small>
-              {String(
-                technologies.length,
-              ).padStart(2, "0")}{" "}
-              RECORDS
+              {String(technologies.length).padStart(2, "0")} RECORDS
             </small>
           </div>
 
           <div className={styles.stackGrid}>
-            {technologies.map(
-              (technology, index) => (
-                <div
-                  className={styles.tech}
-                  key={technology.id}
-                >
-                  <span>
-                    {String(
-                      index + 1,
-                    ).padStart(2, "0")}
-                  </span>
+            {technologies.map((technology, index) => (
+              <div className={styles.tech} key={technology.id}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
 
-                  <small>
-                    {technology.category ??
-                      "TECHNOLOGY"}
-                  </small>
+                <small>{technology.category ?? "TECHNOLOGY"}</small>
 
-                  <strong>
-                    {technology.name}
-                  </strong>
-                </div>
-              ),
-            )}
+                <strong>{technology.name}</strong>
+              </div>
+            ))}
           </div>
         </section>
       )}
@@ -332,37 +238,23 @@ export default async function ProjectPage({
             >
               ←
               <span>
-                <small>
-                  PREVIOUS SYSTEM
-                </small>
-                <strong>
-                  {previous.title}
-                </strong>
+                <small>PREVIOUS SYSTEM</small>
+                <strong>{previous.title}</strong>
               </span>
             </Link>
           )}
         </div>
 
-        <Link
-          href="/projects"
-          className={styles.archiveLink}
-        >
+        <Link href="/projects" className={styles.archiveLink}>
           ALL SYSTEMS
         </Link>
 
         <div>
           {next && (
-            <Link
-              href={`/projects/${next.slug}`}
-              className={styles.next}
-            >
+            <Link href={`/projects/${next.slug}`} className={styles.next}>
               <span>
-                <small>
-                  NEXT SYSTEM
-                </small>
-                <strong>
-                  {next.title}
-                </strong>
+                <small>NEXT SYSTEM</small>
+                <strong>{next.title}</strong>
               </span>
               →
             </Link>

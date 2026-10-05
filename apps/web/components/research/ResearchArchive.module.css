@@ -229,12 +229,11 @@
   display: flex;
   flex-direction: column;
   border-left: 1px solid var(--line);
-  background:
-    radial-gradient(
-      circle at 40% 50%,
-      rgba(223, 255, 99, 0.045),
-      transparent 8rem
-    );
+  background: radial-gradient(
+    circle at 40% 50%,
+    rgba(223, 255, 99, 0.045),
+    transparent 8rem
+  );
 }
 
 .visualHeader {
@@ -317,12 +316,11 @@
   justify-content: center;
   border: 1px solid rgba(223, 255, 99, 0.45);
   border-radius: 50%;
-  background:
-    radial-gradient(
-      circle,
-      rgba(223, 255, 99, 0.12),
-      transparent 70%
-    );
+  background: radial-gradient(
+    circle,
+    rgba(223, 255, 99, 0.12),
+    transparent 70%
+  );
 }
 
 .core small {
@@ -574,11 +572,7 @@
     width: auto;
     height: 1px;
     flex: 1;
-    background: linear-gradient(
-      90deg,
-      var(--accent),
-      var(--line)
-    );
+    background: linear-gradient(90deg, var(--accent), var(--line));
   }
 
   .recordIndex > strong {
@@ -807,8 +801,12 @@
   }
 }
 
-
 @media (max-width: 480px) {
-  .signalStatus > span { min-height: 3.25rem; padding: .45rem; }
-  .signalStatus strong { font-size: .42rem; }
+  .signalStatus > span {
+    min-height: 3.25rem;
+    padding: 0.45rem;
+  }
+  .signalStatus strong {
+    font-size: 0.42rem;
+  }
 }

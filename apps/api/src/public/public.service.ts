@@ -33,7 +33,10 @@ export class PublicService {
         project_technology: {
           include: { technology: true },
         },
-        project_media: { orderBy: [{ is_primary: 'desc' }, { sort_order: 'asc' }], include: { media: true } },
+        project_media: {
+          orderBy: [{ is_primary: 'desc' }, { sort_order: 'asc' }],
+          include: { media: true },
+        },
       },
     });
   }
@@ -45,7 +48,10 @@ export class PublicService {
         project_technology: {
           include: { technology: true },
         },
-        project_media: { orderBy: [{ is_primary: 'desc' }, { sort_order: 'asc' }], include: { media: true } },
+        project_media: {
+          orderBy: [{ is_primary: 'desc' }, { sort_order: 'asc' }],
+          include: { media: true },
+        },
       },
     });
 
@@ -88,6 +94,10 @@ export class PublicService {
       ],
     });
   }
-  getEducation() { return this.prisma.education.findMany({ orderBy: { start_date: 'desc' } }); }
-  getExperience() { return this.prisma.experience.findMany({ orderBy: { start_date: 'desc' } }); }
+  getEducation() {
+    return this.prisma.education.findMany({ orderBy: { start_date: 'desc' } });
+  }
+  getExperience() {
+    return this.prisma.experience.findMany({ orderBy: { start_date: 'desc' } });
+  }
 }

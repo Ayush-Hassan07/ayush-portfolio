@@ -1,1 +1,4 @@
-.page{min-height:100vh;background:var(--background)}
+.page {
+  min-height: 100vh;
+  background: var(--background);
+}

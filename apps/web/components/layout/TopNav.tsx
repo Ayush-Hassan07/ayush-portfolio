@@ -2,11 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  MouseEvent,
-  useEffect,
-  useState,
-} from "react";
+import { MouseEvent, useEffect, useState } from "react";
 
 import TrackedLink from "@/components/analytics/TrackedLink";
 import { trackAnalyticsEvent } from "@/lib/analytics";
@@ -88,9 +84,7 @@ export default function TopNav({
     googleScholarUrl,
   };
 
-  const handleContactClick = (
-    event: MouseEvent<HTMLAnchorElement>,
-  ) => {
+  const handleContactClick = (event: MouseEvent<HTMLAnchorElement>) => {
     if (event.defaultPrevented) {
       return;
     }
@@ -119,10 +113,7 @@ export default function TopNav({
 
         <nav className={styles.topNav}>
           {links.slice(3).map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-            >
+            <Link key={link.href} href={link.href}>
               {link.label}
             </Link>
           ))}
@@ -133,9 +124,7 @@ export default function TopNav({
           className={styles.contact}
           onClick={handleContactClick}
         >
-          {email && (
-            <span className={styles.statusDot} />
-          )}
+          {email && <span className={styles.statusDot} />}
 
           <span>LET&apos;S TALK</span>
           <span>↗</span>
@@ -144,15 +133,11 @@ export default function TopNav({
         <button
           type="button"
           className={`${styles.mobileMenuButton} ${
-            menuOpen
-              ? styles.mobileMenuButtonOpen
-              : ""
+            menuOpen ? styles.mobileMenuButtonOpen : ""
           }`}
           aria-label="Toggle navigation"
           aria-expanded={menuOpen}
-          onClick={() =>
-            setMenuOpen((current) => !current)
-          }
+          onClick={() => setMenuOpen((current) => !current)}
         >
           <span />
           <span />
@@ -167,10 +152,7 @@ export default function TopNav({
       >
         <nav className={styles.mobileMenuNav}>
           {links.map((link) => (
-            <Link
-              href={link.href}
-              key={link.href}
-            >
+            <Link href={link.href} key={link.href}>
               <small>{link.index}</small>
               <span>{link.label}</span>
               <i>↗</i>
@@ -180,8 +162,7 @@ export default function TopNav({
 
         <div className={styles.mobileSocials}>
           {icons.map((icon) => {
-            const url =
-              urls[icon.key as keyof typeof urls];
+            const url = urls[icon.key as keyof typeof urls];
 
             if (!url) {
               return null;
@@ -198,14 +179,8 @@ export default function TopNav({
                 action={icon.action}
                 label={icon.label}
               >
-                <svg
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill="currentColor"
-                    d={icon.path}
-                  />
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path fill="currentColor" d={icon.path} />
                 </svg>
               </TrackedLink>
             );

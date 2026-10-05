@@ -2,11 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const sections = [
   ["Statistics", "/statistics"],
@@ -15,10 +11,7 @@ const sections = [
   ["Publications", "/publications"],
   ["Skills", "/skills"],
   ["Technologies", "/technologies"],
-  [
-    "Licenses & Certifications",
-    "/certifications",
-  ],
+  ["Licenses & Certifications", "/certifications"],
   ["Education", "/education"],
   ["Experience", "/experience"],
   ["Media", "/media"],
@@ -26,9 +19,17 @@ const sections = [
 ];
 
 const adminRoutes = new Set([
-  "/statistics", "/profile", "/projects", "/publications",
-  "/skills", "/technologies", "/certifications", "/education",
-  "/experience", "/media", "/security",
+  "/statistics",
+  "/profile",
+  "/projects",
+  "/publications",
+  "/skills",
+  "/technologies",
+  "/certifications",
+  "/education",
+  "/experience",
+  "/media",
+  "/security",
 ]);
 
 export default function AdminFrame({
@@ -39,12 +40,9 @@ export default function AdminFrame({
   const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
-  const [checking, setChecking] =
-    useState(true);
+  const [checking, setChecking] = useState(true);
 
-  const api =
-    process.env.NEXT_PUBLIC_ADMIN_API_URL ??
-    "http://localhost:4000";
+  const api = process.env.NEXT_PUBLIC_ADMIN_API_URL ?? "http://localhost:4000";
 
   const verify = useCallback(async () => {
     if (pathname === "/login") {
@@ -53,24 +51,16 @@ export default function AdminFrame({
     }
 
     try {
-      const response = await fetch(
-        `${api}/auth/session`,
-        {
-          credentials: "include",
-          cache: "no-store",
-        },
-      );
+      const response = await fetch(`${api}/auth/session`, {
+        credentials: "include",
+        cache: "no-store",
+      });
 
-      const value = await response
-        .json()
-        .catch(() => ({
-          authenticated: false,
-        }));
+      const value = await response.json().catch(() => ({
+        authenticated: false,
+      }));
 
-      if (
-        !response.ok ||
-        !value.authenticated
-      ) {
+      if (!response.ok || !value.authenticated) {
         window.location.replace("/login");
         return;
       }
@@ -88,27 +78,18 @@ export default function AdminFrame({
       return;
     }
 
-    const timer = window.setInterval(
-      () => void verify(),
-      30000,
-    );
+    const timer = window.setInterval(() => void verify(), 30000);
 
     const onFocus = () => {
       void verify();
     };
 
-    window.addEventListener(
-      "focus",
-      onFocus,
-    );
+    window.addEventListener("focus", onFocus);
 
     return () => {
       window.clearInterval(timer);
 
-      window.removeEventListener(
-        "focus",
-        onFocus,
-      );
+      window.removeEventListener("focus", onFocus);
     };
   }, [verify, pathname]);
 
@@ -132,11 +113,7 @@ export default function AdminFrame({
   }
 
   if (checking) {
-    return (
-      <main className="login-shell">
-        Checking authentication…
-      </main>
-    );
+    return <main className="login-shell">Checking authentication…</main>;
   }
 
   return (
@@ -144,81 +121,49 @@ export default function AdminFrame({
       <button
         className="mobile-menu"
         type="button"
-        onClick={() =>
-          setOpen((value) => !value)
-        }
+        onClick={() => setOpen((value) => !value)}
         aria-label="Toggle admin navigation"
       >
         •••
       </button>
 
-      <aside
-        className={
-          open
-            ? "admin-sidebar mobile-open"
-            : "admin-sidebar"
-        }
-      >
-        <Link
-          className="admin-brand"
-          href="/"
-          onClick={() => setOpen(false)}
-        >
+      <aside className={open ? "admin-sidebar mobile-open" : "admin-sidebar"}>
+        <Link className="admin-brand" href="/" onClick={() => setOpen(false)}>
           AHR<span>.</span>
           <small>studio</small>
         </Link>
 
         <nav aria-label="Admin sections">
-          {sections.map(
-            ([label, href], index) => (
-              <Link
-                className={
-                  pathname === href
-                    ? "active"
-                    : ""
-                }
-                href={href}
-                key={label}
-                onClick={() =>
-                  setOpen(false)
-                }
-              >
-                <span>
-                  {String(
-                    index + 1,
-                  ).padStart(2, "0")}
-                </span>
+          {sections.map(([label, href], index) => (
+            <Link
+              className={pathname === href ? "active" : ""}
+              href={href}
+              key={label}
+              onClick={() => setOpen(false)}
+            >
+              <span>{String(index + 1).padStart(2, "0")}</span>
 
-                {label}
-              </Link>
-            ),
-          )}
+              {label}
+            </Link>
+          ))}
         </nav>
 
         <div className="admin-sidebar-foot">
           <span className="admin-status" />
           Local workspace
           <br />
-
-          <small>
-            Content stays yours.
-          </small>
-
+          <small>Content stays yours.</small>
           <button
             className="admin-logout"
             type="button"
-            onClick={() =>
-              void logout()
-            }
+            onClick={() => void logout()}
           >
             Log out
           </button>
         </div>
       </aside>
 
-      <section className="admin-main">
-        {children}
-      </section>
+      <section className="admin-main">{children}</section>
     </main>
   );
 }

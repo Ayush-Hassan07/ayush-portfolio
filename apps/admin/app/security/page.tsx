@@ -12,8 +12,14 @@ export default function SecurityPage() {
   const [message, setMessage] = useState("");
   const [remaining, setRemaining] = useState(0);
   const [securityCode, setSecurityCode] = useState("");
-  const [pending, setPending] = useState<{ emailOtpEnabled: boolean; totpEnabled: boolean } | null>(null);
-  const [totpSetup, setTotpSetup] = useState<{ secret: string; otpauthUri: string } | null>(null);
+  const [pending, setPending] = useState<{
+    emailOtpEnabled: boolean;
+    totpEnabled: boolean;
+  } | null>(null);
+  const [totpSetup, setTotpSetup] = useState<{
+    secret: string;
+    otpauthUri: string;
+  } | null>(null);
   const [totpQr, setTotpQr] = useState("");
   const [totpCode, setTotpCode] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -22,17 +28,302 @@ export default function SecurityPage() {
   const [passwordCode, setPasswordCode] = useState("");
   const [passwordStep, setPasswordStep] = useState<"form" | "otp">("form");
 
-  useEffect(() => { void fetch(`${api}/admin/library/security`, { credentials: "include" }).then((r) => r.json()).then((v: { email_otp_enabled?: boolean; totp_enabled?: boolean }) => { setEmailOtp(v.email_otp_enabled ?? true); setTotp(v.totp_enabled ?? false); }).catch(() => setMessage("Could not load security settings.")); }, []);
-  useEffect(() => { if (!remaining) return; const timer = window.setInterval(() => setRemaining((value) => Math.max(value - 1, 0)), 1000); return () => window.clearInterval(timer); }, [remaining]);
-  useEffect(() => { if (!totpSetup) { setTotpQr(""); return; } void QRCode.toDataURL(totpSetup.otpauthUri, { width: 220, margin: 2 }).then(setTotpQr).catch(() => setTotpQr("")); }, [totpSetup]);
+  useEffect(() => {
+    void fetch(`${api}/admin/library/security`, { credentials: "include" })
+      .then((r) => r.json())
+      .then((v: { email_otp_enabled?: boolean; totp_enabled?: boolean }) => {
+        setEmailOtp(v.email_otp_enabled ?? true);
+        setTotp(v.totp_enabled ?? false);
+      })
+      .catch(() => setMessage("Could not load security settings."));
+  }, []);
+  useEffect(() => {
+    if (!remaining) return;
+    const timer = window.setInterval(
+      () => setRemaining((value) => Math.max(value - 1, 0)),
+      1000,
+    );
+    return () => window.clearInterval(timer);
+  }, [remaining]);
+  useEffect(() => {
+    if (!totpSetup) {
+      setTotpQr("");
+      return;
+    }
+    void QRCode.toDataURL(totpSetup.otpauthUri, { width: 220, margin: 2 })
+      .then(setTotpQr)
+      .catch(() => setTotpQr(""));
+  }, [totpSetup]);
 
-  async function requestSecurity(emailOtpEnabled: boolean, totpEnabled: boolean) { try { const response = await fetch(`${api}/admin/library/security/change/request`, { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ emailOtpEnabled, totpEnabled }) }); if (!response.ok) throw new Error(); setPending({ emailOtpEnabled, totpEnabled }); setRemaining(60); setSecurityCode(""); setMessage("A security-change OTP was sent."); } catch { setMessage("Could not request security change."); } }
-  async function confirmSecurity() { if (!pending) return; const response = await fetch(`${api}/admin/library/security/change/confirm`, { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: securityCode, ...pending }) }); if (response.ok) { setEmailOtp(pending.emailOtpEnabled); setTotp(pending.totpEnabled); setPending(null); setMessage("Security settings updated."); } else setMessage("Invalid or expired security code."); }
-  async function beginTotp() { try { const response = await fetch(`${api}/admin/library/security/totp/begin`, { method: "POST", credentials: "include" }); if (!response.ok) throw new Error(); setTotpSetup(await response.json()); } catch { setMessage("Could not begin TOTP setup."); } }
-  async function confirmTotp() { const response = await fetch(`${api}/admin/library/security/totp/confirm`, { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ code: totpCode }) }); if (response.ok) { setTotp(true); setTotpSetup(null); setMessage("Authenticator app enabled."); } else setMessage("Invalid authenticator code."); }
-  async function passwordSubmit(event: FormEvent) { event.preventDefault(); try { const path = passwordStep === "form" ? "request" : "confirm"; const body = passwordStep === "form" ? { currentPassword, nextPassword } : { code: passwordCode, nextPassword }; const response = await fetch(`${api}/auth/password-change/${path}`, { method: "POST", credentials: "include", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); if (!response.ok) { const detail = await response.json().catch(() => null) as { message?: string } | null; setMessage(detail?.message ?? `Password change failed (${response.status}).`); return; } if (passwordStep === "form") { setPasswordStep("otp"); setRemaining(60); setMessage("A password-change OTP was sent."); } else { setPasswordStep("form"); setCurrentPassword(""); setNextPassword(""); setPasswordCode(""); setMessage("Password changed successfully."); } } catch { setMessage("API is unreachable. Restart the API and try again."); } }
+  async function requestSecurity(
+    emailOtpEnabled: boolean,
+    totpEnabled: boolean,
+  ) {
+    try {
+      const response = await fetch(
+        `${api}/admin/library/security/change/request`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ emailOtpEnabled, totpEnabled }),
+        },
+      );
+      if (!response.ok) throw new Error();
+      setPending({ emailOtpEnabled, totpEnabled });
+      setRemaining(60);
+      setSecurityCode("");
+      setMessage("A security-change OTP was sent.");
+    } catch {
+      setMessage("Could not request security change.");
+    }
+  }
+  async function confirmSecurity() {
+    if (!pending) return;
+    const response = await fetch(
+      `${api}/admin/library/security/change/confirm`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: securityCode, ...pending }),
+      },
+    );
+    if (response.ok) {
+      setEmailOtp(pending.emailOtpEnabled);
+      setTotp(pending.totpEnabled);
+      setPending(null);
+      setMessage("Security settings updated.");
+    } else setMessage("Invalid or expired security code.");
+  }
+  async function beginTotp() {
+    try {
+      const response = await fetch(`${api}/admin/library/security/totp/begin`, {
+        method: "POST",
+        credentials: "include",
+      });
+      if (!response.ok) throw new Error();
+      setTotpSetup(await response.json());
+    } catch {
+      setMessage("Could not begin TOTP setup.");
+    }
+  }
+  async function confirmTotp() {
+    const response = await fetch(`${api}/admin/library/security/totp/confirm`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: totpCode }),
+    });
+    if (response.ok) {
+      setTotp(true);
+      setTotpSetup(null);
+      setMessage("Authenticator app enabled.");
+    } else setMessage("Invalid authenticator code.");
+  }
+  async function passwordSubmit(event: FormEvent) {
+    event.preventDefault();
+    try {
+      const path = passwordStep === "form" ? "request" : "confirm";
+      const body =
+        passwordStep === "form"
+          ? { currentPassword, nextPassword }
+          : { code: passwordCode, nextPassword };
+      const response = await fetch(`${api}/auth/password-change/${path}`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) {
+        const detail = (await response.json().catch(() => null)) as {
+          message?: string;
+        } | null;
+        setMessage(
+          detail?.message ?? `Password change failed (${response.status}).`,
+        );
+        return;
+      }
+      if (passwordStep === "form") {
+        setPasswordStep("otp");
+        setRemaining(60);
+        setMessage("A password-change OTP was sent.");
+      } else {
+        setPasswordStep("form");
+        setCurrentPassword("");
+        setNextPassword("");
+        setPasswordCode("");
+        setMessage("Password changed successfully.");
+      }
+    } catch {
+      setMessage("API is unreachable. Restart the API and try again.");
+    }
+  }
 
-  return <main className="editor-shell"><header className="editor-header"><Link className="admin-brand" href="/">AHR<span>.</span><small>studio / security</small></Link><Link className="editor-back" href="/">← Overview</Link></header><div className="security-panel standalone-security"><div className="security-row"><div><strong>Email OTP</strong><p>Required at login. Codes expire after 60 seconds.</p></div><button className="security-toggle" type="button" onClick={() => void requestSecurity(!emailOtp, totp)}>{emailOtp ? "OFF" : "ON"}</button></div><div className="security-row"><div><strong>Authenticator app</strong><p>Use a QR code with your authenticator app.</p></div><button className="security-toggle" type="button" onClick={() => totp ? void requestSecurity(emailOtp, false) : void beginTotp()}>{totp ? "ON" : "SET UP"}</button></div>{pending && <div className="totp-setup"><p className="admin-kicker">Confirm security change</p><label>Email OTP code<input inputMode="numeric" maxLength={6} value={securityCode} onChange={(e) => setSecurityCode(e.target.value.replace(/\D/g, ""))} /></label><div className="login-timer">{remaining}s remaining</div><button type="button" disabled={securityCode.length !== 6 || remaining === 0} onClick={() => void confirmSecurity()}>Confirm change</button></div>}{totpSetup && <div className="totp-setup"><p className="admin-kicker">Authenticator enrollment</p><p>Scan this QR code:</p>{totpQr && <img className="totp-qr" src={totpQr} alt="TOTP setup QR code" width={220} height={220} />}<details><summary>Manual setup fallback</summary><code>{totpSetup.secret}</code></details><label>Authenticator code<input inputMode="numeric" maxLength={6} value={totpCode} onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, ""))} /></label><button type="button" disabled={totpCode.length !== 6} onClick={() => void confirmTotp()}>Confirm authenticator</button></div>}<form className="password-form" onSubmit={passwordSubmit}><p className="admin-kicker">Password maintenance</p>{passwordStep === "form" ? <><label>Current password<input type="password" required minLength={8} value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} /></label><label>New password<div className="password-field"><input type={showNextPassword ? "text" : "password"} required minLength={8} value={nextPassword} onChange={(e) => setNextPassword(e.target.value)} /><button className="password-toggle" type="button" onClick={() => setShowNextPassword((value) => !value)}>{showNextPassword ? "Hide" : "Show"}</button></div></label></> : <><label>Email OTP<input className="otp-input" inputMode="numeric" maxLength={6} value={passwordCode} onChange={(e) => setPasswordCode(e.target.value.replace(/\D/g, ""))} /></label><div className="login-timer">{remaining}s remaining</div></>}<button type="submit" disabled={passwordStep === "otp" && (remaining === 0 || passwordCode.length !== 6)}>{passwordStep === "form" ? "Request password change code" : "Confirm password change"}</button></form>{message && <p className="editor-message">{message}</p>}</div></main>;
+  return (
+    <main className="editor-shell">
+      <header className="editor-header">
+        <Link className="admin-brand" href="/">
+          AHR<span>.</span>
+          <small>studio / security</small>
+        </Link>
+        <Link className="editor-back" href="/">
+          ← Overview
+        </Link>
+      </header>
+      <div className="security-panel standalone-security">
+        <div className="security-row">
+          <div>
+            <strong>Email OTP</strong>
+            <p>Required at login. Codes expire after 60 seconds.</p>
+          </div>
+          <button
+            className="security-toggle"
+            type="button"
+            onClick={() => void requestSecurity(!emailOtp, totp)}
+          >
+            {emailOtp ? "OFF" : "ON"}
+          </button>
+        </div>
+        <div className="security-row">
+          <div>
+            <strong>Authenticator app</strong>
+            <p>Use a QR code with your authenticator app.</p>
+          </div>
+          <button
+            className="security-toggle"
+            type="button"
+            onClick={() =>
+              totp ? void requestSecurity(emailOtp, false) : void beginTotp()
+            }
+          >
+            {totp ? "ON" : "SET UP"}
+          </button>
+        </div>
+        {pending && (
+          <div className="totp-setup">
+            <p className="admin-kicker">Confirm security change</p>
+            <label>
+              Email OTP code
+              <input
+                inputMode="numeric"
+                maxLength={6}
+                value={securityCode}
+                onChange={(e) =>
+                  setSecurityCode(e.target.value.replace(/\D/g, ""))
+                }
+              />
+            </label>
+            <div className="login-timer">{remaining}s remaining</div>
+            <button
+              type="button"
+              disabled={securityCode.length !== 6 || remaining === 0}
+              onClick={() => void confirmSecurity()}
+            >
+              Confirm change
+            </button>
+          </div>
+        )}
+        {totpSetup && (
+          <div className="totp-setup">
+            <p className="admin-kicker">Authenticator enrollment</p>
+            <p>Scan this QR code:</p>
+            {totpQr && (
+              <img
+                className="totp-qr"
+                src={totpQr}
+                alt="TOTP setup QR code"
+                width={220}
+                height={220}
+              />
+            )}
+            <details>
+              <summary>Manual setup fallback</summary>
+              <code>{totpSetup.secret}</code>
+            </details>
+            <label>
+              Authenticator code
+              <input
+                inputMode="numeric"
+                maxLength={6}
+                value={totpCode}
+                onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, ""))}
+              />
+            </label>
+            <button
+              type="button"
+              disabled={totpCode.length !== 6}
+              onClick={() => void confirmTotp()}
+            >
+              Confirm authenticator
+            </button>
+          </div>
+        )}
+        <form className="password-form" onSubmit={passwordSubmit}>
+          <p className="admin-kicker">Password maintenance</p>
+          {passwordStep === "form" ? (
+            <>
+              <label>
+                Current password
+                <input
+                  type="password"
+                  required
+                  minLength={8}
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                />
+              </label>
+              <label>
+                New password
+                <div className="password-field">
+                  <input
+                    type={showNextPassword ? "text" : "password"}
+                    required
+                    minLength={8}
+                    value={nextPassword}
+                    onChange={(e) => setNextPassword(e.target.value)}
+                  />
+                  <button
+                    className="password-toggle"
+                    type="button"
+                    onClick={() => setShowNextPassword((value) => !value)}
+                  >
+                    {showNextPassword ? "Hide" : "Show"}
+                  </button>
+                </div>
+              </label>
+            </>
+          ) : (
+            <>
+              <label>
+                Email OTP
+                <input
+                  className="otp-input"
+                  inputMode="numeric"
+                  maxLength={6}
+                  value={passwordCode}
+                  onChange={(e) =>
+                    setPasswordCode(e.target.value.replace(/\D/g, ""))
+                  }
+                />
+              </label>
+              <div className="login-timer">{remaining}s remaining</div>
+            </>
+          )}
+          <button
+            type="submit"
+            disabled={
+              passwordStep === "otp" &&
+              (remaining === 0 || passwordCode.length !== 6)
+            }
+          >
+            {passwordStep === "form"
+              ? "Request password change code"
+              : "Confirm password change"}
+          </button>
+        </form>
+        {message && <p className="editor-message">{message}</p>}
+      </div>
+    </main>
+  );
 }
-
-

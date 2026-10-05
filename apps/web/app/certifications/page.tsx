@@ -3,11 +3,15 @@ import { getPublicCertifications } from "../../lib/public-api";
 import CertificatePreview from "./CertificatePreview";
 import styles from "./certifications.module.css";
 
-const api =
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const api = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
-function certificateImages(certificate: { image_url: string | null; certification_media?: { media: { storage_key: string } }[] }) {
-  const images = (certificate.certification_media ?? []).map(({ media }) => `${api}/media/${media.storage_key}`);
+function certificateImages(certificate: {
+  image_url: string | null;
+  certification_media?: { media: { storage_key: string } }[];
+}) {
+  const images = (certificate.certification_media ?? []).map(
+    ({ media }) => `${api}/media/${media.storage_key}`,
+  );
   if (certificate.image_url) images.unshift(`${api}${certificate.image_url}`);
   return [...new Set(images)];
 }
@@ -28,9 +32,7 @@ function formatDate(date: string | null) {
 function validityState(expiry: string | null) {
   if (!expiry) return "NO EXPIRY";
 
-  return new Date(expiry).getTime() >= Date.now()
-    ? "ACTIVE"
-    : "EXPIRED";
+  return new Date(expiry).getTime() >= Date.now() ? "ACTIVE" : "EXPIRED";
 }
 
 function recordState(url: string | null) {
@@ -45,45 +47,33 @@ function recordCode(index: number, featured = false) {
 export default async function CertificationsPage() {
   const certifications = await getPublicCertifications();
 
-  const featured = certifications.filter(
-    (certificate) => certificate.featured,
-  );
+  const featured = certifications.filter((certificate) => certificate.featured);
 
-  const regular = certifications.filter(
-    (certificate) => !certificate.featured,
-  );
+  const regular = certifications.filter((certificate) => !certificate.featured);
 
   return (
     <main className={styles.page}>
       <section className={styles.registry}>
         <header className={styles.registryHeader}>
           <div className={styles.registryIdentity}>
-            <span className={styles.registryCode}>
-              // CREDENTIAL REGISTRY
-            </span>
+            <span className={styles.registryCode}>// CREDENTIAL REGISTRY</span>
 
             <div className={styles.registryTitle}>
               <strong>CREDENTIAL RECORDS</strong>
 
-              <span>
-                LEARNING / EXPERIENCE / PROFESSIONAL DEVELOPMENT
-              </span>
+              <span>LEARNING / EXPERIENCE / PROFESSIONAL DEVELOPMENT</span>
             </div>
           </div>
 
           <div className={styles.registryTelemetry}>
             <div>
               <small>RECORDS</small>
-              <strong>
-                {String(certifications.length).padStart(2, "0")}
-              </strong>
+              <strong>{String(certifications.length).padStart(2, "0")}</strong>
             </div>
 
             <div>
               <small>FEATURED</small>
-              <strong>
-                {String(featured.length).padStart(2, "0")}
-              </strong>
+              <strong>{String(featured.length).padStart(2, "0")}</strong>
             </div>
 
             <div>
@@ -101,9 +91,7 @@ export default async function CertificationsPage() {
           <span>REGISTRY / AYUSH.HR</span>
           <i />
 
-          <span>
-            SOFTWARE · AI / ML · ENGINEERING · RESEARCH
-          </span>
+          <span>SOFTWARE · AI / ML · ENGINEERING · RESEARCH</span>
 
           <i />
 
@@ -115,26 +103,17 @@ export default async function CertificationsPage() {
             <header className={styles.sectionHeader}>
               <div>
                 <span>FEATURED CREDENTIALS</span>
-                <small>
-                  PRIORITY / SELECTED PROFESSIONAL RECORDS
-                </small>
+                <small>PRIORITY / SELECTED PROFESSIONAL RECORDS</small>
               </div>
 
-              <strong>
-                {String(featured.length).padStart(2, "0")}
-              </strong>
+              <strong>{String(featured.length).padStart(2, "0")}</strong>
             </header>
 
             <div className={styles.featuredGrid}>
               {featured.map((certificate, index) => (
-                <article
-                  className={styles.featuredRecord}
-                  key={certificate.id}
-                >
+                <article className={styles.featuredRecord} key={certificate.id}>
                   <aside className={styles.recordRail}>
-                    <span>
-                      {recordCode(index, true)}
-                    </span>
+                    <span>{recordCode(index, true)}</span>
 
                     <i />
 
@@ -144,20 +123,20 @@ export default async function CertificationsPage() {
                   <div className={styles.certificateVisual}>
                     <div className={styles.visualTop}>
                       <span>CERTIFICATE / PREVIEW</span>
-                      <small>
-                        {year(certificate.issue_date)}
-                      </small>
+                      <small>{year(certificate.issue_date)}</small>
                     </div>
 
                     {certificate.image_url ? (
-                      <CertificatePreview src={certificateImages(certificate)[0]} images={certificateImages(certificate)} alt={`${certificate.name} certificate`} />
+                      <CertificatePreview
+                        src={certificateImages(certificate)[0]}
+                        images={certificateImages(certificate)}
+                        alt={`${certificate.name} certificate`}
+                      />
                     ) : (
                       <div className={styles.visualPlaceholder}>
                         <span>DOCUMENT RECORD</span>
 
-                        <strong>
-                          {recordCode(index, true)}
-                        </strong>
+                        <strong>{recordCode(index, true)}</strong>
                       </div>
                     )}
 
@@ -167,20 +146,15 @@ export default async function CertificationsPage() {
                   <div className={styles.recordContent}>
                     <div className={styles.recordMeta}>
                       <span>
-                        {certificate.category ??
-                          "PROFESSIONAL CREDENTIAL"}
+                        {certificate.category ?? "PROFESSIONAL CREDENTIAL"}
                       </span>
 
-                      <span>
-                        RECORD / {recordCode(index, true)}
-                      </span>
+                      <span>RECORD / {recordCode(index, true)}</span>
                     </div>
 
                     <h2>{certificate.name}</h2>
 
-                    <p className={styles.issuer}>
-                      {certificate.issuer}
-                    </p>
+                    <p className={styles.issuer}>{certificate.issuer}</p>
 
                     {certificate.description && (
                       <p className={styles.description}>
@@ -191,9 +165,7 @@ export default async function CertificationsPage() {
                     <div className={styles.dataGrid}>
                       <div>
                         <small>ISSUED</small>
-                        <strong>
-                          {formatDate(certificate.issue_date)}
-                        </strong>
+                        <strong>{formatDate(certificate.issue_date)}</strong>
                       </div>
 
                       <div>
@@ -207,26 +179,20 @@ export default async function CertificationsPage() {
                           }
                         >
                           <i />
-                          {recordState(
-                            certificate.credential_url,
-                          )}
+                          {recordState(certificate.credential_url)}
                         </strong>
                       </div>
 
                       <div>
                         <small>VALIDITY</small>
                         <strong>
-                          {validityState(
-                            certificate.expiry_date,
-                          )}
+                          {validityState(certificate.expiry_date)}
                         </strong>
                       </div>
 
                       <div>
                         <small>CREDENTIAL ID</small>
-                        <strong>
-                          {certificate.credential_id ?? "—"}
-                        </strong>
+                        <strong>{certificate.credential_id ?? "—"}</strong>
                       </div>
                     </div>
 
@@ -265,32 +231,21 @@ export default async function CertificationsPage() {
           <header className={styles.sectionHeader}>
             <div>
               <span>
-                {featured.length
-                  ? "REGISTRY ARCHIVE"
-                  : "CREDENTIAL DOSSIERS"}
+                {featured.length ? "REGISTRY ARCHIVE" : "CREDENTIAL DOSSIERS"}
               </span>
 
-              <small>
-                PROFESSIONAL / TECHNICAL / PARTICIPATION RECORDS
-              </small>
+              <small>PROFESSIONAL / TECHNICAL / PARTICIPATION RECORDS</small>
             </div>
 
-            <strong>
-              {String(regular.length).padStart(2, "0")}
-            </strong>
+            <strong>{String(regular.length).padStart(2, "0")}</strong>
           </header>
 
           {regular.length > 0 ? (
             <div className={styles.recordList}>
               {regular.map((certificate, index) => (
-                <article
-                  className={styles.record}
-                  key={certificate.id}
-                >
+                <article className={styles.record} key={certificate.id}>
                   <aside className={styles.standardRail}>
-                    <span>
-                      {recordCode(index)}
-                    </span>
+                    <span>{recordCode(index)}</span>
 
                     <i />
 
@@ -301,24 +256,23 @@ export default async function CertificationsPage() {
                     <div className={styles.visualTop}>
                       <span>CERT / {recordCode(index)}</span>
 
-                      <small>
-                        {year(certificate.issue_date)}
-                      </small>
+                      <small>{year(certificate.issue_date)}</small>
                     </div>
 
                     {certificate.image_url ? (
-                      <CertificatePreview src={certificateImages(certificate)[0]} images={certificateImages(certificate)} alt={`${certificate.name} certificate`} />
+                      <CertificatePreview
+                        src={certificateImages(certificate)[0]}
+                        images={certificateImages(certificate)}
+                        alt={`${certificate.name} certificate`}
+                      />
                     ) : (
                       <div className={styles.visualPlaceholder}>
                         <span>
-                          {certificate.category
-                            ?.slice(0, 3)
-                            .toUpperCase() ?? "CRD"}
+                          {certificate.category?.slice(0, 3).toUpperCase() ??
+                            "CRD"}
                         </span>
 
-                        <strong>
-                          {recordCode(index)}
-                        </strong>
+                        <strong>{recordCode(index)}</strong>
                       </div>
                     )}
 
@@ -329,13 +283,10 @@ export default async function CertificationsPage() {
                     <div className={styles.standardHead}>
                       <div className={styles.recordMeta}>
                         <span>
-                          {certificate.category ??
-                            "PROFESSIONAL CREDENTIAL"}
+                          {certificate.category ?? "PROFESSIONAL CREDENTIAL"}
                         </span>
 
-                        <span>
-                          {year(certificate.issue_date)}
-                        </span>
+                        <span>{year(certificate.issue_date)}</span>
                       </div>
 
                       <span
@@ -347,9 +298,7 @@ export default async function CertificationsPage() {
                       >
                         <i />
 
-                        {recordState(
-                          certificate.credential_url,
-                        )}
+                        {recordState(certificate.credential_url)}
                       </span>
                     </div>
 
@@ -369,27 +318,21 @@ export default async function CertificationsPage() {
                       <div>
                         <small>ISSUED</small>
 
-                        <strong>
-                          {formatDate(certificate.issue_date)}
-                        </strong>
+                        <strong>{formatDate(certificate.issue_date)}</strong>
                       </div>
 
                       <div>
                         <small>VALIDITY</small>
 
                         <strong>
-                          {validityState(
-                            certificate.expiry_date,
-                          )}
+                          {validityState(certificate.expiry_date)}
                         </strong>
                       </div>
 
                       <div>
                         <small>CREDENTIAL ID</small>
 
-                        <strong>
-                          {certificate.credential_id ?? "—"}
-                        </strong>
+                        <strong>{certificate.credential_id ?? "—"}</strong>
                       </div>
 
                       <div>
@@ -442,9 +385,7 @@ export default async function CertificationsPage() {
 
           <i />
 
-          <Link href="/skills">
-            TECHNICAL INDEX →
-          </Link>
+          <Link href="/skills">TECHNICAL INDEX →</Link>
         </footer>
       </section>
     </main>

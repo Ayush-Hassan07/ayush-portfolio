@@ -45,19 +45,13 @@ export default function HeroMetrics({
       {metrics.map((metric, index) => (
         <div className={styles.metric} key={metric.label}>
           <div className={styles.metricHead}>
-            <span className={styles.metricIndex}>
-              0{index + 1}
-            </span>
+            <span className={styles.metricIndex}>0{index + 1}</span>
 
-            <span className={styles.metricCode}>
-              {metric.code}
-            </span>
+            <span className={styles.metricCode}>{metric.code}</span>
           </div>
 
           <div className={styles.metricMain}>
-            <strong>
-              {String(metric.value).padStart(2, "0")}
-            </strong>
+            <strong>{String(metric.value).padStart(2, "0")}</strong>
 
             <div className={styles.metricCopy}>
               <span>{metric.label}</span>

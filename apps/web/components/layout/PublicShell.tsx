@@ -24,7 +24,8 @@ export default function PublicShell({
   googleScholarUrl,
 }: Props) {
   const pathname = usePathname();
-  const validPath = pathname === "/" ||
+  const validPath =
+    pathname === "/" ||
     pathname === "/skills" ||
     pathname === "/projects" ||
     pathname === "/research" ||
@@ -43,10 +44,18 @@ export default function PublicShell({
         linkedinUrl={linkedinUrl}
         googleScholarUrl={googleScholarUrl}
       />
-      <TopNav name={name} email={email} githubUrl={githubUrl} linkedinUrl={linkedinUrl} googleScholarUrl={googleScholarUrl} />
+      <TopNav
+        name={name}
+        email={email}
+        githubUrl={githubUrl}
+        linkedinUrl={linkedinUrl}
+        googleScholarUrl={googleScholarUrl}
+      />
       <div className={styles.content}>{children}</div>
       <footer className={styles.footer}>
-        <span>&copy; {new Date().getFullYear()} {name}</span>
+        <span>
+          &copy; {new Date().getFullYear()} {name}
+        </span>
         <span className={styles.footerSignal}>
           SOFTWARE <i /> INTELLIGENCE <i /> RESEARCH
         </span>

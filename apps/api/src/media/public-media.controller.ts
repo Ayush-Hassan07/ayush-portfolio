@@ -1,44 +1,31 @@
-import {
-  Controller,
-  Get,
-  Param,
-  Res,
-} from "@nestjs/common";
+import { Controller, Get, Param, Res } from '@nestjs/common';
 
-import type { Response } from "express";
+import type { Response } from 'express';
 
-import { MediaService } from "./media.service";
+import { MediaService } from './media.service';
 
-@Controller("media")
+@Controller('media')
 export class PublicMediaController {
-  constructor(
-    private readonly media: MediaService,
-  ) {}
+  constructor(private readonly media: MediaService) {}
 
-  @Get(":key")
-  async image(
-    @Param("key") key: string,
-    @Res() response: Response,
-  ) {
+  @Get(':key')
+  async image(@Param('key') key: string, @Res() response: Response) {
     if (!/^[a-f0-9-]+\.webp$/i.test(key)) {
       return response.status(400).end();
     }
 
     try {
-      const file =
-        await this.media.getImage(key);
+      const file = await this.media.getImage(key);
 
       if (!file) {
         return response.status(404).end();
       }
 
       return response
-        .type("image/webp")
+        .type('image/webp')
         .set({
-          "Cache-Control":
-            "public, max-age=31536000, immutable",
-          "X-Content-Type-Options":
-            "nosniff",
+          'Cache-Control': 'public, max-age=31536000, immutable',
+          'X-Content-Type-Options': 'nosniff',
         })
         .send(file);
     } catch {

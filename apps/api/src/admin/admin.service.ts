@@ -8,11 +8,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import type { Prisma } from '../../generated/prisma/client';
 import { randomBytes } from 'node:crypto';
-import {
-  encryptTotpSecret,
-  decryptTotpSecret,
-  verifyTotp,
-} from '../auth/totp';
+import { encryptTotpSecret, decryptTotpSecret, verifyTotp } from '../auth/totp';
 import { AuthService } from '../auth/auth.service';
 
 type ProjectInput = {
@@ -93,10 +89,7 @@ export class AdminService {
     });
   }
 
-  async replaceProjectTechnologies(
-    slug: string,
-    technologyIds: unknown,
-  ) {
+  async replaceProjectTechnologies(slug: string, technologyIds: unknown) {
     if (
       !Array.isArray(technologyIds) ||
       technologyIds.some((id) => typeof id !== 'string')
@@ -136,10 +129,7 @@ export class AdminService {
       where: {
         project: { slug },
       },
-      orderBy: [
-        { is_primary: 'desc' },
-        { sort_order: 'asc' },
-      ],
+      orderBy: [{ is_primary: 'desc' }, { sort_order: 'asc' }],
       include: {
         media: true,
       },
@@ -157,9 +147,7 @@ export class AdminService {
       },
     });
 
-    const key = project?.image_url?.match(
-      /([a-f0-9-]+\.webp)$/i,
-    )?.[1];
+    const key = project?.image_url?.match(/([a-f0-9-]+\.webp)$/i)?.[1];
 
     if (!project || !key) {
       return rows;
@@ -235,17 +223,13 @@ export class AdminService {
       data: {
         title: String(input.title ?? '').trim(),
 
-        venue: input.venue
-          ? String(input.venue).trim()
-          : null,
+        venue: input.venue ? String(input.venue).trim() : null,
 
         publication_date: input.publication_date
           ? new Date(String(input.publication_date))
           : null,
 
-        paper_url: input.paper_url
-          ? String(input.paper_url).trim()
-          : null,
+        paper_url: input.paper_url ? String(input.paper_url).trim() : null,
 
         description: input.description
           ? String(input.description).trim()
@@ -260,23 +244,16 @@ export class AdminService {
     });
   }
 
-  updatePublication(
-    id: string,
-    input: Record<string, unknown>,
-  ) {
+  updatePublication(id: string, input: Record<string, unknown>) {
     return this.prisma.publication.update({
       where: { id },
 
       data: {
         title:
-          input.title === undefined
-            ? undefined
-            : String(input.title).trim(),
+          input.title === undefined ? undefined : String(input.title).trim(),
 
         venue:
-          input.venue === undefined
-            ? undefined
-            : String(input.venue).trim(),
+          input.venue === undefined ? undefined : String(input.venue).trim(),
 
         publication_date:
           input.publication_date === undefined
@@ -299,9 +276,7 @@ export class AdminService {
             : String(input.repository_url).trim(),
 
         featured:
-          input.featured === undefined
-            ? undefined
-            : Boolean(input.featured),
+          input.featured === undefined ? undefined : Boolean(input.featured),
       },
     });
   }
@@ -314,10 +289,7 @@ export class AdminService {
 
   listSkills() {
     return this.prisma.skill.findMany({
-      orderBy: [
-        { sort_order: 'asc' },
-        { name: 'asc' },
-      ],
+      orderBy: [{ sort_order: 'asc' }, { name: 'asc' }],
     });
   }
 
@@ -336,30 +308,20 @@ export class AdminService {
             : Number(input.proficiency),
 
         sort_order:
-          input.sort_order === undefined
-            ? 0
-            : Number(input.sort_order),
+          input.sort_order === undefined ? 0 : Number(input.sort_order),
 
         featured:
-          input.featured === undefined
-            ? false
-            : Boolean(input.featured),
+          input.featured === undefined ? false : Boolean(input.featured),
       },
     });
   }
 
-  updateSkill(
-    id: string,
-    input: Record<string, unknown>,
-  ) {
+  updateSkill(id: string, input: Record<string, unknown>) {
     return this.prisma.skill.update({
       where: { id },
 
       data: {
-        name:
-          input.name === undefined
-            ? undefined
-            : String(input.name).trim(),
+        name: input.name === undefined ? undefined : String(input.name).trim(),
 
         category:
           input.category === undefined
@@ -369,20 +331,15 @@ export class AdminService {
         proficiency:
           input.proficiency === undefined
             ? undefined
-            : input.proficiency === null ||
-                input.proficiency === ''
+            : input.proficiency === null || input.proficiency === ''
               ? null
               : Number(input.proficiency),
 
         sort_order:
-          input.sort_order === undefined
-            ? undefined
-            : Number(input.sort_order),
+          input.sort_order === undefined ? undefined : Number(input.sort_order),
 
         featured:
-          input.featured === undefined
-            ? undefined
-            : Boolean(input.featured),
+          input.featured === undefined ? undefined : Boolean(input.featured),
       },
     });
   }
@@ -420,148 +377,121 @@ export class AdminService {
     });
   }
 
-  async createCertification(
-    input: Record<string, unknown>,
-  ) {
-    const certification =
-      await this.prisma.certification.create({
-        data: {
-          name: String(input.name ?? '').trim(),
-          issuer: String(input.issuer ?? '').trim(),
+  async createCertification(input: Record<string, unknown>) {
+    const certification = await this.prisma.certification.create({
+      data: {
+        name: String(input.name ?? '').trim(),
+        issuer: String(input.issuer ?? '').trim(),
 
-          issue_date: input.issue_date
-            ? new Date(String(input.issue_date))
-            : null,
+        issue_date: input.issue_date
+          ? new Date(String(input.issue_date))
+          : null,
 
-          expiry_date: input.expiry_date
-            ? new Date(String(input.expiry_date))
-            : null,
+        expiry_date: input.expiry_date
+          ? new Date(String(input.expiry_date))
+          : null,
 
-          credential_id: input.credential_id
-            ? String(input.credential_id).trim()
-            : null,
+        credential_id: input.credential_id
+          ? String(input.credential_id).trim()
+          : null,
 
-          credential_url: input.credential_url
-            ? String(input.credential_url).trim()
-            : null,
+        credential_url: input.credential_url
+          ? String(input.credential_url).trim()
+          : null,
 
-          description: input.description
-            ? String(input.description).trim()
-            : null,
+        description: input.description
+          ? String(input.description).trim()
+          : null,
 
-          image_url: input.image_url
-            ? String(input.image_url).trim()
-            : null,
+        image_url: input.image_url ? String(input.image_url).trim() : null,
 
-          category: input.category
-            ? String(input.category).trim()
-            : null,
+        category: input.category ? String(input.category).trim() : null,
 
-          featured: Boolean(input.featured),
+        featured: Boolean(input.featured),
 
-          sort_order:
-            input.sort_order === undefined ||
-            input.sort_order === null
-              ? 0
-              : Number(input.sort_order),
-        },
-      });
+        sort_order:
+          input.sort_order === undefined || input.sort_order === null
+            ? 0
+            : Number(input.sort_order),
+      },
+    });
 
-    await this.saveCertificationMedia(
-      certification.id,
-      input.media_ids,
-    );
+    await this.saveCertificationMedia(certification.id, input.media_ids);
 
     return certification;
   }
 
-  async updateCertification(
-    id: string,
-    input: Record<string, unknown>,
-  ) {
-    const certification =
-      await this.prisma.certification.update({
-        where: { id },
+  async updateCertification(id: string, input: Record<string, unknown>) {
+    const certification = await this.prisma.certification.update({
+      where: { id },
 
-        data: {
-          name:
-            input.name === undefined
-              ? undefined
-              : String(input.name).trim(),
+      data: {
+        name: input.name === undefined ? undefined : String(input.name).trim(),
 
-          issuer:
-            input.issuer === undefined
-              ? undefined
-              : String(input.issuer).trim(),
+        issuer:
+          input.issuer === undefined ? undefined : String(input.issuer).trim(),
 
-          issue_date:
-            input.issue_date === undefined
-              ? undefined
-              : input.issue_date
-                ? new Date(String(input.issue_date))
-                : null,
+        issue_date:
+          input.issue_date === undefined
+            ? undefined
+            : input.issue_date
+              ? new Date(String(input.issue_date))
+              : null,
 
-          image_url:
-            input.image_url === undefined
-              ? undefined
-              : input.image_url
-                ? String(input.image_url).trim()
-                : null,
+        image_url:
+          input.image_url === undefined
+            ? undefined
+            : input.image_url
+              ? String(input.image_url).trim()
+              : null,
 
-          expiry_date:
-            input.expiry_date === undefined
-              ? undefined
-              : input.expiry_date
-                ? new Date(String(input.expiry_date))
-                : null,
+        expiry_date:
+          input.expiry_date === undefined
+            ? undefined
+            : input.expiry_date
+              ? new Date(String(input.expiry_date))
+              : null,
 
-          credential_id:
-            input.credential_id === undefined
-              ? undefined
-              : input.credential_id
-                ? String(input.credential_id).trim()
-                : null,
+        credential_id:
+          input.credential_id === undefined
+            ? undefined
+            : input.credential_id
+              ? String(input.credential_id).trim()
+              : null,
 
-          credential_url:
-            input.credential_url === undefined
-              ? undefined
-              : input.credential_url
-                ? String(input.credential_url).trim()
-                : null,
+        credential_url:
+          input.credential_url === undefined
+            ? undefined
+            : input.credential_url
+              ? String(input.credential_url).trim()
+              : null,
 
-          description:
-            input.description === undefined
-              ? undefined
-              : input.description
-                ? String(input.description).trim()
-                : null,
+        description:
+          input.description === undefined
+            ? undefined
+            : input.description
+              ? String(input.description).trim()
+              : null,
 
-          category:
-            input.category === undefined
-              ? undefined
-              : input.category
-                ? String(input.category).trim()
-                : null,
+        category:
+          input.category === undefined
+            ? undefined
+            : input.category
+              ? String(input.category).trim()
+              : null,
 
-          featured:
-            input.featured === undefined
-              ? undefined
-              : Boolean(input.featured),
+        featured:
+          input.featured === undefined ? undefined : Boolean(input.featured),
 
-          sort_order:
-            input.sort_order === undefined
-              ? undefined
-              : Number(input.sort_order),
+        sort_order:
+          input.sort_order === undefined ? undefined : Number(input.sort_order),
 
-          updated_at: new Date(),
-        },
-      });
+        updated_at: new Date(),
+      },
+    });
 
     if (input.media_ids !== undefined) {
-      await this.saveCertificationMedia(
-        id,
-        input.media_ids,
-      );
+      await this.saveCertificationMedia(id, input.media_ids);
     }
 
     return certification;
@@ -571,10 +501,7 @@ export class AdminService {
     certificationId: string,
     value: unknown,
   ) {
-    if (
-      !Array.isArray(value) ||
-      value.some((id) => typeof id !== 'string')
-    ) {
+    if (!Array.isArray(value) || value.some((id) => typeof id !== 'string')) {
       return;
     }
 
@@ -615,35 +542,22 @@ export class AdminService {
         institution: String(i.institution ?? '').trim(),
         degree: String(i.degree ?? '').trim(),
 
-        field: i.field
-          ? String(i.field).trim()
-          : null,
+        field: i.field ? String(i.field).trim() : null,
 
         start_date: new Date(String(i.start_date)),
 
-        end_date: i.end_date
-          ? new Date(String(i.end_date))
-          : null,
+        end_date: i.end_date ? new Date(String(i.end_date)) : null,
 
-        description: i.description
-          ? String(i.description)
-          : null,
+        description: i.description ? String(i.description) : null,
 
-        result: i.result
-          ? String(i.result).trim()
-          : null,
+        result: i.result ? String(i.result).trim() : null,
 
-        institution_url: i.institution_url
-          ? String(i.institution_url)
-          : null,
+        institution_url: i.institution_url ? String(i.institution_url) : null,
       },
     });
   }
 
-  updateEducation(
-    id: string,
-    i: Record<string, unknown>,
-  ) {
+  updateEducation(id: string, i: Record<string, unknown>) {
     return this.prisma.education.update({
       where: { id },
 
@@ -653,10 +567,7 @@ export class AdminService {
             ? undefined
             : String(i.institution).trim(),
 
-        degree:
-          i.degree === undefined
-            ? undefined
-            : String(i.degree).trim(),
+        degree: i.degree === undefined ? undefined : String(i.degree).trim(),
 
         field:
           i.field === undefined
@@ -723,42 +634,28 @@ export class AdminService {
         company: String(i.company ?? '').trim(),
         position: String(i.position ?? '').trim(),
 
-        location: i.location
-          ? String(i.location).trim()
-          : null,
+        location: i.location ? String(i.location).trim() : null,
 
         start_date: new Date(String(i.start_date)),
 
-        end_date: i.end_date
-          ? new Date(String(i.end_date))
-          : null,
+        end_date: i.end_date ? new Date(String(i.end_date)) : null,
 
         description: String(i.description ?? ''),
 
-        company_url: i.company_url
-          ? String(i.company_url)
-          : null,
+        company_url: i.company_url ? String(i.company_url) : null,
       },
     });
   }
 
-  updateExperience(
-    id: string,
-    i: Record<string, unknown>,
-  ) {
+  updateExperience(id: string, i: Record<string, unknown>) {
     return this.prisma.experience.update({
       where: { id },
 
       data: {
-        company:
-          i.company === undefined
-            ? undefined
-            : String(i.company).trim(),
+        company: i.company === undefined ? undefined : String(i.company).trim(),
 
         position:
-          i.position === undefined
-            ? undefined
-            : String(i.position).trim(),
+          i.position === undefined ? undefined : String(i.position).trim(),
 
         location:
           i.location === undefined
@@ -780,9 +677,7 @@ export class AdminService {
               : null,
 
         description:
-          i.description === undefined
-            ? undefined
-            : String(i.description),
+          i.description === undefined ? undefined : String(i.description),
 
         company_url:
           i.company_url === undefined
@@ -827,25 +722,13 @@ export class AdminService {
     const current = await this.prisma.profile.findFirst();
 
     const data = {
-      name:
-        input.name === undefined
-          ? undefined
-          : String(input.name).trim(),
+      name: input.name === undefined ? undefined : String(input.name).trim(),
 
-      title:
-        input.title === undefined
-          ? undefined
-          : String(input.title).trim(),
+      title: input.title === undefined ? undefined : String(input.title).trim(),
 
-      bio:
-        input.bio === undefined
-          ? undefined
-          : String(input.bio).trim(),
+      bio: input.bio === undefined ? undefined : String(input.bio).trim(),
 
-      email:
-        input.email === undefined
-          ? undefined
-          : String(input.email).trim(),
+      email: input.email === undefined ? undefined : String(input.email).trim(),
 
       profile_image:
         input.profile_image === undefined
@@ -899,10 +782,7 @@ export class AdminService {
 
   listTechnologies() {
     return this.prisma.technology.findMany({
-      orderBy: [
-        { category: 'asc' },
-        { name: 'asc' },
-      ],
+      orderBy: [{ category: 'asc' }, { name: 'asc' }],
       include: {
         skill: true,
       },
@@ -914,17 +794,11 @@ export class AdminService {
       data: {
         name: String(input.name ?? '').trim(),
 
-        category: input.category
-          ? String(input.category).trim()
-          : null,
+        category: input.category ? String(input.category).trim() : null,
 
-        icon_url: input.icon_url
-          ? String(input.icon_url).trim()
-          : null,
+        icon_url: input.icon_url ? String(input.icon_url).trim() : null,
 
-        skill_id: input.skill_id
-          ? String(input.skill_id)
-          : null,
+        skill_id: input.skill_id ? String(input.skill_id) : null,
       },
     });
   }
@@ -987,10 +861,8 @@ export class AdminService {
 
       create: {
         admin_id: admin.id,
-        email_otp_enabled:
-          input.emailOtpEnabled !== false,
-        totp_enabled:
-          input.totpEnabled === true,
+        email_otp_enabled: input.emailOtpEnabled !== false,
+        totp_enabled: input.totpEnabled === true,
       },
     });
   }
@@ -1007,22 +879,16 @@ export class AdminService {
     let output = '';
 
     for (let i = 0; i < bits.length; i += 5) {
-      const chunk = bits
-        .slice(i, i + 5)
-        .padEnd(5, '0');
+      const chunk = bits.slice(i, i + 5).padEnd(5, '0');
 
-      output += alphabet[
-        Number.parseInt(chunk, 2)
-      ];
+      output += alphabet[Number.parseInt(chunk, 2)];
     }
 
     return output;
   }
 
   async beginTotp(adminId: string) {
-    const secret = this.base32Encode(
-      randomBytes(20),
-    );
+    const secret = this.base32Encode(randomBytes(20));
 
     await this.prisma.admin_security_settings.upsert({
       where: {
@@ -1030,21 +896,13 @@ export class AdminService {
       },
 
       update: {
-        totp_pending_secret_encrypted:
-          encryptTotpSecret(
-            secret,
-            this.secret(),
-          ),
+        totp_pending_secret_encrypted: encryptTotpSecret(secret, this.secret()),
       },
 
       create: {
         admin_id: adminId,
 
-        totp_pending_secret_encrypted:
-          encryptTotpSecret(
-            secret,
-            this.secret(),
-          ),
+        totp_pending_secret_encrypted: encryptTotpSecret(secret, this.secret()),
       },
     });
 
@@ -1061,21 +919,14 @@ export class AdminService {
     };
   }
 
-  async confirmTotp(
-    adminId: string,
-    code: unknown,
-  ) {
-    const settings =
-      await this.prisma.admin_security_settings.findUnique({
-        where: {
-          admin_id: adminId,
-        },
-      });
+  async confirmTotp(adminId: string, code: unknown) {
+    const settings = await this.prisma.admin_security_settings.findUnique({
+      where: {
+        admin_id: adminId,
+      },
+    });
 
-    if (
-      typeof code !== 'string' ||
-      !settings?.totp_pending_secret_encrypted
-    ) {
+    if (typeof code !== 'string' || !settings?.totp_pending_secret_encrypted) {
       throw new Error('Invalid TOTP enrollment');
     }
 
@@ -1096,8 +947,7 @@ export class AdminService {
       data: {
         totp_enabled: true,
 
-        totp_secret_encrypted:
-          settings.totp_pending_secret_encrypted,
+        totp_secret_encrypted: settings.totp_pending_secret_encrypted,
 
         totp_pending_secret_encrypted: null,
       },
@@ -1125,31 +975,23 @@ export class AdminService {
       throw new NotFoundException('Admin not found');
     }
 
-    const code = Math.floor(
-      100000 + Math.random() * 900000,
-    ).toString();
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const challenge =
-      await this.prisma.admin_otp_challenge.create({
-        data: {
-          admin_id: adminId,
+    const challenge = await this.prisma.admin_otp_challenge.create({
+      data: {
+        admin_id: adminId,
 
-          code_hash: AuthService.hashPassword(
-            `${code}:${Boolean(
-              input.emailOtpEnabled,
-            )}:${Boolean(input.totpEnabled)}`,
-          ),
+        code_hash: AuthService.hashPassword(
+          `${code}:${Boolean(
+            input.emailOtpEnabled,
+          )}:${Boolean(input.totpEnabled)}`,
+        ),
 
-          expires_at: new Date(
-            Date.now() + 60000,
-          ),
-        },
-      });
+        expires_at: new Date(Date.now() + 60000),
+      },
+    });
 
-    await this.sendSecurityOtp(
-      admin.email,
-      code,
-    );
+    await this.sendSecurityOtp(admin.email, code);
 
     return {
       challengeId: challenge.id,
@@ -1166,31 +1008,28 @@ export class AdminService {
     },
   ) {
     if (typeof input.code !== 'string') {
-      throw new Error(
-        'Verification code required',
-      );
+      throw new Error('Verification code required');
     }
 
-    const challenge =
-      await this.prisma.admin_otp_challenge.findFirst({
-        where: {
-          id: {
-            not: undefined,
-          },
-
-          admin_id: adminId,
-
-          consumed: false,
-
-          expires_at: {
-            gt: new Date(),
-          },
+    const challenge = await this.prisma.admin_otp_challenge.findFirst({
+      where: {
+        id: {
+          not: undefined,
         },
 
-        orderBy: {
-          created_at: 'desc',
+        admin_id: adminId,
+
+        consumed: false,
+
+        expires_at: {
+          gt: new Date(),
         },
-      });
+      },
+
+      orderBy: {
+        created_at: 'desc',
+      },
+    });
 
     if (
       !challenge ||
@@ -1201,9 +1040,7 @@ export class AdminService {
         challenge.code_hash,
       )
     ) {
-      throw new Error(
-        'Invalid security verification',
-      );
+      throw new Error('Invalid security verification');
     }
 
     await this.prisma.$transaction([
@@ -1213,13 +1050,9 @@ export class AdminService {
         },
 
         update: {
-          email_otp_enabled: Boolean(
-            input.emailOtpEnabled,
-          ),
+          email_otp_enabled: Boolean(input.emailOtpEnabled),
 
-          totp_enabled: Boolean(
-            input.totpEnabled,
-          ),
+          totp_enabled: Boolean(input.totpEnabled),
 
           updated_at: new Date(),
         },
@@ -1227,13 +1060,9 @@ export class AdminService {
         create: {
           admin_id: adminId,
 
-          email_otp_enabled: Boolean(
-            input.emailOtpEnabled,
-          ),
+          email_otp_enabled: Boolean(input.emailOtpEnabled),
 
-          totp_enabled: Boolean(
-            input.totpEnabled,
-          ),
+          totp_enabled: Boolean(input.totpEnabled),
         },
       }),
 
@@ -1265,49 +1094,33 @@ export class AdminService {
     );
   }
 
-  private async sendSecurityOtp(
-    recipient: string,
-    code: string,
-  ) {
+  private async sendSecurityOtp(recipient: string, code: string) {
     const host = process.env.SMTP_HOST;
-    const port = Number(
-      process.env.SMTP_PORT ?? 587,
-    );
+    const port = Number(process.env.SMTP_PORT ?? 587);
     const user = process.env.SMTP_USER;
     const password = process.env.SMTP_PASSWORD;
     const from = process.env.SMTP_FROM;
 
-    if (
-      !host ||
-      !user ||
-      !password ||
-      !from
-    ) {
-      throw new Error(
-        'SMTP configuration is incomplete',
-      );
+    if (!host || !user || !password || !from) {
+      throw new Error('SMTP configuration is incomplete');
     }
 
-    const nodemailer = await import(
-      'nodemailer'
-    );
+    const nodemailer = await import('nodemailer');
 
-    const transporter =
-      nodemailer.default.createTransport({
-        host,
-        port,
-        secure: port === 465,
-        auth: {
-          user,
-          pass: password,
-        },
-      });
+    const transporter = nodemailer.default.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: {
+        user,
+        pass: password,
+      },
+    });
 
     await transporter.sendMail({
       from,
       to: recipient,
-      subject:
-        'Portfolio security change verification',
+      subject: 'Portfolio security change verification',
       text:
         `Your security settings verification code is ${code}. ` +
         `It expires in 60 seconds.`,
@@ -1315,27 +1128,17 @@ export class AdminService {
   }
 
   private secret() {
-    const value =
-      process.env.SESSION_SECRET;
+    const value = process.env.SESSION_SECRET;
 
     if (!value || value.length < 32) {
-      throw new Error(
-        'SESSION_SECRET must be at least 32 characters',
-      );
+      throw new Error('SESSION_SECRET must be at least 32 characters');
     }
 
     return value;
   }
 
-  private validateProject(
-    input: ProjectInput,
-    partial = false,
-  ) {
-    const text = (
-      value: unknown,
-      field: string,
-      required: boolean,
-    ) => {
+  private validateProject(input: ProjectInput, partial = false) {
+    const text = (value: unknown, field: string, required: boolean) => {
       if (value === undefined) {
         return undefined;
       }
@@ -1344,49 +1147,25 @@ export class AdminService {
         return null;
       }
 
-      if (
-        typeof value !== 'string' ||
-        (!value.trim() && required)
-      ) {
-        throw new Error(
-          `${field} is required`,
-        );
+      if (typeof value !== 'string' || (!value.trim() && required)) {
+        throw new Error(`${field} is required`);
       }
 
       return value.trim() || null;
     };
 
-    const title = text(
-      input.title,
-      'title',
-      true,
-    );
+    const title = text(input.title, 'title', true);
 
-    const slug = text(
-      input.slug,
-      'slug',
-      true,
-    );
+    const slug = text(input.slug, 'slug', true);
 
-    if (
-      typeof slug === 'string' &&
-      !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(
-        slug,
-      )
-    ) {
-      throw new Error(
-        'slug must use lowercase letters, numbers, and hyphens',
-      );
+    if (typeof slug === 'string' && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
+      throw new Error('slug must use lowercase letters, numbers, and hyphens');
     }
 
     const status =
       input.status === undefined && partial
         ? undefined
-        : text(
-            input.status ?? 'draft',
-            'status',
-            true,
-          );
+        : text(input.status ?? 'draft', 'status', true);
 
     const allowedStatuses = [
       'draft',
@@ -1397,26 +1176,15 @@ export class AdminService {
       'archived',
     ];
 
-    if (
-      typeof status === 'string' &&
-      !allowedStatuses.includes(status)
-    ) {
+    if (typeof status === 'string' && !allowedStatuses.includes(status)) {
       throw new Error(
         'status must be draft, planned, ongoing, finished, paused, or archived',
       );
     }
 
-    const description = text(
-      input.description,
-      'description',
-      true,
-    );
+    const description = text(input.description, 'description', true);
 
-    const summary = text(
-      input.summary,
-      'summary',
-      false,
-    );
+    const summary = text(input.summary, 'summary', false);
 
     const data = {
       title,
@@ -1426,11 +1194,7 @@ export class AdminService {
       status,
 
       image_url: (() => {
-        const value = text(
-          input.image_url,
-          'image_url',
-          false,
-        );
+        const value = text(input.image_url, 'image_url', false);
 
         if (value === '\\1') {
           return null;
@@ -1440,11 +1204,7 @@ export class AdminService {
           try {
             const parsed = new URL(value);
 
-            if (
-              parsed.pathname.startsWith(
-                '/media/',
-              )
-            ) {
+            if (parsed.pathname.startsWith('/media/')) {
               return parsed.pathname;
             }
           } catch {
@@ -1455,34 +1215,19 @@ export class AdminService {
         return value;
       })(),
 
-      github_url: text(
-        input.github_url,
-        'github_url',
-        false,
-      ),
+      github_url: text(input.github_url, 'github_url', false),
 
-      live_url: text(
-        input.live_url,
-        'live_url',
-        false,
-      ),
+      live_url: text(input.live_url, 'live_url', false),
 
       featured:
-        input.featured === undefined
-          ? undefined
-          : Boolean(input.featured),
+        input.featured === undefined ? undefined : Boolean(input.featured),
 
       sort_order:
-        input.sort_order === undefined
-          ? undefined
-          : Number(input.sort_order),
+        input.sort_order === undefined ? undefined : Number(input.sort_order),
     };
 
     return Object.fromEntries(
-      Object.entries(data).filter(
-        ([, value]) =>
-          value !== undefined,
-      ),
+      Object.entries(data).filter(([, value]) => value !== undefined),
     ) as unknown as Prisma.projectCreateInput;
   }
 }

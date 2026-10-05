@@ -14,8 +14,8 @@
   justify-content: space-between;
   border-bottom: 1px solid var(--accent-line);
   color: var(--muted);
-  font-size: .45rem;
-  letter-spacing: .14em;
+  font-size: 0.45rem;
+  letter-spacing: 0.14em;
 }
 
 .topline a:hover {
@@ -23,7 +23,7 @@
 }
 
 .sectionHeader {
-  margin-bottom: .9rem;
+  margin-bottom: 0.9rem;
 }
 
 .sectionHeader span {
@@ -50,22 +50,22 @@
   align-items: center;
   gap: 1.2rem;
   color: var(--accent);
-  font-size: .48rem;
+  font-size: 0.48rem;
   font-weight: 700;
-  letter-spacing: .15em;
+  letter-spacing: 0.15em;
 }
 
 .status {
   display: inline-flex;
   align-items: center;
-  gap: .45rem;
+  gap: 0.45rem;
   color: var(--muted);
   text-transform: uppercase;
 }
 
 .status i {
-  width: .34rem;
-  height: .34rem;
+  width: 0.34rem;
+  height: 0.34rem;
   border-radius: 50%;
   background: var(--accent);
 }
@@ -76,8 +76,8 @@
   color: var(--text);
   font-size: clamp(2.8rem, 5vw, 5.5rem);
   font-weight: 520;
-  line-height: .95;
-  letter-spacing: -.055em;
+  line-height: 0.95;
+  letter-spacing: -0.055em;
 }
 
 /* ---------- Summary / overview jump ---------- */
@@ -93,7 +93,7 @@
 .identityDescription {
   max-width: 55rem;
   color: var(--muted);
-  font-size: .8rem;
+  font-size: 0.8rem;
   line-height: 1.8;
 }
 
@@ -107,15 +107,15 @@
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: .5rem;
+  gap: 0.5rem;
   margin-top: 1.6rem;
 }
 
 .quickStack > span {
-  padding: .5rem .7rem;
+  padding: 0.5rem 0.7rem;
   border: 1px solid var(--line-strong);
   color: var(--text);
-  font-size: .52rem;
+  font-size: 0.52rem;
   font-weight: 650;
 }
 
@@ -130,7 +130,7 @@
   display: inline-flex;
   align-items: center;
   gap: 2rem;
-  font-size: .47rem;
+  font-size: 0.47rem;
   font-weight: 750;
 }
 
@@ -161,15 +161,15 @@
 }
 
 .identityMeta small {
-  color: rgba(196, 201, 191, .78);
-  font-size: .46rem;
+  color: rgba(196, 201, 191, 0.78);
+  font-size: 0.46rem;
   font-weight: 700;
-  letter-spacing: .12em;
+  letter-spacing: 0.12em;
 }
 
 .identityMeta strong {
   color: var(--text);
-  font-size: .62rem;
+  font-size: 0.62rem;
   font-weight: 650;
   text-transform: uppercase;
 }
@@ -186,7 +186,7 @@
 
 .systemBrief {
   display: grid;
-  grid-template-columns: minmax(15rem, .65fr) minmax(0, 1.35fr);
+  grid-template-columns: minmax(15rem, 0.65fr) minmax(0, 1.35fr);
   gap: clamp(2rem, 5vw, 5rem);
   padding: 2.75rem 0;
   border-top: 1px solid var(--accent-line);
@@ -195,7 +195,7 @@
 
 .briefHeading > span {
   color: var(--accent);
-  font-size: .44rem;
+  font-size: 0.44rem;
 }
 
 .briefHeading h2 {
@@ -210,7 +210,7 @@
 }
 
 .briefDescription p {
-  margin: .8rem 0 0;
+  margin: 0.8rem 0 0;
   color: var(--text-soft);
   line-height: 1.85;
 }
@@ -226,7 +226,7 @@
 
 .factGrid > div {
   min-height: 5rem;
-  padding: .85rem;
+  padding: 0.85rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -238,15 +238,15 @@
 }
 
 .factGrid small {
-  color: rgba(196, 201, 191, .72);
-  font-size: .48rem;
+  color: rgba(196, 201, 191, 0.72);
+  font-size: 0.48rem;
   font-weight: 700;
-  letter-spacing: .11em;
+  letter-spacing: 0.11em;
 }
 
 .factGrid strong {
   color: var(--text);
-  font-size: .68rem;
+  font-size: 0.68rem;
   font-weight: 650;
 }
 
@@ -268,16 +268,16 @@
 
 .tech > span {
   color: var(--accent);
-  font-size: .48rem;
+  font-size: 0.48rem;
   font-weight: 700;
 }
 
 .tech small {
-  margin-top: .5rem;
-  color: rgba(196, 201, 191, .72);
-  font-size: .48rem;
+  margin-top: 0.5rem;
+  color: rgba(196, 201, 191, 0.72);
+  font-size: 0.48rem;
   font-weight: 700;
-  letter-spacing: .11em;
+  letter-spacing: 0.11em;
 }
 
 .tech strong {
@@ -330,9 +330,9 @@
 
 .archiveLink {
   color: var(--muted);
-  font-size: .42rem;
+  font-size: 0.42rem;
   font-weight: 700;
-  letter-spacing: .14em;
+  letter-spacing: 0.14em;
 }
 
 /* ---------- Empty state ---------- */
@@ -398,8 +398,8 @@
   .topline {
     min-height: 3.3rem;
     gap: 1rem;
-    font-size: .4rem;
-    letter-spacing: .11em;
+    font-size: 0.4rem;
+    letter-spacing: 0.11em;
   }
 
   .topline a,
@@ -414,16 +414,16 @@
 
   .recordLabel {
     flex-wrap: wrap;
-    gap: .6rem 1rem;
-    font-size: .42rem;
+    gap: 0.6rem 1rem;
+    font-size: 0.42rem;
   }
 
   .identity h1 {
     max-width: 14ch;
     margin-top: 1.15rem;
     font-size: clamp(2.2rem, 9vw, 3.4rem);
-    line-height: .96;
-    letter-spacing: -.05em;
+    line-height: 0.96;
+    letter-spacing: -0.05em;
   }
 
   .identityDescription {
@@ -431,20 +431,20 @@
     overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
-    font-size: .72rem;
+    font-size: 0.72rem;
     line-height: 1.68;
   }
 
   .overviewJump {
     width: fit-content;
-    margin-top: .7rem;
+    margin-top: 0.7rem;
     display: inline-flex;
     align-items: center;
     color: var(--accent);
     font-family: monospace;
-    font-size: .42rem;
+    font-size: 0.42rem;
     font-weight: 750;
-    letter-spacing: .11em;
+    letter-spacing: 0.11em;
     text-decoration: none;
     transition:
       opacity 160ms ease,
@@ -452,7 +452,7 @@
   }
 
   .overviewJump:hover {
-    opacity: .78;
+    opacity: 0.78;
     transform: translateY(2px);
   }
 
@@ -462,28 +462,28 @@
 
   .quickStack {
     margin-top: 1.3rem;
-    gap: .4rem;
+    gap: 0.4rem;
   }
 
   .quickStack > span {
-    padding: .42rem .58rem;
-    font-size: .45rem;
+    padding: 0.42rem 0.58rem;
+    font-size: 0.45rem;
   }
 
   .actions {
     margin-top: 1.4rem;
     display: grid;
     grid-template-columns: 1fr;
-    gap: .55rem;
+    gap: 0.55rem;
   }
 
   .primaryAction,
   .secondaryAction {
     width: 100%;
     min-height: 3rem;
-    padding-inline: .9rem;
+    padding-inline: 0.9rem;
     justify-content: space-between;
-    font-size: .45rem;
+    font-size: 0.45rem;
   }
 
   .identityMeta {
@@ -496,12 +496,12 @@
 
   .identityMeta > div {
     min-height: 4.4rem;
-    padding: .7rem;
+    padding: 0.7rem;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     flex-direction: column;
-    gap: .45rem;
+    gap: 0.45rem;
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
@@ -515,11 +515,11 @@
   }
 
   .identityMeta small {
-    font-size: .39rem;
+    font-size: 0.39rem;
   }
 
   .identityMeta strong {
-    font-size: .58rem;
+    font-size: 0.58rem;
   }
 
   .mediaSection,
@@ -530,13 +530,13 @@
 
   .sectionHeader {
     min-height: 2.8rem;
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
     gap: 1rem;
-    font-size: .4rem;
+    font-size: 0.4rem;
   }
 
   .sectionHeader small {
-    font-size: .36rem;
+    font-size: 0.36rem;
     text-align: right;
   }
 
@@ -550,28 +550,28 @@
   }
 
   .briefHeading > span {
-    font-size: .4rem;
+    font-size: 0.4rem;
   }
 
   .briefHeading h2 {
-    margin-top: .85rem;
+    margin-top: 0.85rem;
     font-size: clamp(1.8rem, 8vw, 2.7rem);
-    line-height: .98;
-    letter-spacing: -.045em;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
   }
 
   .briefHeading h2 strong {
     display: inline;
-    margin-left: .25em;
+    margin-left: 0.25em;
   }
 
   .briefDescription small {
-    font-size: .42rem;
+    font-size: 0.42rem;
   }
 
   .briefDescription p {
-    margin-top: .75rem;
-    font-size: .78rem;
+    margin-top: 0.75rem;
+    font-size: 0.78rem;
     line-height: 1.7;
   }
 
@@ -586,9 +586,9 @@
 
   .factGrid > div {
     min-height: 4.5rem;
-    padding: .75rem;
+    padding: 0.75rem;
     justify-content: center;
-    gap: .55rem;
+    gap: 0.55rem;
     border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
@@ -602,33 +602,33 @@
   }
 
   .factGrid small {
-    font-size: .4rem;
+    font-size: 0.4rem;
   }
 
   .factGrid strong {
-    font-size: .65rem;
+    font-size: 0.65rem;
   }
 
   .tech {
     min-width: 0;
     min-height: 6.25rem;
-    padding: .85rem;
+    padding: 0.85rem;
     justify-content: flex-start;
   }
 
   .tech > span {
-    font-size: .4rem;
+    font-size: 0.4rem;
   }
 
   .tech small {
-    margin-top: .35rem;
-    font-size: .36rem;
+    margin-top: 0.35rem;
+    font-size: 0.36rem;
     line-height: 1.35;
   }
 
   .tech strong {
     margin-top: auto;
-    font-size: .85rem;
+    font-size: 0.85rem;
     line-height: 1.15;
     overflow-wrap: anywhere;
   }
@@ -653,7 +653,7 @@
   .next {
     width: 100%;
     min-height: 5rem;
-    padding: 1rem .25rem;
+    padding: 1rem 0.25rem;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -677,13 +677,13 @@
 
   .previous small,
   .next small {
-    margin-bottom: .35rem;
-    font-size: .4rem;
+    margin-bottom: 0.35rem;
+    font-size: 0.4rem;
   }
 
   .previous strong,
   .next strong {
-    font-size: .72rem;
+    font-size: 0.72rem;
     line-height: 1.35;
     overflow-wrap: anywhere;
   }
@@ -706,7 +706,7 @@
   }
 
   .identityDescription {
-    font-size: .7rem;
+    font-size: 0.7rem;
     line-height: 1.65;
   }
 
@@ -715,7 +715,7 @@
   }
 
   .tech strong {
-    font-size: .73rem;
+    font-size: 0.73rem;
   }
 
   .previous,

@@ -9,8 +9,7 @@ async function bootstrap() {
   app.use(cookieParser());
 
   const allowedOrigins = (
-    process.env.CORS_ORIGIN ??
-    'http://localhost:3000,http://localhost:3001'
+    process.env.CORS_ORIGIN ?? 'http://localhost:3000,http://localhost:3001'
   )
     .split(',')
     .map((origin) => origin.trim())
@@ -21,10 +20,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  const port =
-    process.env.PORT ??
-    process.env.API_PORT ??
-    4000;
+  const port = process.env.PORT ?? process.env.API_PORT ?? 4000;
 
   await app.listen(Number(port));
 }

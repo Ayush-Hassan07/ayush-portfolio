@@ -1,1 +1,16 @@
-.page{width:min(calc(100% - 7vw),1440px);margin:auto;padding:2rem 0 8rem}.empty{padding:4rem 0;color:var(--muted);font-size:.8rem}@media(max-width:650px){.page{width:calc(100% - 2rem);padding-top:1rem}}
+.page {
+  width: min(calc(100% - 7vw), 1440px);
+  margin: auto;
+  padding: 2rem 0 8rem;
+}
+.empty {
+  padding: 4rem 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+@media (max-width: 650px) {
+  .page {
+    width: calc(100% - 2rem);
+    padding-top: 1rem;
+  }
+}

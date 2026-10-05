@@ -22,14 +22,12 @@ export default function ResearchArchive({
       <div className={styles.intro}>
         <div>
           <span>// RESEARCH OUTPUT</span>
-          <small>
-            {String(records.length).padStart(2, "0")} PUBLICATIONS
-          </small>
+          <small>{String(records.length).padStart(2, "0")} PUBLICATIONS</small>
         </div>
 
         <p>
-          Published research with linked papers and reproducible
-          implementation notebooks.
+          Published research with linked papers and reproducible implementation
+          notebooks.
         </p>
       </div>
 
@@ -60,9 +58,7 @@ export default function ResearchArchive({
                 </span>
               </div>
 
-              <span className={styles.recordLabel}>
-                RESEARCH / {r.number}
-              </span>
+              <span className={styles.recordLabel}>RESEARCH / {r.number}</span>
 
               <h2>{r.title}</h2>
 
@@ -132,16 +128,12 @@ export default function ResearchArchive({
                 <div className={styles.signalStatus}>
                   <span>
                     <small>PAPER</small>
-                    <strong>
-                      {r.paperUrl ? "LINKED" : "—"}
-                    </strong>
+                    <strong>{r.paperUrl ? "LINKED" : "—"}</strong>
                   </span>
 
                   <span>
                     <small>NOTEBOOK</small>
-                    <strong>
-                      {r.notebookUrl ? "LINKED" : "—"}
-                    </strong>
+                    <strong>{r.notebookUrl ? "LINKED" : "—"}</strong>
                   </span>
 
                   <span>

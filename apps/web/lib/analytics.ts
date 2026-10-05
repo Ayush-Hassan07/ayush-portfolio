@@ -1,14 +1,14 @@
 type AnalyticsEventType =
-  | 'PAGE_VIEW'
-  | 'PROJECT_VIEW'
-  | 'RESEARCH_VIEW'
-  | 'CTA_CLICK'
-  | 'SOCIAL_CLICK'
-  | 'CONTACT_CLICK'
-  | 'SCROLL_DEPTH'
-  | 'ENGAGEMENT';
+  | "PAGE_VIEW"
+  | "PROJECT_VIEW"
+  | "RESEARCH_VIEW"
+  | "CTA_CLICK"
+  | "SOCIAL_CLICK"
+  | "CONTACT_CLICK"
+  | "SCROLL_DEPTH"
+  | "ENGAGEMENT";
 
-type DeviceType = 'desktop' | 'tablet' | 'mobile';
+type DeviceType = "desktop" | "tablet" | "mobile";
 
 type AnalyticsPayload = {
   eventType: AnalyticsEventType;
@@ -22,8 +22,8 @@ type AnalyticsPayload = {
   metadata?: Record<string, string | number | boolean>;
 };
 
-const VISITOR_KEY = 'ahr_visitor_key';
-const SESSION_KEY = 'ahr_session_key';
+const VISITOR_KEY = "ahr_visitor_key";
+const SESSION_KEY = "ahr_session_key";
 
 function createId(prefix: string) {
   return `${prefix}_${crypto.randomUUID()}`;
@@ -33,7 +33,7 @@ function getVisitorKey() {
   let visitorKey = localStorage.getItem(VISITOR_KEY);
 
   if (!visitorKey) {
-    visitorKey = createId('visitor');
+    visitorKey = createId("visitor");
     localStorage.setItem(VISITOR_KEY, visitorKey);
   }
 
@@ -44,7 +44,7 @@ function getSessionKey() {
   let sessionKey = sessionStorage.getItem(SESSION_KEY);
 
   if (!sessionKey) {
-    sessionKey = createId('session');
+    sessionKey = createId("session");
     sessionStorage.setItem(SESSION_KEY, sessionKey);
   }
 
@@ -53,14 +53,14 @@ function getSessionKey() {
 
 function getDeviceType(): DeviceType {
   if (window.innerWidth <= 700) {
-    return 'mobile';
+    return "mobile";
   }
 
   if (window.innerWidth <= 1100) {
-    return 'tablet';
+    return "tablet";
   }
 
-  return 'desktop';
+  return "desktop";
 }
 
 function getReferrerDomain() {
@@ -75,10 +75,8 @@ function getReferrerDomain() {
   }
 }
 
-export async function trackAnalyticsEvent(
-  payload: AnalyticsPayload,
-) {
-  if (typeof window === 'undefined') {
+export async function trackAnalyticsEvent(payload: AnalyticsPayload) {
+  if (typeof window === "undefined") {
     return;
   }
 
@@ -109,36 +107,26 @@ export async function trackAnalyticsEvent(
   };
 
   try {
-    const response = await fetch(
-      `${apiUrl}/analytics/event`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(body),
-        keepalive: true,
+    const response = await fetch(`${apiUrl}/analytics/event`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify(body),
+      keepalive: true,
+    });
 
-    if (
-      !response.ok &&
-      process.env.NODE_ENV === 'development'
-    ) {
+    if (!response.ok && process.env.NODE_ENV === "development") {
       console.error(
-        '[Analytics] Request failed:',
+        "[Analytics] Request failed:",
         response.status,
         await response.text(),
         body,
       );
     }
   } catch (error) {
-    if (process.env.NODE_ENV === 'development') {
-      console.error(
-        '[Analytics] Request error:',
-        error,
-        body,
-      );
+    if (process.env.NODE_ENV === "development") {
+      console.error("[Analytics] Request error:", error, body);
     }
 
     // Analytics must never break the public portfolio.

@@ -16,8 +16,7 @@ export const metadata: Metadata = {
     "Software engineer building intelligent systems across full-stack development, AI/ML, and research.",
 
   metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ??
-      "http://localhost:3000",
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   ),
 
   openGraph: {
@@ -41,18 +40,11 @@ export default async function RootLayout({
         <AnalyticsTracker />
 
         <PublicShell
-          name={
-            profile?.name ??
-            "Ayush Hassan Raiyan"
-          }
+          name={profile?.name ?? "Ayush Hassan Raiyan"}
           email={profile?.email ?? null}
           githubUrl={profile?.github_url ?? null}
-          linkedinUrl={
-            profile?.linkedin_url ?? null
-          }
-          googleScholarUrl={
-            profile?.google_scholar_url ?? null
-          }
+          linkedinUrl={profile?.linkedin_url ?? null}
+          googleScholarUrl={profile?.google_scholar_url ?? null}
         >
           {children}
         </PublicShell>

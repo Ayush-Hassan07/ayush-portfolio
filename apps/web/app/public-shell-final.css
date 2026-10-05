@@ -19,7 +19,9 @@
     box-sizing: border-box !important;
   }
 
-  .public-frame-content > .systems-archive > .archive-rail { display: none !important; }
+  .public-frame-content > .systems-archive > .archive-rail {
+    display: none !important;
+  }
   .public-frame-content > .systems-archive > .archive-main {
     width: 100% !important;
     max-width: none !important;
@@ -30,5 +32,8 @@
 }
 
 @media (max-width: 900px) {
-  .public-frame-content { margin-left: 0 !important; width: 100% !important; }
+  .public-frame-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
 }

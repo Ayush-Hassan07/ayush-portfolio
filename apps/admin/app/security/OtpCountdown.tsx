@@ -12,5 +12,12 @@ export function OtpCountdown({ seconds = 60 }: { seconds?: number }) {
     return () => window.clearInterval(timer);
   }, []);
 
-  return <span className={remaining <= 10 ? "otp-countdown urgent" : "otp-countdown"} aria-live="polite">{remaining}s remaining</span>;
+  return (
+    <span
+      className={remaining <= 10 ? "otp-countdown urgent" : "otp-countdown"}
+      aria-live="polite"
+    >
+      {remaining}s remaining
+    </span>
+  );
 }

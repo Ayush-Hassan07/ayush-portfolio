@@ -1,10 +1,26 @@
 @media (min-width: 901px) {
-  .public-frame-rail { width: 180px !important; top: 0 !important; bottom: 0 !important; position: fixed !important; }
-  .public-frame-rail .public-logo { display: none !important; }
-  .public-frame-rail nav { margin-top: 55px !important; }
-  .public-frame-header { height: 96px !important; margin-left: 180px !important; padding-left: 56px !important; padding-right: 56px !important; }
+  .public-frame-rail {
+    width: 180px !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    position: fixed !important;
+  }
+  .public-frame-rail .public-logo {
+    display: none !important;
+  }
+  .public-frame-rail nav {
+    margin-top: 55px !important;
+  }
+  .public-frame-header {
+    height: 96px !important;
+    margin-left: 180px !important;
+    padding-left: 56px !important;
+    padding-right: 56px !important;
+  }
   .public-frame-content,
-  .public-frame-footer { margin-left: 180px !important; }
+  .public-frame-footer {
+    margin-left: 180px !important;
+  }
 }
 
 @media (min-width: 901px) {
@@ -24,7 +40,9 @@
 .public-frame-content > .benchmark-nav,
 .public-frame-content > .system-index,
 .public-frame-content > .public-system > .benchmark-nav,
-.public-frame-content > .public-system > .system-index { display: none !important; }
+.public-frame-content > .public-system > .system-index {
+  display: none !important;
+}
 
 @media (min-width: 901px) {
   .public-frame-content > main,

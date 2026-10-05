@@ -13,21 +13,21 @@ import {
 import styles from "./page.module.css";
 
 export default async function HomePage() {
-  const [profile, projects, publications, skills, education, experience] = await Promise.all([
-    getPublicProfile(),
-    getPublicProjects(),
-    getPublicPublications(),
-    getPublicSkills(),
-    getPublicEducation(),
-    getPublicExperience(),
-  ]);
+  const [profile, projects, publications, skills, education, experience] =
+    await Promise.all([
+      getPublicProfile(),
+      getPublicProjects(),
+      getPublicPublications(),
+      getPublicSkills(),
+      getPublicEducation(),
+      getPublicExperience(),
+    ]);
 
   const technologies = new Set(
     projects.flatMap(
       (project) =>
-        project.project_technology?.map(
-          ({ technology }) => technology.id,
-        ) ?? [],
+        project.project_technology?.map(({ technology }) => technology.id) ??
+        [],
     ),
   );
 
@@ -46,7 +46,12 @@ export default async function HomePage() {
         capabilities={skills.length}
       />
       <FeaturedSystems projects={projects} />
-      <CapabilityTrajectory skills={skills} education={education} experience={experience} publications={publications} />
+      <CapabilityTrajectory
+        skills={skills}
+        education={education}
+        experience={experience}
+        publications={publications}
+      />
       <ContactSignal email={profile?.email} />
     </main>
   );

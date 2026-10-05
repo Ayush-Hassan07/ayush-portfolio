@@ -25,20 +25,13 @@ export default function HomeHero({
   technologies,
   capabilities,
 }: Props) {
-  const api =
-    process.env.NEXT_PUBLIC_API_URL ??
-    "http://localhost:4000";
+  const api = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
-  const image = profileImage
-    ? `${api}/media/${profileImage}`
-    : null;
+  const image = profileImage ? `${api}/media/${profileImage}` : null;
 
   return (
     <section className={styles.hero}>
-      <div
-        className={styles.backgroundGeometry}
-        aria-hidden="true"
-      />
+      <div className={styles.backgroundGeometry} aria-hidden="true" />
 
       <div className={styles.identityHero}>
         <div className={styles.identitySide}>
@@ -57,16 +50,10 @@ export default function HomeHero({
                     className={styles.portraitImage}
                   />
 
-                  <span
-                    className={styles.scanBeam}
-                    aria-hidden="true"
-                  />
+                  <span className={styles.scanBeam} aria-hidden="true" />
                 </div>
 
-                <span
-                  className={styles.portraitCornerTop}
-                  aria-hidden="true"
-                />
+                <span className={styles.portraitCornerTop} aria-hidden="true" />
 
                 <span
                   className={styles.portraitCornerBottom}
@@ -91,9 +78,9 @@ export default function HomeHero({
               </div>
 
               <p className={styles.heroSummary}>
-                Building practical software across full-stack
-                development, AI/ML and applied research, with a
-                focus on systems that solve real problems.
+                Building practical software across full-stack development, AI/ML
+                and applied research, with a focus on systems that solve real
+                problems.
               </p>
             </div>
           </div>
@@ -109,16 +96,12 @@ export default function HomeHero({
 
               <span>
                 <small>FOCUS</small>
-                <strong>
-                  Software + Intelligence
-                </strong>
+                <strong>Software + Intelligence</strong>
               </span>
 
               <span>
                 <small>STATE</small>
-                <strong>
-                  Open to Opportunities
-                </strong>
+                <strong>Open to Opportunities</strong>
               </span>
             </div>
 
@@ -153,9 +136,7 @@ export default function HomeHero({
         <div>
           <span>THE SYSTEM CONTINUES</span>
 
-          <small>
-            PROJECTS &times; TECHNOLOGIES &times; RESEARCH
-          </small>
+          <small>PROJECTS &times; TECHNOLOGIES &times; RESEARCH</small>
         </div>
 
         <i aria-hidden="true" />

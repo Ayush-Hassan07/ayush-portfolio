@@ -17,9 +17,7 @@ import { AnalyticsEventInput } from './analytics.types';
 
 @Controller('analytics')
 export class AnalyticsController {
-  constructor(
-    private readonly analyticsService: AnalyticsService,
-  ) {}
+  constructor(private readonly analyticsService: AnalyticsService) {}
 
   @Post('event')
   @Throttle({
@@ -29,9 +27,7 @@ export class AnalyticsController {
     },
   })
   @HttpCode(HttpStatus.ACCEPTED)
-  recordEvent(
-    @Body() body: AnalyticsEventInput,
-  ) {
+  recordEvent(@Body() body: AnalyticsEventInput) {
     return this.analyticsService.recordEvent(body);
   }
 
@@ -44,6 +40,12 @@ export class AnalyticsController {
     @Query('project') project?: string,
     @Query('research') research?: string,
   ) {
-    return this.analyticsService.getStatistics(range, month, year, project, research);
+    return this.analyticsService.getStatistics(
+      range,
+      month,
+      year,
+      project,
+      research,
+    );
   }
 }

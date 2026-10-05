@@ -52,8 +52,7 @@
 
   background: var(--accent);
 
-  box-shadow:
-    0 0 10px var(--accent);
+  box-shadow: 0 0 10px var(--accent);
 }
 
 /* =========================================================
@@ -128,17 +127,15 @@
 
   transform: scaleY(0);
 
-  transition:
-    transform 220ms;
+  transition: transform 220ms;
 }
 
 .systemRowActive {
-  background:
-    linear-gradient(
-      90deg,
-      rgba(223, 255, 99, 0.045),
-      transparent 65%
-    );
+  background: linear-gradient(
+    90deg,
+    rgba(223, 255, 99, 0.045),
+    transparent 65%
+  );
 }
 
 .systemRowActive::before {
@@ -171,13 +168,11 @@
 
   background: var(--muted);
 
-  transform:
-    translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .systemRowActive .signal {
-  background:
-    rgba(223, 255, 99, 0.22);
+  background: rgba(223, 255, 99, 0.22);
 }
 
 .systemRowActive .signal i {
@@ -185,8 +180,7 @@
 
   background: var(--accent);
 
-  box-shadow:
-    0 0 10px var(--accent);
+  box-shadow: 0 0 10px var(--accent);
 }
 
 .identity {
@@ -207,12 +201,7 @@
 .identity strong {
   color: var(--text);
 
-  font-size:
-    clamp(
-      1.1rem,
-      1.55vw,
-      1.55rem
-    );
+  font-size: clamp(1.1rem, 1.55vw, 1.55rem);
 
   font-weight: 500;
 
@@ -236,13 +225,9 @@
 
 .stack > span,
 .tech {
-  padding:
-    0.32rem
-    0.42rem;
+  padding: 0.32rem 0.42rem;
 
-  border:
-    1px solid
-    var(--line);
+  border: 1px solid var(--line);
 
   color: var(--muted);
 
@@ -252,8 +237,7 @@
 .rowState {
   justify-self: end;
 
-  color:
-    rgba(243, 246, 237, 0.7);
+  color: rgba(243, 246, 237, 0.7);
 
   font-size: 0.48rem;
   font-weight: 750;
@@ -277,8 +261,7 @@
 .mobileStack {
   display: none;
 
-  color:
-    rgba(243, 246, 237, 0.72);
+  color: rgba(243, 246, 237, 0.72);
 }
 
 /* =========================================================
@@ -311,19 +294,10 @@
   opacity: 0.25;
 
   background:
-    linear-gradient(
-      rgba(223, 255, 99, 0.035) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(223, 255, 99, 0.035) 1px,
-      transparent 1px
-    );
+    linear-gradient(rgba(223, 255, 99, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(223, 255, 99, 0.035) 1px, transparent 1px);
 
-  background-size:
-    42px
-    42px;
+  background-size: 42px 42px;
 }
 
 .inspectorHeader {
@@ -332,17 +306,13 @@
 
   min-height: 4.8rem;
 
-  padding:
-    1.25rem
-    1.5rem;
+  padding: 1.25rem 1.5rem;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  border-bottom:
-    1px solid
-    var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .inspectorHeader > div {
@@ -374,8 +344,7 @@
 
   gap: 0.5rem;
 
-  color:
-    rgba(243, 246, 237, 0.72);
+  color: rgba(243, 246, 237, 0.72);
 
   font-weight: 700;
 
@@ -397,9 +366,7 @@
   display: grid;
   place-items: center;
 
-  border-bottom:
-    1px solid
-    var(--line);
+  border-bottom: 1px solid var(--line);
 
   overflow: hidden;
 
@@ -420,8 +387,7 @@
   width: 76%;
   height: 1px;
 
-  background:
-    rgba(223, 255, 99, 0.24);
+  background: rgba(223, 255, 99, 0.24);
 }
 
 .visual::after {
@@ -432,8 +398,7 @@
   height: 76%;
   width: 1px;
 
-  background:
-    rgba(223, 255, 99, 0.24);
+  background: rgba(223, 255, 99, 0.24);
 }
 
 .ringOuter,
@@ -445,36 +410,25 @@
 
   border-radius: 50%;
 
-  transform:
-    translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }
 
 .ringOuter {
   width: 12.5rem;
   height: 12.5rem;
 
-  border:
-    1px dashed
-    rgba(223, 255, 99, 0.32);
+  border: 1px dashed rgba(223, 255, 99, 0.32);
 
-  box-shadow:
-    0 0 24px
-    rgba(223, 255, 99, 0.04);
+  box-shadow: 0 0 24px rgba(223, 255, 99, 0.04);
 
-  animation:
-    orbit
-    24s
-    linear
-    infinite;
+  animation: orbit 24s linear infinite;
 }
 
 .ringInner {
   width: 8.5rem;
   height: 8.5rem;
 
-  border:
-    1px solid
-    rgba(223, 255, 99, 0.35);
+  border: 1px solid rgba(223, 255, 99, 0.35);
 }
 
 .core {
@@ -489,24 +443,19 @@
   align-items: center;
   justify-content: center;
 
-  border:
-    1px solid
-    rgba(223, 255, 99, 0.7);
+  border: 1px solid rgba(223, 255, 99, 0.7);
 
   border-radius: 50%;
 
-  background:
-    radial-gradient(
-      circle,
-      rgba(223, 255, 99, 0.18),
-      rgba(223, 255, 99, 0.035) 67%
-    );
+  background: radial-gradient(
+    circle,
+    rgba(223, 255, 99, 0.18),
+    rgba(223, 255, 99, 0.035) 67%
+  );
 
   box-shadow:
-    0 0 0 1.2rem
-      rgba(223, 255, 99, 0.035),
-    0 0 32px
-      rgba(223, 255, 99, 0.1);
+    0 0 0 1.2rem rgba(223, 255, 99, 0.035),
+    0 0 32px rgba(223, 255, 99, 0.1);
 }
 
 .core small {
@@ -521,9 +470,7 @@
   font-size: 1.7rem;
   font-weight: 500;
 
-  text-shadow:
-    0 0 12px
-    rgba(223, 255, 99, 0.35);
+  text-shadow: 0 0 12px rgba(223, 255, 99, 0.35);
 }
 
 .coordinate {
@@ -532,8 +479,7 @@
   right: 8%;
   bottom: 17%;
 
-  color:
-    rgba(243, 246, 237, 0.5);
+  color: rgba(243, 246, 237, 0.5);
 
   font-size: 0.42rem;
 
@@ -548,10 +494,7 @@
   position: relative;
   z-index: 3;
 
-  padding:
-    1.6rem
-    1.75rem
-    1.75rem;
+  padding: 1.6rem 1.75rem 1.75rem;
 }
 
 .recordMeta {
@@ -561,21 +504,15 @@
 
   display: grid;
 
-  grid-template-columns:
-    repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
 
-  border:
-    1px solid
-    var(--line);
+  border: 1px solid var(--line);
 
-  background:
-    rgba(223, 255, 99, 0.015);
+  background: rgba(223, 255, 99, 0.015);
 }
 
 .recordMeta span {
-  padding:
-    1.1rem
-    1rem;
+  padding: 1.1rem 1rem;
 
   display: flex;
   flex-direction: column;
@@ -583,9 +520,7 @@
 
   gap: 0.55rem;
 
-  border-right:
-    1px solid
-    var(--line);
+  border-right: 1px solid var(--line);
 }
 
 .recordMeta span:last-child {
@@ -624,12 +559,7 @@
 
   margin: 0;
 
-  font-size:
-    clamp(
-      2rem,
-      3.5vw,
-      3.9rem
-    );
+  font-size: clamp(2rem, 3.5vw, 3.9rem);
 
   font-weight: 500;
 
@@ -641,10 +571,7 @@
 .inspectorBody > p {
   max-width: 44rem;
 
-  margin:
-    1.2rem
-    0
-    0;
+  margin: 1.2rem 0 0;
 
   color: var(--muted);
 
@@ -666,8 +593,7 @@
 
   margin-bottom: 0.65rem;
 
-  color:
-    rgba(243, 246, 237, 0.72);
+  color: rgba(243, 246, 237, 0.72);
 
   font-size: 0.48rem;
   font-weight: 750;
@@ -683,23 +609,18 @@
 }
 
 .tech {
-  padding:
-    0.48rem
-    0.65rem;
+  padding: 0.48rem 0.65rem;
 
   display: flex;
   align-items: center;
 
   gap: 0.4rem;
 
-  border-color:
-    rgba(223, 255, 99, 0.28);
+  border-color: rgba(223, 255, 99, 0.28);
 
-  background:
-    rgba(223, 255, 99, 0.025);
+  background: rgba(223, 255, 99, 0.025);
 
-  color:
-    rgba(244, 246, 239, 0.86);
+  color: rgba(244, 246, 239, 0.86);
 
   font-size: 0.5rem;
   font-weight: 650;
@@ -713,9 +634,7 @@
 
   background: var(--accent);
 
-  box-shadow:
-    0 0 7px
-    rgba(223, 255, 99, 0.7);
+  box-shadow: 0 0 7px rgba(223, 255, 99, 0.7);
 }
 
 /* =========================================================
@@ -731,9 +650,7 @@
   align-items: center;
   justify-content: space-between;
 
-  border-top:
-    1px solid
-    rgba(223, 255, 99, 0.2);
+  border-top: 1px solid rgba(223, 255, 99, 0.2);
 }
 
 .inspectAction span {
@@ -751,8 +668,7 @@
 }
 
 .inspectAction small {
-  color:
-    rgba(243, 246, 237, 0.64);
+  color: rgba(243, 246, 237, 0.64);
 
   font-size: 0.42rem;
 
@@ -764,9 +680,7 @@
 
   font-size: 1.4rem;
 
-  text-shadow:
-    0 0 10px
-    rgba(223, 255, 99, 0.35);
+  text-shadow: 0 0 10px rgba(223, 255, 99, 0.35);
 }
 
 /* =========================================================
@@ -774,12 +688,9 @@
    ========================================================= */
 
 .status i {
-  background:
-    rgba(243, 246, 237, 0.55);
+  background: rgba(243, 246, 237, 0.55);
 
-  box-shadow:
-    0 0 8px
-    rgba(243, 246, 237, 0.25);
+  box-shadow: 0 0 8px rgba(243, 246, 237, 0.25);
 }
 
 .systemRowActive .status,
@@ -790,59 +701,43 @@
 .systemRowActive .status i {
   background: var(--accent);
 
-  box-shadow:
-    0 0 10px
-    rgba(223, 255, 99, 0.7);
+  box-shadow: 0 0 10px rgba(223, 255, 99, 0.7);
 }
 
 .statusongoing {
-  color:
-    var(--accent) !important;
+  color: var(--accent) !important;
 }
 
 .statusongoing i {
-  background:
-    var(--accent) !important;
+  background: var(--accent) !important;
 
-  box-shadow:
-    0 0 12px
-    rgba(223, 255, 99, 0.8) !important;
+  box-shadow: 0 0 12px rgba(223, 255, 99, 0.8) !important;
 }
 
 .statusfinished {
-  color:
-    rgba(243, 246, 237, 0.62) !important;
+  color: rgba(243, 246, 237, 0.62) !important;
 }
 
 .statusfinished i {
-  background:
-    rgba(243, 246, 237, 0.42) !important;
+  background: rgba(243, 246, 237, 0.42) !important;
 
-  box-shadow:
-    0 0 7px
-    rgba(243, 246, 237, 0.2) !important;
+  box-shadow: 0 0 7px rgba(243, 246, 237, 0.2) !important;
 }
 
 .systemRowActive .stack > span {
-  border-color:
-    rgba(223, 255, 99, 0.38);
+  border-color: rgba(223, 255, 99, 0.38);
 
   color: var(--text);
 }
 
 .stack > span {
-  padding:
-    0.42rem
-    0.58rem;
+  padding: 0.42rem 0.58rem;
 
-  border-color:
-    rgba(223, 255, 99, 0.24);
+  border-color: rgba(223, 255, 99, 0.24);
 
-  background:
-    rgba(223, 255, 99, 0.025);
+  background: rgba(223, 255, 99, 0.025);
 
-  color:
-    rgba(243, 246, 237, 0.78);
+  color: rgba(243, 246, 237, 0.78);
 
   font-size: 0.48rem;
   font-weight: 650;
@@ -856,9 +751,7 @@
 
 @keyframes orbit {
   to {
-    transform:
-      translate(-50%, -50%)
-      rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
@@ -890,8 +783,7 @@
 
     margin-top: 0.55rem;
 
-    color:
-      rgba(243, 246, 237, 0.72);
+    color: rgba(243, 246, 237, 0.72);
 
     font-size: 0.39rem;
 
@@ -921,9 +813,7 @@
   .inspector {
     position: relative;
 
-    border-top:
-      1px solid
-      var(--line);
+    border-top: 1px solid var(--line);
   }
 }
 
@@ -933,9 +823,7 @@
 
 @media (max-width: 560px) {
   .consoleHeader {
-    padding:
-      0
-      0.8rem;
+    padding: 0 0.8rem;
   }
 
   .consoleHeader small,
@@ -984,11 +872,9 @@
 
 @media (max-width: 1023px) {
   .workspace {
-    grid-template-columns:
-      1fr !important;
+    grid-template-columns: 1fr !important;
 
-    min-height:
-      0 !important;
+    min-height: 0 !important;
   }
 
   .index {
@@ -1014,9 +900,7 @@
 
     gap: 0.85rem;
 
-    padding:
-      1rem
-      1.15rem;
+    padding: 1rem 1.15rem;
   }
 
   .stack {
@@ -1032,8 +916,7 @@
       Raised from 0.38 to 0.72 specifically for WCAG
       text contrast against the project workspace.
     */
-    color:
-      rgba(243, 246, 237, 0.72);
+    color: rgba(243, 246, 237, 0.72);
 
     font-size: 0.4rem;
 
@@ -1063,9 +946,7 @@
   .consoleHeader {
     min-height: 4.4rem;
 
-    padding:
-      0
-      1rem;
+    padding: 0 1rem;
   }
 
   .consoleHeader > div:first-child {
@@ -1077,8 +958,7 @@
   .consoleHeader small {
     display: block;
 
-    color:
-      rgba(243, 246, 237, 0.68);
+    color: rgba(243, 246, 237, 0.68);
 
     font-size: 0.4rem;
   }
@@ -1097,9 +977,7 @@
 
     gap: 0.65rem;
 
-    padding:
-      0.9rem
-      1rem;
+    padding: 0.9rem 1rem;
   }
 
   .rowState {
@@ -1121,8 +999,7 @@
   .mobileStack {
     max-width: 100%;
 
-    color:
-      rgba(243, 246, 237, 0.72);
+    color: rgba(243, 246, 237, 0.72);
 
     font-size: 0.38rem;
   }
@@ -1152,8 +1029,7 @@
   }
 
   .consoleHeader small {
-    color:
-      rgba(243, 246, 237, 0.68);
+    color: rgba(243, 246, 237, 0.68);
 
     font-size: 0.36rem;
   }
@@ -1192,8 +1068,7 @@
   .mobileStack {
     margin-top: 0.42rem;
 
-    color:
-      rgba(243, 246, 237, 0.72);
+    color: rgba(243, 246, 237, 0.72);
 
     font-size: 0.34rem;
   }
@@ -1237,8 +1112,7 @@
       This is the desktop Lighthouse failure you showed.
       Do not use var(--muted) here.
     */
-    color:
-      rgba(243, 246, 237, 0.72);
+    color: rgba(243, 246, 237, 0.72);
 
     font-size: 0.39rem;
 

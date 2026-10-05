@@ -31,13 +31,38 @@ export default function ThemedSelect({
 
   return (
     <div className={`themed-select ${className}`} ref={ref}>
-      <button type="button" className="themed-select-trigger" aria-label={ariaLabel} aria-expanded={open} onClick={() => setOpen((current) => !current)}>
-        <span className="themed-select-label">{selected?.label ?? "Select"}</span><span className="themed-select-arrow" aria-hidden="true">⌄</span>
+      <button
+        type="button"
+        className="themed-select-trigger"
+        aria-label={ariaLabel}
+        aria-expanded={open}
+        onClick={() => setOpen((current) => !current)}
+      >
+        <span className="themed-select-label">
+          {selected?.label ?? "Select"}
+        </span>
+        <span className="themed-select-arrow" aria-hidden="true">
+          ⌄
+        </span>
       </button>
       {open && (
-        <div className="themed-select-menu" role="listbox" aria-label={ariaLabel}>
+        <div
+          className="themed-select-menu"
+          role="listbox"
+          aria-label={ariaLabel}
+        >
           {options.map((option) => (
-            <button type="button" role="option" aria-selected={option.value === value} className={option.value === value ? "selected" : ""} key={option.value} onClick={() => { onChange(option.value); setOpen(false); }}>
+            <button
+              type="button"
+              role="option"
+              aria-selected={option.value === value}
+              className={option.value === value ? "selected" : ""}
+              key={option.value}
+              onClick={() => {
+                onChange(option.value);
+                setOpen(false);
+              }}
+            >
               {option.label}
             </button>
           ))}

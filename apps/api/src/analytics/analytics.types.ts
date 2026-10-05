@@ -9,8 +9,7 @@ export const ANALYTICS_EVENT_TYPES = [
   'ENGAGEMENT',
 ] as const;
 
-export type AnalyticsEventType =
-  (typeof ANALYTICS_EVENT_TYPES)[number];
+export type AnalyticsEventType = (typeof ANALYTICS_EVENT_TYPES)[number];
 
 export type DeviceType = 'desktop' | 'tablet' | 'mobile';
 

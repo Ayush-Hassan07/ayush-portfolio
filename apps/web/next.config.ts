@@ -1,8 +1,6 @@
 import type { NextConfig } from "next";
 
-const apiUrl =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "http://localhost:4000";
+const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 
 const api = new URL(apiUrl);
 
@@ -21,10 +19,7 @@ const nextConfig: NextConfig = {
 
     remotePatterns: [
       {
-        protocol:
-          api.protocol === "https:"
-            ? "https"
-            : "http",
+        protocol: api.protocol === "https:" ? "https" : "http",
         hostname: api.hostname,
         port: api.port,
         pathname: "/media/**",
