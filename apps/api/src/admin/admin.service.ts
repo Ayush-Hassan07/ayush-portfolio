@@ -790,9 +790,15 @@ export class AdminService {
   }
 
   createTechnology(input: Record<string, unknown>) {
+    const name = String(input.name ?? '').trim();
+
+    if (!name) {
+      throw new Error('Technology name is required');
+    }
+
     return this.prisma.technology.create({
       data: {
-        name: String(input.name ?? '').trim(),
+        name,
 
         category: input.category ? String(input.category).trim() : null,
 
@@ -801,6 +807,48 @@ export class AdminService {
         skill_id: input.skill_id ? String(input.skill_id) : null,
       },
     });
+  }
+
+  async updateTechnology(id: string, input: Record<string, unknown>) {
+    const name = String(input.name ?? '').trim();
+
+    if (!name) {
+      throw new Error('Technology name is required');
+    }
+
+    const technology = await this.prisma.technology.findUnique({
+      where: { id },
+    });
+
+    if (!technology) {
+      throw new NotFoundException('Technology not found');
+    }
+
+    return this.prisma.technology.update({
+      where: { id },
+      data: {
+        name,
+        category: input.category ? String(input.category).trim() : null,
+        icon_url: input.icon_url ? String(input.icon_url).trim() : null,
+        skill_id: input.skill_id ? String(input.skill_id) : null,
+      },
+    });
+  }
+
+  async deleteTechnology(id: string) {
+    const technology = await this.prisma.technology.findUnique({
+      where: { id },
+    });
+
+    if (!technology) {
+      throw new NotFoundException('Technology not found');
+    }
+
+    await this.prisma.technology.delete({
+      where: { id },
+    });
+
+    return { deleted: true };
   }
 
   async getSecurity() {

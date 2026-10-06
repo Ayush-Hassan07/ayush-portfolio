@@ -15,6 +15,7 @@ export default function TechnologiesPage() {
     [name, setName] = useState(""),
     [category, setCategory] = useState(""),
     [skillId, setSkillId] = useState(""),
+    [editing, setEditing] = useState<string | null>(null),
     [msg, setMsg] = useState("");
   async function load() {
     const [a, b] = await Promise.all([
@@ -29,19 +30,50 @@ export default function TechnologiesPage() {
   }, []);
   async function save(e: FormEvent) {
     e.preventDefault();
-    const r = await fetch(`${api}/admin/library/technologies`, {
-      method: "POST",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, category, skill_id: skillId || null }),
-    });
+    const r = await fetch(
+      `${api}/admin/library/technologies${editing ? `/${editing}` : ""}`,
+      {
+        method: editing ? "PUT" : "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, category, skill_id: skillId || null }),
+      },
+    );
     if (r.ok) {
       setName("");
       setCategory("");
       setSkillId("");
-      setMsg("Technology added.");
+      setEditing(null);
+      setMsg(editing ? "Technology updated." : "Technology added.");
       await load();
-    } else setMsg("Could not add technology.");
+    } else
+      setMsg(
+        editing ? "Could not update technology." : "Could not add technology.",
+      );
+  }
+  function edit(item: Tech) {
+    setEditing(item.id);
+    setName(item.name);
+    setCategory(item.category ?? "");
+    setSkillId(item.skill?.id ?? "");
+    setMsg("");
+  }
+  async function remove(item: Tech) {
+    if (!window.confirm(`Delete ${item.name}?`)) return;
+    const r = await fetch(`${api}/admin/library/technologies/${item.id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    if (r.ok) {
+      if (editing === item.id) {
+        setEditing(null);
+        setName("");
+        setCategory("");
+        setSkillId("");
+      }
+      setMsg("Technology deleted.");
+      await load();
+    } else setMsg("Could not delete technology.");
   }
   return (
     <main className="editor-shell">
@@ -56,7 +88,9 @@ export default function TechnologiesPage() {
       </header>
       <section className="editor-grid">
         <form className="project-form" onSubmit={save}>
-          <p className="admin-kicker">Add technology</p>
+          <p className="admin-kicker">
+            {editing ? "Edit technology" : "Add technology"}
+          </p>
           <label>
             Name
             <input
@@ -86,7 +120,23 @@ export default function TechnologiesPage() {
               ))}
             </select>
           </label>
-          <button type="submit">Add technology</button>
+          <button type="submit">
+            {editing ? "Update technology" : "Add technology"}
+          </button>
+          {editing && (
+            <button
+              type="button"
+              onClick={() => {
+                setEditing(null);
+                setName("");
+                setCategory("");
+                setSkillId("");
+                setMsg("");
+              }}
+            >
+              Cancel edit
+            </button>
+          )}
           <p className="editor-message">{msg}</p>
         </form>
         <div className="project-list">
@@ -103,6 +153,12 @@ export default function TechnologiesPage() {
                     : " · No skill mapping"}
                 </p>
               </div>
+              <button type="button" onClick={() => edit(x)}>
+                Edit
+              </button>
+              <button type="button" onClick={() => void remove(x)}>
+                Delete
+              </button>
             </article>
           ))}
         </div>

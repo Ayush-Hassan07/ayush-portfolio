@@ -121,6 +121,15 @@ export class AdminLibraryController {
   ) {
     return this.service.createTechnology(body);
   }
+  @Put('technologies/:id') updateTechnology(
+    @Param('id') id: string,
+    @Body() body: Record<string, unknown>,
+  ) {
+    return this.service.updateTechnology(id, body);
+  }
+  @Delete('technologies/:id') deleteTechnology(@Param('id') id: string) {
+    return this.service.deleteTechnology(id);
+  }
   @Post('security/totp/begin') beginTotp(@Req() request: Request) {
     return this.service.beginTotp(this.adminId(request));
   }
